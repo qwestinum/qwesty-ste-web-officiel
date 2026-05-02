@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img" aria-label="Qwestinum">
+  <title>Qwestinum — logo horizontal</title>
+  <g id="symbol" transform="translate(20,20)">
+    <line x1="80" y1="80" x2="59" y2="40" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="80" y1="80" x2="94" y2="35" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="80" y1="80" x2="125" y2="62" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="80" y1="80" x2="46" y2="85" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="80" y1="80" x2="125" y2="99" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="80" y1="80" x2="69" y2="128" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="80" cy="80" r="16" fill="#D4A82C"/>
+    <circle cx="59" cy="40" r="9" fill="#2A2724"/>
+    <circle cx="94" cy="35" r="7" fill="#D4A82C"/>
+    <circle cx="125" cy="62" r="9" fill="#2A2724"/>
+    <circle cx="46" cy="85" r="9" fill="#D4A82C"/>
+    <circle cx="125" cy="99" r="7" fill="#2A2724"/>
+    <circle cx="69" cy="128" r="10" fill="#D4A82C"/>
+  </g>
+  <text x="200" y="115" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="500" fill="#2A2724" letter-spacing="2">
+    <tspan>QWEST</tspan><tspan font-weight="400">i</tspan><tspan>NUM</tspan>
+  </text>
+</svg>

@@ -33,7 +33,7 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #DCD9D1;
+    background-color: #D8D2C2;
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -65,5 +65,142 @@
   /* Label en capitales espacées (signature de la marque) */
   .label-mark {
     @apply font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre;
+  }
+
+  /* ============================================================
+     PROSE QWESTY — typographie éditoriale pour le contenu d'articles
+     Rendu du HTML produit par l'éditeur Tiptap (Lot 5)
+     ============================================================ */
+  .prose-qwesty {
+    @apply font-sans text-sepia max-w-[680px] mx-auto;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .prose-qwesty > * + * {
+    margin-top: 1.4em;
+  }
+
+  .prose-qwesty h1,
+  .prose-qwesty h2,
+  .prose-qwesty h3,
+  .prose-qwesty h4 {
+    @apply font-serif font-medium tracking-tight-1 text-sepia;
+    line-height: 1.25;
+  }
+
+  .prose-qwesty h2 {
+    font-size: 32px;
+    margin-top: 2em;
+    margin-bottom: 0.4em;
+  }
+
+  .prose-qwesty h3 {
+    font-size: 24px;
+    margin-top: 1.7em;
+    margin-bottom: 0.4em;
+  }
+
+  .prose-qwesty h4 {
+    font-size: 19px;
+    margin-top: 1.5em;
+    margin-bottom: 0.3em;
+  }
+
+  .prose-qwesty p {
+    @apply text-sepia;
+  }
+
+  .prose-qwesty strong {
+    @apply font-medium text-sepia;
+  }
+
+  .prose-qwesty em {
+    @apply italic text-or-fonce;
+    font-family: var(--font-fraunces), Georgia, serif;
+  }
+
+  .prose-qwesty a {
+    @apply text-sepia underline decoration-or-pale decoration-2 underline-offset-4 transition-colors hover:decoration-or;
+  }
+
+  .prose-qwesty ul,
+  .prose-qwesty ol {
+    padding-left: 1.4em;
+  }
+
+  .prose-qwesty ul {
+    list-style: none;
+  }
+
+  .prose-qwesty ul > li {
+    position: relative;
+    padding-left: 0.4em;
+  }
+
+  .prose-qwesty ul > li::before {
+    content: '';
+    position: absolute;
+    left: -1em;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background-color: #D4A82C;
+  }
+
+  .prose-qwesty ol {
+    list-style: decimal;
+    @apply text-pierre;
+  }
+
+  .prose-qwesty ol > li {
+    @apply text-sepia;
+    padding-left: 0.4em;
+  }
+
+  .prose-qwesty li + li {
+    margin-top: 0.5em;
+  }
+
+  .prose-qwesty blockquote {
+    @apply font-serif italic text-pierre border-l-2 border-or pl-6 my-8;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .prose-qwesty blockquote p {
+    @apply text-pierre;
+  }
+
+  .prose-qwesty img {
+    @apply rounded-md my-10 w-full;
+  }
+
+  .prose-qwesty figure {
+    @apply my-10;
+  }
+
+  .prose-qwesty figcaption {
+    @apply font-sans text-xs text-pierre italic mt-3 text-center;
+  }
+
+  .prose-qwesty hr {
+    @apply border-perle my-14;
+  }
+
+  .prose-qwesty code {
+    @apply bg-perle/40 px-1.5 py-0.5 rounded text-[0.92em];
+    font-family: ui-monospace, 'SFMono-Regular', monospace;
+  }
+
+  .prose-qwesty pre {
+    @apply bg-sepia text-lin p-5 rounded-md my-8 overflow-x-auto text-sm;
+    font-family: ui-monospace, 'SFMono-Regular', monospace;
+    line-height: 1.55;
+  }
+
+  .prose-qwesty pre code {
+    @apply bg-transparent p-0 text-lin;
   }
 }

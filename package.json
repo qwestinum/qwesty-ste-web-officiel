@@ -10,6 +10,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@tiptap/html": "^2.10.3",
+    "isomorphic-dompurify": "^2.18.0",
     "@supabase/ssr": "^0.5.2",
     "resend": "^4.0.1",
     "@supabase/supabase-js": "^2.45.4",

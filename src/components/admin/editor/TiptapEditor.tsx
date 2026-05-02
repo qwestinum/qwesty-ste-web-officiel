@@ -13,7 +13,17 @@ interface TiptapEditorProps {
   initialContent: Json | null;
 }
 
-const AUTOSAVE_DELAY_MS = 30000; // 30 secondes
+const AUTOSAVE_DELAY_MS = 30000;
+
+/**
+ * Re-sérialise le JSON Tiptap pour s'assurer qu'il ne contient que des objets
+ * "plain". Sans ça, certaines extensions Tiptap (notamment l'extension Image)
+ * peuvent inclure des références non-sérialisables qui font planter la
+ * Server Action avec l'erreur "Only plain objects can be passed".
+ */
+function sanitizeTiptapJson(json: unknown): unknown {
+  return JSON.parse(JSON.stringify(json));
+}
 
 export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'dirty' | 'saving' | 'saved' | 'error'>('idle');
@@ -44,24 +54,31 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
   }
 
   async function doSave(editor: Editor, manual = false) {
-    const json = editor.getJSON();
-    const serialized = JSON.stringify(json);
+    const rawJson = editor.getJSON();
+    // Sanitize : élimine toute référence non-sérialisable
+    const cleanJson = sanitizeTiptapJson(rawJson);
+    const serialized = JSON.stringify(cleanJson);
     if (serialized === lastSavedRef.current && !manual) return;
 
     setSaveStatus('saving');
     setErrorMsg(null);
 
-    const result = await saveArticleContent(articleId, json as unknown as Json);
-
-    if (result.success) {
-      lastSavedRef.current = serialized;
-      setSaveStatus('saved');
-      setTimeout(() => {
-        setSaveStatus((s) => (s === 'saved' ? 'idle' : s));
-      }, 2000);
-    } else {
+    try {
+      const result = await saveArticleContent(articleId, cleanJson as Json);
+      if (result.success) {
+        lastSavedRef.current = serialized;
+        setSaveStatus('saved');
+        setTimeout(() => {
+          setSaveStatus((s) => (s === 'saved' ? 'idle' : s));
+        }, 2000);
+      } else {
+        setSaveStatus('error');
+        setErrorMsg(result.message);
+      }
+    } catch (err) {
+      console.error('saveArticleContent failed:', err);
       setSaveStatus('error');
-      setErrorMsg(result.message);
+      setErrorMsg('Erreur de sauvegarde — voir la console pour le détail.');
     }
   }
 
@@ -99,7 +116,7 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
     return () => window.removeEventListener('beforeunload', beforeUnload);
   }, [saveStatus]);
 
-  // Upload d'image via API route (pas Server Action — meilleure compat fichiers binaires)
+  // Upload d'image via API route (compat fichiers binaires)
   async function handleImageUpload(file: File): Promise<string | null> {
     try {
       const formData = new FormData();
@@ -113,7 +130,7 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
       const result = await response.json();
 
       if (!response.ok || !result.success || !result.url) {
-        setErrorMsg(result.message ?? 'Échec de l\'upload');
+        setErrorMsg(result.message ?? "Échec de l'upload");
         setSaveStatus('error');
         return null;
       }
@@ -121,7 +138,7 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
       return result.url as string;
     } catch (err) {
       console.error('handleImageUpload exception:', err);
-      setErrorMsg('Erreur réseau pendant l\'upload');
+      setErrorMsg("Erreur réseau pendant l'upload");
       setSaveStatus('error');
       return null;
     }

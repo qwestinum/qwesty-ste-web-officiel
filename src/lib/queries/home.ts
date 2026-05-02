@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import type { Article, Partner, UseCase, UseCaseKpi } from '@/lib/supabase/types';
+import type { Article, Partner, UseCaseKpi } from '@/lib/supabase/types';
 
 /**
  * Récupère tous les partenaires actifs ordonnés par display_order.
@@ -14,7 +14,7 @@ export async function getActivePartners(): Promise<Partner[]> {
       .order('display_order', { ascending: true });
 
     if (error) throw error;
-    return data ?? [];
+    return (data ?? []) as Partner[];
   } catch (err) {
     console.error('getActivePartners failed:', err);
     return [];
@@ -22,7 +22,7 @@ export async function getActivePartners(): Promise<Partner[]> {
 }
 
 /**
- * Récupère les 3 derniers articles publiés.
+ * Récupère les N derniers articles publiés.
  */
 export async function getLatestArticles(limit = 3): Promise<Article[]> {
   try {
@@ -35,7 +35,7 @@ export async function getLatestArticles(limit = 3): Promise<Article[]> {
       .limit(limit);
 
     if (error) throw error;
-    return data ?? [];
+    return (data ?? []) as Article[];
   } catch (err) {
     console.error('getLatestArticles failed:', err);
     return [];
@@ -57,9 +57,12 @@ export async function getHomeKpis(): Promise<UseCaseKpi[]> {
 
     if (error) throw error;
 
+    // On caste explicitement la forme du retour (sélection partielle)
+    const rows = (data ?? []) as Array<{ kpis: unknown }>;
+
     const flat: UseCaseKpi[] = [];
-    for (const row of data ?? []) {
-      const kpis = row.kpis as unknown;
+    for (const row of rows) {
+      const kpis = row.kpis;
       if (Array.isArray(kpis)) {
         for (const k of kpis) {
           if (
@@ -103,17 +106,19 @@ export async function getHeroCounters(): Promise<Array<{ value: string; label: s
 
     if (error) throw error;
 
-    const value = data?.value;
+    // Cast explicite (sélection partielle)
+    const row = data as { value: unknown } | null;
+    const value = row?.value;
+
     if (Array.isArray(value)) {
-      return value
-        .filter(
-          (v): v is { value: string; label: string } =>
-            !!v &&
-            typeof v === 'object' &&
-            typeof (v as { value: unknown }).value === 'string' &&
-            typeof (v as { label: unknown }).label === 'string'
-        )
-        .slice(0, 4);
+      const counters = value.filter(
+        (v): v is { value: string; label: string } =>
+          !!v &&
+          typeof v === 'object' &&
+          typeof (v as { value: unknown }).value === 'string' &&
+          typeof (v as { label: unknown }).label === 'string'
+      );
+      return counters.length > 0 ? counters.slice(0, 4) : fallback;
     }
 
     return fallback;

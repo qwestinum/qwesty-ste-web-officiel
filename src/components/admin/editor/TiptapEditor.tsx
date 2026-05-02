@@ -1,6 +1,7 @@
 'use client';
 
 import { useEditor, EditorContent, type Editor } from '@tiptap/react';
+import type { Content } from '@tiptap/core';
 import { useEffect, useRef, useState } from 'react';
 import { getTiptapExtensions } from '@/lib/tiptap/extensions';
 import { saveArticleContent, uploadArticleImage } from '@/lib/actions/articles';
@@ -22,7 +23,7 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
 
   const editor = useEditor({
     extensions: getTiptapExtensions({ placeholder: "Commencez à écrire votre article ici…" }),
-    content: initialContent ?? '',
+    content: (initialContent ?? '') as Content,
     editorProps: {
       attributes: {
         class: 'tiptap-content focus:outline-none',

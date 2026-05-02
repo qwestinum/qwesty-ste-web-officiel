@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+interface AdminRow {
+  id: string;
+  email: string;
+  role: string;
+}
+
 /**
  * Layout racine de toutes les pages /admin/*.
  *
@@ -26,15 +32,16 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     redirect('/admin/login');
   }
 
-  // Vérifie que l'utilisateur est bien admin
-  const { data: adminRow } = await supabase
+  // Vérifie que l'utilisateur est bien admin (cast via unknown — TypeScript strict)
+  const { data } = await supabase
     .from('admin_users')
     .select('id, email, role')
     .eq('user_id', user.id)
     .maybeSingle();
 
+  const adminRow = data as unknown as AdminRow | null;
+
   if (!adminRow) {
-    // L'utilisateur s'est connecté mais n'est pas admin → on le déconnecte
     await supabase.auth.signOut();
     redirect('/admin/login?error=not_admin');
   }

@@ -19,7 +19,7 @@ export async function getLeadsCounters(): Promise<{
 
     if (error) throw error;
 
-    const rows = ((data ?? []) as unknown as Array<{ status: LeadStatus }>);
+    const rows = (data as unknown as Array<{ status: LeadStatus }>) ?? [];
     const counters = {
       total: rows.length,
       new: rows.filter((r) => r.status === 'new').length,
@@ -47,7 +47,7 @@ export async function getRecentLeads(limit = 5): Promise<Lead[]> {
       .limit(limit);
 
     if (error) throw error;
-    return ((data ?? []) as unknown as Lead[]);
+    return (data as unknown as Lead[]) ?? [];
   } catch (err) {
     console.error('getRecentLeads failed:', err);
     return [];
@@ -78,7 +78,7 @@ export async function getAllLeads(filters?: {
 
     const { data, error } = await query.order('created_at', { ascending: false });
     if (error) throw error;
-    return ((data ?? []) as unknown as Lead[]);
+    return (data as unknown as Lead[]) ?? [];
   } catch (err) {
     console.error('getAllLeads failed:', err);
     return [];
@@ -123,7 +123,7 @@ export async function getLeadsActivityLast14Days(): Promise<
 
     if (error) throw error;
 
-    const rows = ((data ?? []) as unknown as Array<{ created_at: string }>);
+    const rows = (data as unknown as Array<{ created_at: string }>) ?? [];
     const buckets: Record<string, number> = {};
     for (let i = 13; i >= 0; i--) {
       const d = new Date();

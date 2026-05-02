@@ -15,12 +15,17 @@ const ACCENT_STYLES: Record<UseCase['accent_color'], { dot: string; value: strin
 export function UseCaseCard({ useCase }: UseCaseCardProps) {
   const accent = ACCENT_STYLES[useCase.accent_color] ?? ACCENT_STYLES.or;
 
-  // Solution items et KPI sont stockés en JSON, on les caste avec garde
+  // Casts via unknown pour Json -> types métier (TypeScript strict)
   const solutionItems = Array.isArray(useCase.solution_items)
-    ? (useCase.solution_items as string[]).filter((s) => typeof s === 'string')
+    ? (useCase.solution_items as unknown as string[]).filter(
+        (s) => typeof s === 'string'
+      )
     : [];
+
   const kpis = Array.isArray(useCase.kpis)
-    ? (useCase.kpis as UseCaseKpi[]).filter((k) => k && typeof k.value === 'string')
+    ? (useCase.kpis as unknown as UseCaseKpi[]).filter(
+        (k) => k && typeof k === 'object' && typeof k.value === 'string'
+      )
     : [];
 
   return (

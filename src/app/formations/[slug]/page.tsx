@@ -34,8 +34,11 @@ export default async function FormationDetailPage({
   const formation = await getFormationBySlug(params.slug);
   if (!formation) notFound();
 
+  // Cast via unknown pour Json -> string[] (TypeScript strict)
   const programme = Array.isArray(formation.programme)
-    ? (formation.programme as string[]).filter((s) => typeof s === 'string')
+    ? (formation.programme as unknown as string[]).filter(
+        (s) => typeof s === 'string'
+      )
     : [];
 
   return (

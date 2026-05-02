@@ -35,11 +35,17 @@ export default async function CasDetailPage({
   const useCase = await getUseCaseBySlug(params.slug);
   if (!useCase) notFound();
 
+  // Casts via unknown pour Json -> types métier (TypeScript strict)
   const solutionItems = Array.isArray(useCase.solution_items)
-    ? (useCase.solution_items as string[]).filter((s) => typeof s === 'string')
+    ? (useCase.solution_items as unknown as string[]).filter(
+        (s) => typeof s === 'string'
+      )
     : [];
+
   const kpis = Array.isArray(useCase.kpis)
-    ? (useCase.kpis as UseCaseKpi[]).filter((k) => k && typeof k.value === 'string')
+    ? (useCase.kpis as unknown as UseCaseKpi[]).filter(
+        (k) => k && typeof k === 'object' && typeof k.value === 'string'
+      )
     : [];
 
   return (

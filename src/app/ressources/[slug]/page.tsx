@@ -8,7 +8,7 @@ import { ArticleContent } from '@/components/ressources/ArticleContent';
 import { getAllArticleSlugs, getArticleBySlug } from '@/lib/queries/articles';
 import { formatDate } from '@/lib/utils';
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
   const slugs = await getAllArticleSlugs();

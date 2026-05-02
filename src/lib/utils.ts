@@ -3,7 +3,6 @@ import { twMerge } from 'tailwind-merge';
 
 /**
  * Combine intelligemment des classes Tailwind en évitant les conflits.
- * Exemple : cn('px-4', condition && 'px-8') → 'px-8' si condition vraie.
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,23 +22,35 @@ export function formatDate(iso: string | null, options?: Intl.DateTimeFormatOpti
 }
 
 /**
+ * Formate une date ISO en chaîne courte avec heure.
+ * Exemple : formatDateTime('2026-04-01T14:30Z') → '01/04 14:30'
+ */
+export function formatDateTime(iso: string | null) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  return `${day}/${month} ${hours}:${minutes}`;
+}
+
+/**
  * Génère un slug URL-safe à partir d'une chaîne.
- * "L'IA en 2026" → "l-ia-en-2026"
  */
 export function slugify(text: string): string {
   return text
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')  // accents
-    .replace(/[^a-z0-9\s-]/g, '')      // caractères spéciaux
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
     .trim()
-    .replace(/\s+/g, '-')              // espaces → tirets
-    .replace(/-+/g, '-');              // tirets multiples
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 }
 
 /**
  * Calcule le temps de lecture en minutes depuis du texte HTML.
- * Base : 220 mots par minute (lecture moyenne FR).
  */
 export function calculateReadingTime(html: string | null): number {
   if (!html) return 0;

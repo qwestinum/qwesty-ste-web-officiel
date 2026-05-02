@@ -1,182 +1,114 @@
-# Qwestinum — Site dynamique
+# LOT 5 — Éditeur d'articles Tiptap + Supabase Storage
 
-Site institutionnel de Qwestinum avec admin intégré.
+## Vue d'ensemble
 
-**Stack** : Next.js 14 (App Router) · TypeScript · Tailwind CSS · Supabase (PostgreSQL + Auth) · Tiptap (éditeur d'articles)
+Ce lot débloque la **publication autonome d'articles** depuis l'admin :
+- Éditeur WYSIWYG complet (Tiptap)
+- Upload d'images via Supabase Storage
+- Auto-save toutes les 30s
+- Page Preview avant publication
+- Sanitization XSS du HTML rendu
 
----
+## Procédure de déploiement — dans l'ordre
 
-## 🚀 Démarrage en local
+### Étape 1 — Migration SQL Supabase Storage
 
-### Prérequis
-
-- **Node.js 18+** ([télécharger](https://nodejs.org))
-- **Compte Supabase** (free tier — voir étape 2)
-
-### 1. Installer les dépendances
-
-```bash
-cd qwestinum-site
-npm install
+Va sur **Supabase → SQL Editor → New query** et exécute le contenu de :
+```
+supabase/migration-storage.sql
 ```
 
-L'installation peut prendre 1 à 2 minutes.
+Cette migration :
+- Crée le bucket public `articles-images` (5 MB max, JPEG/PNG/WebP/GIF)
+- Configure les politiques RLS (lecture publique, upload admin)
 
-### 2. Créer le projet Supabase
-
-1. Va sur https://supabase.com et crée un compte (ou connecte-toi avec GitHub)
-2. Clique sur **New project**
-3. Remplis :
-   - **Name** : `qwestinum-prod` (ou ce que tu veux)
-   - **Database password** : génère un mot de passe fort, **garde-le précieusement**
-   - **Region** : `Frankfurt (eu-central-1)` (proximité UE pour RGPD)
-   - **Pricing plan** : `Free`
-4. Attends ~2 minutes pendant le provisionnement
-
-### 3. Créer le schéma de base de données
-
-1. Dans Supabase, va dans **SQL Editor** (icône `</>` dans la sidebar)
-2. Clique sur **New query**
-3. Ouvre le fichier `supabase/schema.sql` de ce projet
-4. Copie tout son contenu, colle-le dans l'éditeur SQL Supabase
-5. Clique sur **Run** (ou Ctrl/Cmd + Enter)
-6. Tu dois voir "Success. No rows returned" → tout est bon
-
-### 4. Configurer les variables d'environnement
-
-1. Dans Supabase, va dans **Project Settings** → **API**
-2. Copie la **Project URL** et l'**anon public key**
-3. Dans le projet local, copie `.env.example` en `.env.local` :
-
-```bash
-cp .env.example .env.local
-```
-
-4. Édite `.env.local` et remplace les valeurs :
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-### 5. Activer l'authentification Magic Link
-
-1. Dans Supabase, va dans **Authentication** → **Providers**
-2. Clique sur **Email**
-3. Active **Enable Email provider**
-4. (Optionnel) Désactive **Confirm email** pour aller plus vite en dev
-5. Active **Enable email magic link**
-6. Sauvegarde
-
-### 6. Lancer le serveur de développement
-
-```bash
-npm run dev
-```
-
-Ouvre http://localhost:3000 dans ton navigateur.
-
-Si tout est bon, tu vois :
-- Le logo Qwestinum (constellation perle & or)
-- Un panneau de diagnostic avec **4 lignes vertes** ("Actif" / "X partenaires")
-
-🎉 **Le Lot 1 est opérationnel.**
-
----
-
-## 📁 Organisation du projet
-
-```
-qwestinum-site/
-├── public/                    Assets statiques (logos SVG, favicon...)
-├── supabase/
-│   └── schema.sql             Schéma DB complet à coller dans Supabase
-├── src/
-│   ├── app/                   Pages (App Router Next.js)
-│   │   ├── layout.tsx         Layout racine — polices + meta
-│   │   ├── page.tsx           Page d'accueil
-│   │   └── globals.css        CSS global + Tailwind
-│   ├── components/
-│   │   └── brand/
-│   │       └── Logo.tsx       Composants Logo (SVG inline)
-│   ├── lib/
-│   │   ├── supabase/
-│   │   │   ├── client.ts      Client Supabase navigateur
-│   │   │   ├── server.ts      Client Supabase serveur
-│   │   │   └── types.ts       Types TypeScript de la DB
-│   │   ├── utils.ts           Helpers (cn, formatDate, slugify...)
-│   │   └── constants.ts       Config site (nav, contact...)
-│   └── styles/
-│       └── fonts.ts           Configuration Fraunces + Inter
-├── tailwind.config.ts         Palette + polices Tailwind
-├── tsconfig.json              Config TypeScript
-└── package.json               Dépendances
-```
-
----
-
-## 🎨 Charte graphique
-
-**Couleurs Tailwind disponibles** :
-- `lin` `#FBFAF7` — background principal
-- `perle` `#DCD9D1` — surfaces secondaires
-- `pierre` `#807D75` — texte secondaire
-- `sepia` `#2A2724` — texte primaire (encre)
-- `or-pale` `#F4D35E` — accents discrets
-- `or` `#D4A82C` — CTA principaux
-- `or-fonce` `#A8861C` — hover, états actifs
-
-**Polices** :
-- `font-serif` → Fraunces (titres éditoriaux)
-- `font-sans` → Inter (corps + UI)
-
-**Composants utilitaires** déjà disponibles dans `globals.css` :
-- `.container-page` — container centré 1200px max
-- `.btn-primary` — bouton or
-- `.btn-secondary` — bouton outline
-- `.label-mark` — label uppercase espacé
-- `.link-editorial` — lien souligné or pâle
-
----
-
-## 🔐 Devenir admin (après le Lot 4)
-
-Quand le Lot 4 sera livré, tu pourras te connecter à `/admin/login`. Après avoir reçu ton magic link et créé ton compte Supabase, exécute cette requête dans le SQL Editor pour devenir admin :
-
+**Vérification** :
 ```sql
-insert into public.admin_users (user_id, email, role)
-values (
-  (select id from auth.users where email = 'TON-EMAIL@example.com'),
-  'TON-EMAIL@example.com',
-  'admin'
-);
+select * from storage.buckets where id = 'articles-images';
+-- → 1 ligne, public = true
 ```
 
----
+### Étape 2 — Mettre à jour package.json
 
-## 📦 Roadmap des lots
+Ajouter ces dépendances dans le bloc `"dependencies"` :
 
-- ✅ **Lot 1 — Setup** (actuel) : Next.js + Tailwind + Supabase + diagnostic
-- ⏳ **Lot 2 — Page d'accueil premium** : hero, partenaires, services, garanties, etc.
-- ⏳ **Lot 3 — Pages publiques** : cas d'usage, formations, ressources, à propos
-- ⏳ **Lot 4 — Auth admin** : magic link, dashboard, layout admin
-- ⏳ **Lot 5 — Éditeur Tiptap** : CRUD articles avec WYSIWYG
-- ⏳ **Lot 6 — Gestion content** : formations, cas, modules, partenaires
-
----
-
-## 🛠️ Commandes utiles
-
-```bash
-npm run dev          # Serveur de développement (localhost:3000)
-npm run build        # Build de production
-npm run start        # Serveur de production
-npm run lint         # Linter ESLint
-npm run type-check   # Vérification TypeScript
+```json
+"@tiptap/extension-image": "^2.10.3",
+"@tiptap/extension-link": "^2.10.3",
+"@tiptap/extension-placeholder": "^2.10.3",
+"@tiptap/pm": "^2.10.3",
+"@tiptap/react": "^2.10.3",
+"@tiptap/starter-kit": "^2.10.3",
+"isomorphic-dompurify": "^2.18.0",
 ```
 
----
+### Étape 3 — Pousser le code
 
-**Contact** : contact@qwestinum.com
+Décompresse le ZIP et fusionne avec ton repo local. Les fichiers sont :
+
+**Nouveaux** :
+- `src/lib/tiptap/extensions.ts`
+- `src/lib/tiptap/render.ts`
+- `src/lib/queries/articles-admin.ts`
+- `src/lib/actions/articles.ts`
+- `src/components/admin/editor/TiptapEditor.tsx`
+- `src/components/admin/editor/EditorToolbar.tsx`
+- `src/components/admin/editor/ArticleMetaForm.tsx`
+- `src/components/admin/editor/CreateArticleButton.tsx`
+- `src/app/admin/articles/page.tsx`
+- `src/app/admin/articles/[id]/edit/page.tsx`
+- `src/app/admin/articles/[id]/preview/page.tsx`
+
+**Modifiés** :
+- `src/components/admin/AdminShell.tsx` (Articles devient cliquable)
+- `src/app/globals.css` (ajouter le contenu de `globals-additions.css` à la fin)
+
+Commit + push.
+
+### Étape 4 — Build Vercel
+
+Vercel relance automatiquement (~3 min).
+
+⚠️ **TypeScript strict** : si tu as des erreurs `never`, c'est le pattern récurrent qu'on connaît :
+- Pour `.update()`/`.insert()` → `const table = supabase.from('xxx') as any` puis chaîner
+- Pour `.select('partial')` → `data as unknown as Type[]`
+
+Tous les fichiers livrés appliquent déjà ces patterns.
+
+### Étape 5 — Tester le flow complet
+
+1. Va sur `/admin` → connecte-toi
+2. Clique **Articles** dans la sidebar (maintenant cliquable, plus "bientôt")
+3. Clique **+ Nouvel article**
+4. Tu es redirigé vers `/admin/articles/[id]/edit`
+5. Tape un titre, change le slug si besoin
+6. Dans l'éditeur, écris un paragraphe, ajoute un H2, une liste, un lien
+7. **Upload d'image** : clique 🖼 dans la toolbar → sélectionne une image → elle s'insère
+8. Attends 30s → tu vois "Sauvegardé" en bas
+9. Ou sauvegarde immédiatement avec Cmd/Ctrl+S
+10. Clique **Aperçu →** dans la sidebar → tu vois l'article rendu
+11. Reviens à l'édition → clique **Publier**
+12. Va sur `/ressources` → ton article est visible publiquement
+
+## Architecture
+
+```
+Édition Tiptap (client)
+    ↓ JSON Tiptap
+saveArticleContent() Server Action
+    ↓ JSON + HTML généré + reading_time
+articles table (content, content_html, reading_time_minutes)
+    ↓ revalidatePath('/ressources')
+Site public (rend content_html avec dangerouslySetInnerHTML)
+```
+
+Le HTML est généré côté serveur (jamais côté client) et **sanitizé avec DOMPurify** avant stockage. Donc même si quelqu'un pollue le JSON Tiptap directement en DB, l'HTML rendu reste safe.
+
+## Ce qui reste à faire (Lot 6)
+
+- CRUD `use_cases`
+- CRUD `formations`
+- CRUD `flagship_modules`
+- CRUD `partners`
+
+Tout réutilisera l'AdminShell et les patterns d'éditeur déjà en place.

@@ -1,0 +1,14 @@
+// Dépendances à ajouter dans le bloc "dependencies" du package.json :
+//
+//   "@tiptap/extension-image": "^2.10.3",
+//   "@tiptap/extension-link": "^2.10.3",
+//   "@tiptap/extension-placeholder": "^2.10.3",
+//   "@tiptap/pm": "^2.10.3",
+//   "@tiptap/react": "^2.10.3",
+//   "@tiptap/starter-kit": "^2.10.3",
+//   "isomorphic-dompurify": "^2.18.0",
+//
+// L'ordre alphabétique avec @ est respecté.
+//
+// Tiptap est déjà partiellement listé dans le package.json initial (Lot 1)
+// mais avec une vieille version (^2.6.6). On met à jour vers ^2.10.3.

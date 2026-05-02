@@ -22,8 +22,8 @@ const ADMIN_NAV = [
     section: 'Contenu',
     items: [
       { href: '/admin/leads', label: 'Leads', icon: 'mail' },
-      // Items à venir aux Lots 5-6 (désactivés visuellement pour l'instant)
-      { href: '/admin/articles', label: 'Articles', icon: 'edit', disabled: true },
+      { href: '/admin/articles', label: 'Articles', icon: 'edit' },
+      // À venir au Lot 6
       { href: '/admin/use-cases', label: "Cas d'usage", icon: 'briefcase', disabled: true },
       { href: '/admin/formations', label: 'Formations', icon: 'academic', disabled: true },
     ],
@@ -60,7 +60,6 @@ export function AdminShell({ userEmail, children }: AdminShellProps) {
 
       {/* Contenu principal */}
       <div className="lg:pl-64">
-        {/* Topbar mobile */}
         <header className="lg:hidden sticky top-0 z-40 flex items-center justify-between h-14 px-4 border-b border-perle bg-lin">
           <Link href="/admin" className="flex items-center gap-2">
             <LogoSymbol className="w-7 h-7" />
@@ -96,7 +95,6 @@ function SidebarContent({
 }) {
   return (
     <>
-      {/* Header sidebar */}
       <div className="h-16 px-5 flex items-center gap-3 border-b border-perle">
         <LogoSymbol className="w-8 h-8 shrink-0" />
         <div className="min-w-0">
@@ -109,7 +107,6 @@ function SidebarContent({
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-6 px-3">
         {ADMIN_NAV.map((section) => (
           <div key={section.section} className="mb-7">
@@ -164,7 +161,6 @@ function SidebarContent({
         ))}
       </nav>
 
-      {/* Footer sidebar : user + déconnexion */}
       <div className="p-4 border-t border-perle">
         <div className="font-sans text-xs text-pierre mb-1">Connecté</div>
         <div className="font-sans text-sm text-sepia truncate mb-3" title={userEmail}>

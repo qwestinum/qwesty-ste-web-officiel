@@ -1,33 +1,42 @@
 import { createClient } from '@/lib/supabase/server';
 import type { Lead, LeadStatus } from '@/lib/supabase/types';
 
-/**
- * Compte les leads par statut.
- */
-export async function getLeadsCounters(): Promise<{
+interface LeadsCounters {
   total: number;
   new: number;
   inProgress: number;
   archived: number;
   spam: number;
-}> {
+}
+
+interface ActivityPoint {
+  date: string;
+  count: number;
+}
+
+interface LeadsFilters {
+  status?: LeadStatus | 'all';
+  search?: string;
+}
+
+/**
+ * Compte les leads par statut.
+ */
+export async function getLeadsCounters(): Promise<LeadsCounters> {
   try {
     const supabase = createClient();
-    const { data, error } = await supabase
-      .from('leads')
-      .select('status');
+    const { data, error } = await supabase.from('leads').select('status');
 
     if (error) throw error;
 
     const rows = (data as unknown as Array<{ status: LeadStatus }>) ?? [];
-    const counters = {
+    return {
       total: rows.length,
       new: rows.filter((r) => r.status === 'new').length,
       inProgress: rows.filter((r) => r.status === 'in-progress').length,
       archived: rows.filter((r) => r.status === 'archived').length,
       spam: rows.filter((r) => r.status === 'spam').length,
     };
-    return counters;
   } catch (err) {
     console.error('getLeadsCounters failed:', err);
     return { total: 0, new: 0, inProgress: 0, archived: 0, spam: 0 };
@@ -57,10 +66,7 @@ export async function getRecentLeads(limit = 5): Promise<Lead[]> {
 /**
  * Liste tous les leads, filtrables.
  */
-export async function getAllLeads(filters?: {
-  status?: LeadStatus | 'all';
-  search?: string;
-}): Promise<Lead[]> {
+export async function getAllLeads(filters?: LeadsFilters): Promise<Lead[]> {
   try {
     const supabase = createClient();
     let query = supabase.from('leads').select('*');
@@ -106,11 +112,9 @@ export async function getLeadById(id: string): Promise<Lead | null> {
 }
 
 /**
- * Activité par jour des 14 derniers jours.
+ * Activite par jour des 14 derniers jours (pour mini-graph dashboard).
  */
-export async function getLeadsActivityLast14Days(): Promise
-  Array<{ date: string; count: number }>
-> {
+export async function getLeadsActivityLast14Days(): Promise<ActivityPoint[]> {
   try {
     const supabase = createClient();
     const since = new Date();

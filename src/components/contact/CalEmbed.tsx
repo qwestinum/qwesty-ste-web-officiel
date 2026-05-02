@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 /**
  * Widget Cal.com inline pour la prise de rendez-vous diagnostic.
  *
- * Utilise le package officiel @calcom/embed-react.
- * Configuration via NEXT_PUBLIC_CAL_USERNAME (ex: "qwestinum/diagnostic").
+ * Hauteur adaptative selon la taille de l'écran :
+ *  - Mobile : 720px (évite scroll interne à l'embed)
+ *  - Desktop : 760px (confortable pour mois + créneaux côte à côte)
  */
 export function CalEmbed() {
   const calLink = process.env.NEXT_PUBLIC_CAL_USERNAME;
@@ -16,7 +17,6 @@ export function CalEmbed() {
     (async function () {
       const cal = await getCalApi();
 
-      // Mêmes valeurs pour light et dark : on force toujours light côté site
       const calColors = {
         'cal-brand': '#D4A82C',
         'cal-text': '#2A2724',
@@ -61,9 +61,27 @@ export function CalEmbed() {
     <div className="rounded-md overflow-hidden border border-perle bg-lin">
       <Cal
         calLink={calLink}
-        style={{ width: '100%', height: '640px', overflow: 'scroll' }}
+        style={{
+          width: '100%',
+          height: '760px',
+          minHeight: '720px',
+          overflow: 'hidden',
+        }}
         config={{ layout: 'month_view', theme: 'light' }}
       />
+
+      {/* Lien de secours pour ouvrir Cal.com en plein écran si l'embed coince */}
+      <div className="border-t border-perle bg-perle/30 px-4 py-3 text-center">
+        <a
+          href={`https://cal.com/${calLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-xs text-pierre hover:text-or-fonce transition-colors inline-flex items-center gap-1.5"
+        >
+          Ouvrir le calendrier en plein écran
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   );
 }

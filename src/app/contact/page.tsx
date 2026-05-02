@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     'Prenez rendez-vous pour un diagnostic IA gratuit de 30 minutes ou écrivez-nous pour toute autre demande.',
 };
 
-// Pas de revalidate : la page est statique côté contenu
 export const dynamic = 'force-static';
 
 export default function ContactPage() {
@@ -29,39 +28,15 @@ export default function ContactPage() {
 
         {/* Diagnostic gratuit avec Cal.com */}
         <section id="diagnostic" className="py-16 md:py-20 border-b border-perle">
-          <div className="container-page">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-
-              <div className="lg:col-span-4">
-                <span className="label-mark">Diagnostic gratuit</span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
-                  30 minutes pour identifier <em className="italic text-or-fonce">vos leviers IA.</em>
-                </h2>
-                <p className="mt-5 font-sans text-base leading-relaxed text-pierre">
-                  Réservez directement un créneau dans notre calendrier. Nous échangeons sur votre contexte et identifions 2 à 3 cas d'usage concrets à fort impact dans votre organisation.
-                </p>
-
-                <ul className="mt-8 space-y-3">
-                  {[
-                    'Sans engagement, sans préparation à fournir',
-                    'Visioconférence (lien envoyé après réservation)',
-                    'Compte-rendu écrit envoyé sous 48 h',
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 font-sans text-sm leading-relaxed text-sepia"
-                    >
-                      <span className="block w-1.5 h-1.5 rounded-full bg-or mt-2 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="lg:col-span-8">
-                <CalEmbed />
-              </div>
+          <div className="container-page max-w-4xl">
+            <div className="mb-10 text-center">
+              <span className="label-mark">Diagnostic gratuit</span>
+              <h2 className="mt-4 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
+                30 minutes pour identifier <em className="italic text-or-fonce">vos leviers IA.</em>
+              </h2>
             </div>
+
+            <CalEmbed />
           </div>
         </section>
 

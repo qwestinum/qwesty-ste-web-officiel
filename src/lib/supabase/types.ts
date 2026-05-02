@@ -1,8 +1,5 @@
 /**
  * Types TypeScript de la base de données Supabase.
- *
- * NOTE : ces types peuvent être régénérés automatiquement avec la CLI Supabase :
- *   npx supabase gen types typescript --project-id YOUR_PROJECT_ID > src/lib/supabase/types.ts
  */
 
 export type Json =

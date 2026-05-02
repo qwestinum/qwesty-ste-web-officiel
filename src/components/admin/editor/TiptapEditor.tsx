@@ -4,7 +4,7 @@ import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import type { Content } from '@tiptap/core';
 import { useEffect, useRef, useState } from 'react';
 import { getTiptapExtensions } from '@/lib/tiptap/extensions';
-import { saveArticleContent, uploadArticleImage } from '@/lib/actions/articles';
+import { saveArticleContent } from '@/lib/actions/articles';
 import { EditorToolbar } from './EditorToolbar';
 import type { Json } from '@/lib/supabase/types';
 
@@ -99,17 +99,32 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
     return () => window.removeEventListener('beforeunload', beforeUnload);
   }, [saveStatus]);
 
-  // Upload d'image via toolbar
+  // Upload d'image via API route (pas Server Action — meilleure compat fichiers binaires)
   async function handleImageUpload(file: File): Promise<string | null> {
-    const formData = new FormData();
-    formData.append('file', file);
-    const result = await uploadArticleImage(formData);
-    if (!result.success || !result.url) {
-      setErrorMsg(result.message);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/admin/upload-image', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success || !result.url) {
+        setErrorMsg(result.message ?? 'Échec de l\'upload');
+        setSaveStatus('error');
+        return null;
+      }
+
+      return result.url as string;
+    } catch (err) {
+      console.error('handleImageUpload exception:', err);
+      setErrorMsg('Erreur réseau pendant l\'upload');
       setSaveStatus('error');
       return null;
     }
-    return result.url;
   }
 
   if (!editor) {

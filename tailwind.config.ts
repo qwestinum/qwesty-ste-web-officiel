@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette Qwestinum — Perle & or pâle
-        lin: '#FBFAF7',         // Background principal
-        perle: '#DCD9D1',       // Surfaces secondaires
+        // Palette Qwestinum — Ivoire papier & or
+        lin: '#F4F0E8',         // Background principal — ivoire papier (chaleureux)
+        perle: '#D8D2C2',       // Surfaces secondaires (légèrement plus foncé)
         pierre: '#807D75',      // Texte secondaire
         sepia: '#2A2724',       // Texte primaire
         'or-pale': '#F4D35E',   // Accents discrets
@@ -19,9 +19,7 @@ const config: Config = {
         'or-fonce': '#A8861C',  // Hover, états actifs
       },
       fontFamily: {
-        // Fraunces : titres éditoriaux
         serif: ['var(--font-fraunces)', 'Georgia', 'serif'],
-        // Inter : corps + UI
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {

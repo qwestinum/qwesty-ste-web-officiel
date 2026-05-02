@@ -3,8 +3,6 @@
  *
  * NOTE : ces types peuvent être régénérés automatiquement avec la CLI Supabase :
  *   npx supabase gen types typescript --project-id YOUR_PROJECT_ID > src/lib/supabase/types.ts
- *
- * Pour l'instant on les écrit à la main pour rester sans dépendance CLI.
  */
 
 export type Json =
@@ -126,6 +124,26 @@ export interface SiteSetting {
   updated_at: string;
 }
 
+export type LeadSubject = 'general' | 'diagnostic' | 'formation' | 'partnership' | 'press' | 'other';
+export type LeadStatus = 'new' | 'in-progress' | 'archived' | 'spam';
+
+export interface Lead {
+  id: string;
+  full_name: string;
+  email: string;
+  company: string | null;
+  phone: string | null;
+  subject: LeadSubject;
+  message: string;
+  source: string | null;
+  ip_hash: string | null;
+  user_agent: string | null;
+  status: LeadStatus;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 // ----------------------------------------------------------------
 // Database type — utilisé par createClient<Database>()
 // ----------------------------------------------------------------
@@ -167,6 +185,15 @@ export interface Database {
         Row: SiteSetting;
         Insert: SiteSetting;
         Update: Partial<SiteSetting>;
+      };
+      leads: {
+        Row: Lead;
+        Insert: Partial<Omit<Lead, 'id' | 'created_at' | 'updated_at'>> & {
+          full_name: string;
+          email: string;
+          message: string;
+        };
+        Update: Partial<Lead>;
       };
     };
   };

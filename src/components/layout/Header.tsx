@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
  * Header sticky avec navigation principale.
  * - Devient légèrement opaque + bordure au scroll
  * - Mobile : burger menu
- * - CTA "Diagnostic gratuit" en or
+ * - CTA "Diagnostic gratuit" en or → /contact#diagnostic
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +38,7 @@ export function Header() {
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -48,7 +48,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Link href="/#contact" className="btn-primary !py-3 !px-5">
+          <Link href="/contact#diagnostic" className="btn-primary !py-3 !px-5">
             Diagnostic gratuit
           </Link>
         </nav>
@@ -89,7 +89,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/#contact"
+              href="/contact#diagnostic"
               onClick={() => setMobileOpen(false)}
               className="btn-primary mt-4 w-full"
             >

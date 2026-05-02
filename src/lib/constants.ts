@@ -22,6 +22,7 @@ export const NAV_LINKS = [
   { href: '/formations', label: 'Formations' },
   { href: '/ressources', label: 'Ressources' },
   { href: '/a-propos', label: 'À propos' },
+  { href: '/contact', label: 'Contact' },
 ] as const;
 
 export const FOOTER_LINKS = {
@@ -33,7 +34,7 @@ export const FOOTER_LINKS = {
   entreprise: [
     { href: '/a-propos', label: 'À propos' },
     { href: '/ressources', label: 'Ressources' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/contact', label: 'Contact' },
   ],
   ressources: [
     { href: '/ressources', label: 'Articles' },

@@ -15,19 +15,24 @@ export function CalEmbed() {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();
+
+      // Mêmes valeurs pour light et dark : on force toujours light côté site
+      const calColors = {
+        'cal-brand': '#D4A82C',
+        'cal-text': '#2A2724',
+        'cal-text-emphasis': '#2A2724',
+        'cal-text-muted': '#807D75',
+        'cal-bg': '#F4F0E8',
+        'cal-bg-emphasis': '#D8D2C2',
+        'cal-border': '#D8D2C2',
+        'cal-border-emphasis': '#807D75',
+      };
+
       cal('ui', {
         theme: 'light',
         cssVarsPerTheme: {
-          light: {
-            'cal-brand': '#D4A82C',
-            'cal-text': '#2A2724',
-            'cal-text-emphasis': '#2A2724',
-            'cal-text-muted': '#807D75',
-            'cal-bg': '#F4F0E8',
-            'cal-bg-emphasis': '#D8D2C2',
-            'cal-border': '#D8D2C2',
-            'cal-border-emphasis': '#807D75',
-          },
+          light: calColors,
+          dark: calColors,
         },
         hideEventTypeDetails: false,
         layout: 'month_view',

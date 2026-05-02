@@ -8,6 +8,11 @@ const VALID_STATUSES: LeadStatus[] = ['new', 'in-progress', 'archived', 'spam'];
 
 /**
  * Met à jour le statut d'un lead.
+ *
+ * NOTE typage : on caste `from('leads')` en any pour contourner le bug
+ * de @supabase/ssr qui type les UPDATE/INSERT comme `never` quand le
+ * type Database est manuel. La validation reste assurée côté serveur (whitelist
+ * VALID_STATUSES) et côté DB (CHECK constraint sur status).
  */
 export async function updateLeadStatus(leadId: string, status: LeadStatus) {
   if (!VALID_STATUSES.includes(status)) {
@@ -16,10 +21,10 @@ export async function updateLeadStatus(leadId: string, status: LeadStatus) {
 
   try {
     const supabase = createClient();
-    const { error } = await supabase
-      .from('leads')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .update({ status } as any)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const table = supabase.from('leads') as any;
+    const { error } = await table
+      .update({ status })
       .eq('id', leadId);
 
     if (error) {
@@ -47,10 +52,10 @@ export async function updateLeadNotes(leadId: string, notes: string) {
 
   try {
     const supabase = createClient();
-    const { error } = await supabase
-      .from('leads')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .update({ notes: notes.trim() || null } as any)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const table = supabase.from('leads') as any;
+    const { error } = await table
+      .update({ notes: notes.trim() || null })
       .eq('id', leadId);
 
     if (error) {

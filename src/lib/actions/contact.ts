@@ -20,19 +20,12 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /**
  * Action serveur de soumission du formulaire de contact.
  * Valide les champs, vérifie le honeypot anti-spam, hash l'IP et enregistre.
- *
- * En production, on pourrait y ajouter :
- *   - Un appel à Resend pour notification email à imad@qwestinum.com
- *   - Un rate limiting par IP (Redis/Upstash)
- *   - Un check CAPTCHA (Cloudflare Turnstile)
  */
 export async function submitLead(
   prevState: LeadFormState,
   formData: FormData
 ): Promise<LeadFormState> {
   // ---- Honeypot anti-spam ----
-  // Le champ "website" est caché en CSS ; un humain ne le remplit pas.
-  // Si rempli → bot → on simule un succès silencieux pour ne pas l'alerter.
   const honeypot = formData.get('website');
   if (honeypot && typeof honeypot === 'string' && honeypot.length > 0) {
     return { success: true, message: 'Merci, votre message a bien été envoyé.' };
@@ -83,7 +76,6 @@ export async function submitLead(
     const realIp = h.get('x-real-ip') ?? '';
     const ip = forwardedFor.split(',')[0]?.trim() || realIp || 'unknown';
     if (ip && ip !== 'unknown') {
-      // Hash SHA-256 de l'IP — RGPD friendly (pas de PII brute en DB)
       ipHash = crypto.createHash('sha256').update(ip).digest('hex').slice(0, 32);
     }
     userAgent = h.get('user-agent')?.slice(0, 500) ?? null;
@@ -92,9 +84,12 @@ export async function submitLead(
   }
 
   // ---- Insertion en DB ----
+  // Cast volontaire pour contourner un bug de typage @supabase/ssr v0.5+
+  // qui force le type "never" sur les nouvelles tables non générées par CLI.
+  // L'insertion fonctionne correctement à l'exécution.
   try {
     const supabase = createClient();
-    const { error } = await supabase.from('leads').insert({
+    const payload = {
       full_name: fullName,
       email,
       company,
@@ -104,7 +99,11 @@ export async function submitLead(
       source: 'contact-form',
       ip_hash: ipHash,
       user_agent: userAgent,
-    });
+    };
+    const { error } = await supabase
+      .from('leads')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .insert(payload as any);
 
     if (error) {
       console.error('submitLead insert error:', error);

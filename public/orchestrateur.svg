@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" role="img" aria-label="Orchestrateur multi-agents Qwestinum">
+  <!-- Fond -->
+  <rect width="800" height="600" fill="#F4F0E8"/>
+
+  <!-- Cadre fenêtre application -->
+  <rect x="40" y="40" width="720" height="520" rx="8" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+
+  <!-- Barre de titre -->
+  <rect x="40" y="40" width="720" height="40" rx="8" fill="#2A2724"/>
+  <rect x="40" y="72" width="720" height="8" fill="#2A2724"/>
+
+  <!-- Boutons fenêtre -->
+  <circle cx="60" cy="60" r="5" fill="#A8861C"/>
+  <circle cx="78" cy="60" r="5" fill="#807D75"/>
+  <circle cx="96" cy="60" r="5" fill="#D8D2C2"/>
+
+  <!-- Titre -->
+  <text x="120" y="65" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#F4F0E8" letter-spacing="0.5">QWESTINUM — Orchestrateur</text>
+
+  <!-- Status indicateur droite -->
+  <circle cx="710" cy="60" r="4" fill="#D4A82C"/>
+  <text x="720" y="64" font-family="Inter, sans-serif" font-size="10" fill="#F4F0E8" letter-spacing="1">LIVE</text>
+
+  <!-- Label section -->
+  <text x="70" y="115" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="2">ENTREPRISE VIRTUELLE · 5 DÉPARTEMENTS</text>
+
+  <!-- Hub central -->
+  <g>
+    <circle cx="400" cy="280" r="48" fill="#2A2724"/>
+    <circle cx="400" cy="280" r="48" fill="none" stroke="#D4A82C" stroke-width="2"/>
+    <circle cx="400" cy="280" r="38" fill="none" stroke="#F4D35E" stroke-width="0.5" opacity="0.5"/>
+    <text x="400" y="276" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#F4D35E" text-anchor="middle">ORCHES-</text>
+    <text x="400" y="290" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#F4D35E" text-anchor="middle">TRATEUR</text>
+  </g>
+
+  <!-- Liens orchestrateur vers départements -->
+  <line x1="400" y1="232" x2="180" y2="170" stroke="#D8D2C2" stroke-width="1.5"/>
+  <line x1="400" y1="232" x2="400" y2="155" stroke="#D8D2C2" stroke-width="1.5"/>
+  <line x1="400" y1="232" x2="620" y2="170" stroke="#D8D2C2" stroke-width="1.5"/>
+  <line x1="400" y1="328" x2="220" y2="430" stroke="#D8D2C2" stroke-width="1.5"/>
+  <line x1="400" y1="328" x2="580" y2="430" stroke="#D8D2C2" stroke-width="1.5"/>
+
+  <!-- Département 1 — RH (haut gauche) -->
+  <g>
+    <rect x="100" y="140" width="160" height="80" rx="4" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+    <rect x="100" y="140" width="3" height="80" fill="#D4A82C"/>
+    <text x="115" y="160" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#807D75" letter-spacing="1.5">DÉPARTEMENT</text>
+    <text x="115" y="178" font-family="Fraunces, serif" font-size="14" font-weight="500" fill="#2A2724">Ressources humaines</text>
+    <g transform="translate(115, 192)">
+      <circle cx="4" cy="4" r="3" fill="#D4A82C"/>
+      <text x="14" y="7" font-family="Inter, sans-serif" font-size="9" fill="#2A2724">3 agents actifs</text>
+    </g>
+    <text x="115" y="213" font-family="Inter, sans-serif" font-size="8" fill="#807D75">throughput · 47/h</text>
+  </g>
+
+  <!-- Département 2 — Finance (haut centre) -->
+  <g>
+    <rect x="320" y="125" width="160" height="80" rx="4" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+    <rect x="320" y="125" width="3" height="80" fill="#D4A82C"/>
+    <text x="335" y="145" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#807D75" letter-spacing="1.5">DÉPARTEMENT</text>
+    <text x="335" y="163" font-family="Fraunces, serif" font-size="14" font-weight="500" fill="#2A2724">Finance</text>
+    <g transform="translate(335, 177)">
+      <circle cx="4" cy="4" r="3" fill="#D4A82C"/>
+      <text x="14" y="7" font-family="Inter, sans-serif" font-size="9" fill="#2A2724">5 agents actifs</text>
+    </g>
+    <text x="335" y="198" font-family="Inter, sans-serif" font-size="8" fill="#807D75">throughput · 124/h</text>
+  </g>
+
+  <!-- Département 3 — Commercial (haut droite) -->
+  <g>
+    <rect x="540" y="140" width="160" height="80" rx="4" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+    <rect x="540" y="140" width="3" height="80" fill="#D4A82C"/>
+    <text x="555" y="160" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#807D75" letter-spacing="1.5">DÉPARTEMENT</text>
+    <text x="555" y="178" font-family="Fraunces, serif" font-size="14" font-weight="500" fill="#2A2724">Commercial</text>
+    <g transform="translate(555, 192)">
+      <circle cx="4" cy="4" r="3" fill="#D4A82C"/>
+      <text x="14" y="7" font-family="Inter, sans-serif" font-size="9" fill="#2A2724">4 agents actifs</text>
+    </g>
+    <text x="555" y="213" font-family="Inter, sans-serif" font-size="8" fill="#807D75">throughput · 89/h</text>
+  </g>
+
+  <!-- Département 4 — Technique (bas gauche) -->
+  <g>
+    <rect x="140" y="395" width="160" height="80" rx="4" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+    <rect x="140" y="395" width="3" height="80" fill="#807D75"/>
+    <text x="155" y="415" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#807D75" letter-spacing="1.5">DÉPARTEMENT</text>
+    <text x="155" y="433" font-family="Fraunces, serif" font-size="14" font-weight="500" fill="#2A2724">Technique</text>
+    <g transform="translate(155, 447)">
+      <circle cx="4" cy="4" r="3" fill="#807D75"/>
+      <text x="14" y="7" font-family="Inter, sans-serif" font-size="9" fill="#2A2724">2 agents · veille</text>
+    </g>
+    <text x="155" y="468" font-family="Inter, sans-serif" font-size="8" fill="#807D75">throughput · 12/h</text>
+  </g>
+
+  <!-- Département 5 — Marketing (bas droite) -->
+  <g>
+    <rect x="500" y="395" width="160" height="80" rx="4" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+    <rect x="500" y="395" width="3" height="80" fill="#D4A82C"/>
+    <text x="515" y="415" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#807D75" letter-spacing="1.5">DÉPARTEMENT</text>
+    <text x="515" y="433" font-family="Fraunces, serif" font-size="14" font-weight="500" fill="#2A2724">Marketing</text>
+    <g transform="translate(515, 447)">
+      <circle cx="4" cy="4" r="3" fill="#D4A82C"/>
+      <text x="14" y="7" font-family="Inter, sans-serif" font-size="9" fill="#2A2724">3 agents actifs</text>
+    </g>
+    <text x="515" y="468" font-family="Inter, sans-serif" font-size="8" fill="#807D75">throughput · 31/h</text>
+  </g>
+
+  <!-- Footer barre status -->
+  <rect x="40" y="520" width="720" height="40" fill="#F4F0E8" stroke="#D8D2C2" stroke-width="1" stroke-dasharray="0,0,0,720,40,0"/>
+  <line x1="40" y1="520" x2="760" y2="520" stroke="#D8D2C2" stroke-width="1"/>
+
+  <g transform="translate(70, 540)">
+    <text font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="1.5">SUPERVISION</text>
+  </g>
+  <g transform="translate(195, 540)">
+    <circle cx="0" cy="-3" r="3" fill="#D4A82C"/>
+    <text x="10" font-family="Inter, sans-serif" font-size="10" fill="#2A2724">17 agents en activité</text>
+  </g>
+  <g transform="translate(360, 540)">
+    <text font-family="Inter, sans-serif" font-size="10" fill="#807D75">·</text>
+    <text x="10" font-family="Inter, sans-serif" font-size="10" fill="#2A2724">303 tâches/heure</text>
+  </g>
+  <g transform="translate(495, 540)">
+    <text font-family="Inter, sans-serif" font-size="10" fill="#807D75">·</text>
+    <text x="10" font-family="Inter, sans-serif" font-size="10" fill="#2A2724">2 validations en attente</text>
+  </g>
+</svg>

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" role="img" aria-label="Pipeline de validation humaine Qwestinum">
+  <!-- Fond -->
+  <rect width="800" height="600" fill="#F4F0E8"/>
+
+  <!-- Cadre fenêtre application -->
+  <rect x="40" y="40" width="720" height="520" rx="8" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="1"/>
+
+  <!-- Barre de titre -->
+  <rect x="40" y="40" width="720" height="40" rx="8" fill="#2A2724"/>
+  <rect x="40" y="72" width="720" height="8" fill="#2A2724"/>
+
+  <!-- Boutons fenêtre -->
+  <circle cx="60" cy="60" r="5" fill="#A8861C"/>
+  <circle cx="78" cy="60" r="5" fill="#807D75"/>
+  <circle cx="96" cy="60" r="5" fill="#D8D2C2"/>
+
+  <!-- Titre -->
+  <text x="120" y="65" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#F4F0E8" letter-spacing="0.5">QWESTINUM — Pipeline · Validation humaine</text>
+  <text x="710" y="64" font-family="Inter, sans-serif" font-size="10" fill="#807D75" letter-spacing="1" text-anchor="end">Cas #2847</text>
+
+  <!-- Titre section -->
+  <text x="70" y="115" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="2">PROCESSUS · TRAITEMENT FACTURE FOURNISSEUR</text>
+  <text x="70" y="138" font-family="Fraunces, serif" font-size="20" font-weight="500" fill="#2A2724">5 étapes · 2 validations humaines</text>
+
+  <!-- Pipeline horizontal -->
+  <!-- Ligne de connexion -->
+  <line x1="100" y1="240" x2="730" y2="240" stroke="#D8D2C2" stroke-width="2"/>
+
+  <!-- Étape 1 — TERMINÉE -->
+  <g transform="translate(100, 240)">
+    <circle r="22" fill="#D4A82C"/>
+    <circle r="22" fill="none" stroke="#A8861C" stroke-width="2"/>
+    <!-- Checkmark -->
+    <path d="M -8 0 L -2 6 L 8 -6" stroke="#2A2724" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="100" y="290" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="1.5" text-anchor="middle">01 · IA</text>
+  <text x="100" y="305" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#2A2724" text-anchor="middle">Extraction</text>
+  <text x="100" y="320" font-family="Inter, sans-serif" font-size="9" fill="#807D75" text-anchor="middle">données facture</text>
+  <g transform="translate(100, 335)">
+    <text font-family="Inter, sans-serif" font-size="8" fill="#A8861C" text-anchor="middle" font-weight="600">✓ Terminée · 2,3 s</text>
+  </g>
+
+  <!-- Étape 2 — VALIDATION HUMAINE EN COURS -->
+  <g transform="translate(258, 240)">
+    <circle r="26" fill="#FAF7F0" stroke="#A8861C" stroke-width="3"/>
+    <circle r="26" fill="none" stroke="#A8861C" stroke-width="3" stroke-dasharray="4,3" opacity="0.6"/>
+    <!-- Icône humain -->
+    <circle cx="0" cy="-4" r="4" fill="#A8861C"/>
+    <path d="M -7 8 Q 0 0 7 8 L 7 10 L -7 10 Z" fill="#A8861C"/>
+  </g>
+  <text x="258" y="290" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#A8861C" letter-spacing="1.5" text-anchor="middle">02 · HUMAIN</text>
+  <text x="258" y="305" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#2A2724" text-anchor="middle">Vérification</text>
+  <text x="258" y="320" font-family="Inter, sans-serif" font-size="9" fill="#807D75" text-anchor="middle">contrôle conformité</text>
+  <g transform="translate(258, 335)">
+    <text font-family="Inter, sans-serif" font-size="8" fill="#A8861C" text-anchor="middle" font-weight="600">⏳ En attente · 4 min</text>
+  </g>
+
+  <!-- Étape 3 — IA À VENIR -->
+  <g transform="translate(415, 240)">
+    <circle r="22" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="2"/>
+    <text font-family="Fraunces, serif" font-size="13" font-weight="500" fill="#807D75" text-anchor="middle" dominant-baseline="middle" y="0">03</text>
+  </g>
+  <text x="415" y="290" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="1.5" text-anchor="middle">03 · IA</text>
+  <text x="415" y="305" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#807D75" text-anchor="middle">Imputation</text>
+  <text x="415" y="320" font-family="Inter, sans-serif" font-size="9" fill="#807D75" text-anchor="middle">comptable</text>
+
+  <!-- Étape 4 — VALIDATION HUMAINE À VENIR -->
+  <g transform="translate(572, 240)">
+    <circle r="22" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="2"/>
+    <!-- Icône humain en gris -->
+    <circle cx="0" cy="-4" r="4" fill="#807D75"/>
+    <path d="M -7 8 Q 0 0 7 8 L 7 10 L -7 10 Z" fill="#807D75"/>
+  </g>
+  <text x="572" y="290" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="1.5" text-anchor="middle">04 · HUMAIN</text>
+  <text x="572" y="305" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#807D75" text-anchor="middle">Approbation</text>
+  <text x="572" y="320" font-family="Inter, sans-serif" font-size="9" fill="#807D75" text-anchor="middle">ordonnateur</text>
+
+  <!-- Étape 5 — IA À VENIR -->
+  <g transform="translate(730, 240)">
+    <circle r="22" fill="#FAF7F0" stroke="#D8D2C2" stroke-width="2"/>
+    <text font-family="Fraunces, serif" font-size="13" font-weight="500" fill="#807D75" text-anchor="middle" dominant-baseline="middle" y="0">05</text>
+  </g>
+  <text x="730" y="290" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#807D75" letter-spacing="1.5" text-anchor="middle">05 · IA</text>
+  <text x="730" y="305" font-family="Fraunces, serif" font-size="11" font-weight="500" fill="#807D75" text-anchor="middle">Paiement</text>
+  <text x="730" y="320" font-family="Inter, sans-serif" font-size="9" fill="#807D75" text-anchor="middle">émission</text>
+
+  <!-- Card validation actuelle -->
+  <rect x="70" y="385" width="660" height="145" rx="4" fill="#FAF7F0" stroke="#A8861C" stroke-width="1.5"/>
+  <rect x="70" y="385" width="3" height="145" fill="#A8861C"/>
+
+  <text x="90" y="408" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#A8861C" letter-spacing="1.5">VALIDATION EN ATTENTE · ÉTAPE 02</text>
+
+  <text x="90" y="430" font-family="Fraunces, serif" font-size="15" font-weight="500" fill="#2A2724">Facture FACT-2024-08923 · Acme Industries · 4 250,00 €</text>
+
+  <!-- Checklist -->
+  <g transform="translate(90, 450)">
+    <!-- Item 1 -->
+    <rect x="0" y="0" width="11" height="11" rx="2" fill="#D4A82C"/>
+    <path d="M 2 5.5 L 5 8.5 L 9 3" stroke="#2A2724" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="20" y="9" font-family="Inter, sans-serif" font-size="11" fill="#2A2724">Bon de commande rapproché (BC-2024-1547)</text>
+  </g>
+  <g transform="translate(90, 470)">
+    <rect x="0" y="0" width="11" height="11" rx="2" fill="#D4A82C"/>
+    <path d="M 2 5.5 L 5 8.5 L 9 3" stroke="#2A2724" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="20" y="9" font-family="Inter, sans-serif" font-size="11" fill="#2A2724">Montant cohérent avec historique fournisseur (±3%)</text>
+  </g>
+  <g transform="translate(90, 490)">
+    <rect x="0" y="0" width="11" height="11" rx="2" fill="#FAF7F0" stroke="#A8861C" stroke-width="1.5"/>
+    <text x="20" y="9" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#2A2724">TVA conforme · validation manuelle requise</text>
+    <text x="320" y="9" font-family="Inter, sans-serif" font-size="9" fill="#A8861C" font-weight="600">→ action requise</text>
+  </g>
+
+  <!-- Boutons action -->
+  <g transform="translate(490, 488)">
+    <rect x="0" y="0" width="100" height="32" rx="3" fill="#2A2724"/>
+    <text x="50" y="20" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#F4D35E" text-anchor="middle" letter-spacing="0.5">VALIDER</text>
+  </g>
+  <g transform="translate(600, 488)">
+    <rect x="0" y="0" width="100" height="32" rx="3" fill="#FAF7F0" stroke="#807D75" stroke-width="1"/>
+    <text x="50" y="20" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#807D75" text-anchor="middle" letter-spacing="0.5">REJETER</text>
+  </g>
+</svg>

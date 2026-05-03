@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/home/Hero';
+import { Showcase } from '@/components/home/Showcase';
 import { PartnersBand } from '@/components/home/PartnersBand';
 import { Services } from '@/components/home/Services';
 import { Approach } from '@/components/home/Approach';
@@ -33,6 +34,7 @@ export default async function HomePage() {
 
       <main>
         <Hero counters={counters} />
+        <Showcase />
         <PartnersBand partners={partners} />
         <Services />
         <Approach />

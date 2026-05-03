@@ -288,19 +288,15 @@ export default function AboutPage() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href={`https://cal.com/${
-                  process.env.NEXT_PUBLIC_CAL_USERNAME ?? 'qwestinum/diagnostic'
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact#diagnostic"
                 className="btn-primary !py-4 !px-7"
               >
                 Diagnostic IA — réserver une heure
                 <span aria-hidden="true">→</span>
-              </a>
+              </Link>
               <Link
-                href="/contact"
+                href="/contact#formulaire"
                 className="inline-flex items-center gap-2 px-6 py-4 rounded-sm border border-perle/30 text-perle font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-lin/5 hover:border-perle/60 transition-colors"
               >
                 Nous écrire

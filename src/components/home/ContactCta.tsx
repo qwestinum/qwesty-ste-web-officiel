@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export function ContactCta() {
@@ -28,13 +29,13 @@ export function ContactCta() {
           </p>
 
           <div className="mt-12">
-            <a
-              href={`mailto:${SITE_CONFIG.contact.email}`}
+            <Link
+              href="/contact#diagnostic"
               className="inline-flex items-center gap-2 rounded-sm bg-or px-9 py-5 font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia transition-all hover:bg-or-pale hover:-translate-y-0.5"
             >
               Réserver un créneau
               <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="mt-16 pt-10 border-t border-pierre/30 flex flex-wrap justify-center items-center gap-x-10 gap-y-3">

@@ -5,27 +5,36 @@ import { createClient } from '@/lib/supabase/server';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const BUCKET_CONFIGS = {
+  'articles-images': {
+    maxSize: 5 * 1024 * 1024,
+    allowedTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+    sizeLabel: '5 Mo',
+  },
+  'partners-logos': {
+    maxSize: 2 * 1024 * 1024,
+    allowedTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'],
+    sizeLabel: '2 Mo',
+  },
+  'use-cases-images': {
+    maxSize: 5 * 1024 * 1024,
+    allowedTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    sizeLabel: '5 Mo',
+  },
+} as const;
 
-/**
- * Route d'upload d'image vers Supabase Storage.
- * Vérifie l'authentification admin avant d'autoriser l'upload.
- */
+type AllowedBucket = keyof typeof BUCKET_CONFIGS;
+
 export async function POST(request: Request) {
   try {
     const supabase = createClient();
 
-    // 1. Vérification admin
     const {
       data: { user },
     } = await supabase.auth.getUser();
 
     if (!user) {
-      return NextResponse.json(
-        { success: false, message: 'Non authentifié.' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, message: 'Non authentifié.' }, { status: 401 });
     }
 
     const { data: adminRow } = await supabase
@@ -35,51 +44,44 @@ export async function POST(request: Request) {
       .maybeSingle();
 
     if (!adminRow) {
-      return NextResponse.json(
-        { success: false, message: 'Accès admin requis.' },
-        { status: 403 }
-      );
+      return NextResponse.json({ success: false, message: 'Accès admin requis.' }, { status: 403 });
     }
 
-    // 2. Lecture du fichier
     const formData = await request.formData();
     const file = formData.get('file');
+    const bucketParam = formData.get('bucket') as string | null;
 
     if (!file || !(file instanceof File)) {
+      return NextResponse.json({ success: false, message: 'Aucun fichier fourni.' }, { status: 400 });
+    }
+
+    const bucket: AllowedBucket = (bucketParam && bucketParam in BUCKET_CONFIGS)
+      ? (bucketParam as AllowedBucket)
+      : 'articles-images';
+
+    const config = BUCKET_CONFIGS[bucket];
+
+    if (file.size > config.maxSize) {
       return NextResponse.json(
-        { success: false, message: 'Aucun fichier fourni.' },
+        { success: false, message: `Fichier trop volumineux (${config.sizeLabel} max).` },
         { status: 400 }
       );
     }
 
-    // 3. Validation
-    if (file.size > MAX_SIZE) {
+    if (!config.allowedTypes.includes(file.type as never)) {
       return NextResponse.json(
-        { success: false, message: 'Fichier trop volumineux (5 Mo max).' },
-        { status: 400 }
-      );
-    }
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Type non supporté (JPEG, PNG, WebP, GIF uniquement).',
-        },
+        { success: false, message: `Type non supporté pour ce bucket (${config.allowedTypes.join(', ')}).` },
         { status: 400 }
       );
     }
 
-    // 4. Upload Supabase Storage
     const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
     const fileName = `${randomUUID()}.${ext}`;
     const filePath = `${new Date().getFullYear()}/${fileName}`;
 
     const { error: uploadError } = await supabase.storage
-      .from('articles-images')
-      .upload(filePath, file, {
-        cacheControl: '31536000',
-        upsert: false,
-      });
+      .from(bucket)
+      .upload(filePath, file, { cacheControl: '31536000', upsert: false });
 
     if (uploadError) {
       console.error('upload-image route — supabase upload error:', uploadError);
@@ -89,17 +91,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // 5. URL publique
-    const { data } = supabase.storage
-      .from('articles-images')
-      .getPublicUrl(filePath);
+    const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
 
     return NextResponse.json({ success: true, url: data.publicUrl });
   } catch (err) {
     console.error('upload-image route exception:', err);
-    return NextResponse.json(
-      { success: false, message: 'Erreur serveur.' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Erreur serveur.' }, { status: 500 });
   }
 }

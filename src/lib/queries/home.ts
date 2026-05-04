@@ -90,7 +90,6 @@ export async function getHomeKpis(): Promise<UseCaseKpi[]> {
  */
 export async function getHeroCounters(): Promise<Array<{ value: string; label: string }>> {
   const fallback = [
-    { value: '20+', label: "Ans d'expérience" },
     { value: '5', label: 'Cas déployés' },
     { value: '3', label: 'Capitales' },
     { value: '100%', label: 'RGPD compliant' },
@@ -111,13 +110,15 @@ export async function getHeroCounters(): Promise<Array<{ value: string; label: s
     const value = row?.value;
 
     if (Array.isArray(value)) {
-      const counters = value.filter(
-        (v): v is { value: string; label: string } =>
-          !!v &&
-          typeof v === 'object' &&
-          typeof (v as { value: unknown }).value === 'string' &&
-          typeof (v as { label: unknown }).label === 'string'
-      );
+      const counters = value
+        .filter(
+          (v): v is { value: string; label: string } =>
+            !!v &&
+            typeof v === 'object' &&
+            typeof (v as { value: unknown }).value === 'string' &&
+            typeof (v as { label: unknown }).label === 'string'
+        )
+        .filter((c) => !c.label.toLowerCase().includes("expérience"));
       return counters.length > 0 ? counters.slice(0, 4) : fallback;
     }
 

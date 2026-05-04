@@ -204,3 +204,23 @@
     @apply bg-transparent p-0 text-lin;
   }
 }
+
+.input {
+  width: 100%;
+  background: #F4F0E8;
+  border: 1px solid #D8D2C2;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: #2A2724;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input::placeholder { color: rgba(128, 125, 117, 0.5); }
+.input:focus {
+  outline: none;
+  border-color: #A8861C;
+  box-shadow: 0 0 0 2px rgba(212, 168, 44, 0.2);
+}
+.input:disabled { opacity: 0.5; cursor: not-allowed; }
+textarea.input { resize: vertical; min-height: 4rem; }

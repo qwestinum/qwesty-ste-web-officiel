@@ -23,9 +23,15 @@ const ADMIN_NAV = [
     items: [
       { href: '/admin/leads', label: 'Leads', icon: 'mail' },
       { href: '/admin/articles', label: 'Articles', icon: 'edit' },
-      // À venir au Lot 6
-      { href: '/admin/use-cases', label: "Cas d'usage", icon: 'briefcase', disabled: true },
-      { href: '/admin/formations', label: 'Formations', icon: 'academic', disabled: true },
+      { href: '/admin/use-cases', label: "Cas d'usage", icon: 'briefcase' },
+      { href: '/admin/formations', label: 'Formations', icon: 'academic' },
+    ],
+  },
+  {
+    section: 'Configuration',
+    items: [
+      { href: '/admin/flagship-modules', label: 'Modules Flagship', icon: 'modules' },
+      { href: '/admin/partners', label: 'Partenaires', icon: 'partners' },
     ],
   },
 ];
@@ -119,24 +125,6 @@ function SidebarContent({
                   item.href === '/admin'
                     ? pathname === '/admin'
                     : pathname.startsWith(item.href);
-                const isDisabled = 'disabled' in item && item.disabled;
-
-                if (isDisabled) {
-                  return (
-                    <li key={item.href}>
-                      <span
-                        className="flex items-center gap-3 px-3 py-2 rounded-sm font-sans text-sm text-pierre/40 cursor-not-allowed select-none"
-                        title="Bientôt disponible"
-                      >
-                        <NavIcon name={item.icon} />
-                        <span>{item.label}</span>
-                        <span className="ml-auto text-[9px] uppercase tracking-wide-2 text-pierre/40">
-                          bientôt
-                        </span>
-                      </span>
-                    </li>
-                  );
-                }
 
                 return (
                   <li key={item.href}>
@@ -235,6 +223,24 @@ function NavIcon({ name, active = false }: { name: string; active?: boolean }) {
         <svg {...props}>
           <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
           <path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>
+      );
+    case 'modules':
+      return (
+        <svg {...props}>
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+      );
+    case 'partners':
+      return (
+        <svg {...props}>
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
         </svg>
       );
     default:

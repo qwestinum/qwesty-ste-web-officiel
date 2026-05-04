@@ -16,6 +16,8 @@ export type Json =
 
 export type ArticleCategory = 'strategie' | 'methode' | 'retours-experience' | 'lucidite-ia';
 export type ContentStatus = 'draft' | 'published' | 'archived';
+export type UseCaseCategory = 'commercial' | 'finance' | 'rh' | 'marketing' | 'technique' | 'transverse';
+export type FormationFormat = 'flagship' | 'modulaire' | 'workshop';
 
 export interface Article {
   id: string;
@@ -101,6 +103,7 @@ export interface Partner {
   logo_svg: string | null;
   logo_url: string | null;
   website_url: string | null;
+  description: string | null;
   display_order: number;
   is_active: boolean;
   created_at: string;

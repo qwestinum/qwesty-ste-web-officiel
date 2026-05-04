@@ -45,17 +45,22 @@ export async function updatePartner(id: string, payload: PartnerPayload) {
     const supabase = createClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const table = supabase.from('partners') as any;
-    const { error } = await table
-      .update({
-        name: payload.name.trim(),
-        logo_url: payload.logo_url?.trim() || null,
-        logo_svg: payload.logo_svg?.trim() || null,
-        website_url: payload.website_url?.trim() || null,
-        description: payload.description?.trim() || null,
-        display_order: payload.display_order,
-        is_active: payload.is_active,
-      })
-      .eq('id', id);
+
+    const baseFields = {
+      name: payload.name.trim(),
+      logo_url: payload.logo_url?.trim() || null,
+      logo_svg: payload.logo_svg?.trim() || null,
+      website_url: payload.website_url?.trim() || null,
+      display_order: payload.display_order,
+      is_active: payload.is_active,
+    };
+
+    let { error } = await table.update({ ...baseFields, description: payload.description?.trim() || null }).eq('id', id);
+
+    // Fallback si la colonne description n'existe pas encore (migration non exécutée)
+    if (error?.code === '42703') {
+      ({ error } = await table.update(baseFields).eq('id', id));
+    }
 
     if (error) {
       console.error('updatePartner error:', error);

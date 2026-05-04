@@ -90,7 +90,6 @@ export async function getHomeKpis(): Promise<UseCaseKpi[]> {
  */
 export async function getHeroCounters(): Promise<Array<{ value: string; label: string }>> {
   const fallback = [
-    { value: '20+', label: "Ans d'expérience" },
     { value: '5', label: 'Cas déployés' },
     { value: '3', label: 'Capitales' },
     { value: '100%', label: 'RGPD compliant' },

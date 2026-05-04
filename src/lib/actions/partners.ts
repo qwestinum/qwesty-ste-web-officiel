@@ -57,9 +57,10 @@ export async function updatePartner(id: string, payload: PartnerPayload) {
 
     let { error } = await table.update({ ...baseFields, description: payload.description?.trim() || null }).eq('id', id);
 
-    // Fallback si la colonne description n'existe pas encore (migration non exécutée)
-    if (error?.code === '42703') {
-      ({ error } = await table.update(baseFields).eq('id', id));
+    // PostgREST retourne PGRST204 (schema cache) ou le SQLSTATE 42703 quand la
+    // colonne description n'existe pas encore (migration non exécutée).
+    if (error?.code === '42703' || error?.code === 'PGRST204' || error?.message?.includes('description')) {
+      ({ error } = await (supabase.from('partners') as any).update(baseFields).eq('id', id));
     }
 
     if (error) {

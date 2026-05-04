@@ -34,8 +34,8 @@ export default async function HomePage() {
 
       <main>
         <Hero counters={counters} />
-        <Showcase />
         <PartnersBand partners={partners} />
+        <Showcase />
         <Services />
         <Approach />
         <Proof kpis={kpis} />

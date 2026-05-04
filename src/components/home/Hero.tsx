@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { LogoSymbol } from '@/components/brand/Logo';
 
 interface HeroCounter {
   value: string;
@@ -13,194 +14,93 @@ interface HeroProps {
 }
 
 /**
- * Hero éditorial — voix Revue.
- * Manchette tabulaire en haut, titre pleine largeur Fraunces, chapeau 2 colonnes
- * signé Imad Belfaqir. Compteurs déplacés dans une bande "État des lieux"
- * séparée du titre, façon ours de revue.
+ * Hero éditorial premium.
+ * - Typo Fraunces généreuse pour le titre
+ * - Logo constellation animé en pulsation discrète
+ * - 4 compteurs de réassurance dynamiques
  */
 export function Hero({ counters }: HeroProps) {
-  // Date courante en français — affichée dans la manchette
-  const now = new Date();
-  const dateLabel = now
-    .toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-    })
-    .toUpperCase();
-
   return (
-    <section className="relative">
-      <div className="container-page">
+    <section className="relative overflow-hidden">
+      <div className="container-page pt-12 md:pt-20 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-        {/* Manchette — bande tabulaire en haut */}
-        <div className="pt-8 md:pt-10 pb-3">
-          <div
-            className="flex flex-wrap items-baseline gap-x-6 gap-y-1 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-pierre"
-            style={{ fontFamily: '"IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace' }}
-          >
-            <span className="text-sepia font-semibold">QWESTINUM — Édition n° 04</span>
-            <span aria-hidden="true" className="opacity-40">·</span>
-            <span>Dossier · Process First</span>
-            <span aria-hidden="true" className="opacity-40">·</span>
-            <span>Mis à jour le {dateLabel}</span>
-          </div>
-        </div>
-
-        {/* Filet sépia 30% qui ouvre la une */}
-        <div
-          aria-hidden="true"
-          className="h-px w-full"
-          style={{ backgroundColor: 'rgba(42, 39, 36, 0.30)' }}
-        />
-
-        {/* Bloc principal — titre éditorial */}
-        <div className="pt-10 md:pt-16 pb-12 md:pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Numéro de section façon roman */}
-            <div
-              className="mb-6 md:mb-8 font-serif italic text-pierre opacity-60"
-              style={{ fontSize: '15px', letterSpacing: '0.05em' }}
+          {/* Colonne gauche — texte */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              I — Manifeste
-            </div>
+              <span className="label-mark">
+                Conseil · Solutions · Formations en IA
+              </span>
 
-            {/* Titre éditorial pleine largeur, deux phrases en cascade */}
-            <h1 className="font-serif font-normal text-sepia">
-              <span className="block text-[44px] md:text-[80px] lg:text-[104px] xl:text-[120px] leading-[0.92] tracking-[-0.025em]">
-                L&apos;intelligence
-              </span>
-              <span className="block mt-1 md:mt-2 text-[44px] md:text-[80px] lg:text-[104px] xl:text-[120px] leading-[0.92] tracking-[-0.025em]">
-                artificielle suit
-              </span>
-              <span className="block mt-1 md:mt-2 text-[44px] md:text-[80px] lg:text-[104px] xl:text-[120px] leading-[0.92] tracking-[-0.025em]">
-                <em className="italic text-or-fonce">le processus,</em>
-              </span>
-              <span className="block mt-1 md:mt-2 text-[44px] md:text-[80px] lg:text-[104px] xl:text-[120px] leading-[0.92] tracking-[-0.025em]">
-                jamais l&apos;inverse.
-              </span>
-            </h1>
-          </motion.div>
+              <h1 className="mt-6 font-serif text-5xl md:text-6xl lg:text-7xl font-normal leading-tight-extra tracking-tighter-2 text-sepia">
+                De l'idée à <em className="italic text-or-fonce">l'impact.</em>
+              </h1>
 
-          {/* Chapeau — 2 colonnes éditoriales avec signature */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-            className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-start"
-          >
-            {/* Drop-cap + chapeau */}
-            <div className="md:col-span-8 md:col-start-2">
-              <p className="font-serif text-sepia leading-[1.55] text-[18px] md:text-[20px]">
-                <span
-                  className="float-left mr-3 mt-1 font-serif font-medium text-or-fonce"
-                  style={{
-                    fontSize: '5.2em',
-                    lineHeight: '0.85',
-                    paddingTop: '0.05em',
-                  }}
-                >
-                  C
-                </span>
-                hronique d&apos;une discipline d&apos;ingénierie appliquée à
-                l&apos;IA. Nous accompagnons les organisations qui veulent
-                industrialiser leurs usages sans renoncer à la rigueur de leurs
-                opérations — en partant du processus, jamais de la technologie.
+              <p className="mt-8 max-w-xl font-sans text-lg md:text-xl leading-relaxed text-pierre">
+                Qwestinum conçoit et déploie des solutions d'intelligence artificielle qui transforment réellement les organisations — sans hype, sans jargon, avec des résultats mesurables.
               </p>
 
-              {/* Signature italique */}
-              <div className="mt-8 flex items-baseline gap-3">
-                <span
-                  aria-hidden="true"
-                  className="block h-px w-8"
-                  style={{ backgroundColor: 'rgba(42, 39, 36, 0.45)' }}
-                />
-                <span className="font-serif italic text-pierre text-[14px] md:text-[15px]">
-                  Imad Belfaqir, fondateur
-                </span>
-              </div>
-            </div>
-
-            {/* Colonne droite — appel à action éditorial */}
-            <div className="md:col-span-3 md:col-start-10 md:pt-2">
-              <div className="space-y-3 md:space-y-4">
-                <Link
-                  href="/contact#diagnostic"
-                  className="group block font-serif italic text-sepia hover:text-or-fonce transition-colors text-[18px] md:text-[19px] leading-snug"
-                  style={{ textUnderlineOffset: '0.2em' }}
-                >
-                  <span className="underline decoration-1 decoration-or-fonce/40 group-hover:decoration-or-fonce">
-                    Diagnostic
-                  </span>
-                  <span className="ml-2 inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
-                    →
-                  </span>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Link href="/#contact" className="btn-primary">
+                  Diagnostic IA gratuit
                 </Link>
-
-                <Link
-                  href="/cas-usage"
-                  className="group block font-sans text-pierre hover:text-sepia transition-colors text-[12px] uppercase tracking-[0.2em] font-medium"
-                >
-                  <span className="border-b border-pierre/40 group-hover:border-sepia pb-0.5">
-                    Lire les cas d&apos;étude
-                  </span>
+                <Link href="/cas-usage" className="btn-secondary">
+                  Voir nos cas d'usage
                 </Link>
               </div>
+            </motion.div>
+
+            {/* Compteurs */}
+            <motion.div
+              className="mt-14 pt-10 border-t border-perle grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+            >
+              {counters.map((counter) => (
+                <div key={counter.label}>
+                  <div className="font-serif text-3xl md:text-4xl font-medium tracking-tight-1 text-sepia">
+                    {counter.value}
+                  </div>
+                  <div className="mt-2 font-sans text-xs text-pierre uppercase tracking-wide-1">
+                    {counter.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Colonne droite — constellation animée */}
+          <motion.div
+            className="lg:col-span-5 hidden lg:flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          >
+            <div className="relative">
+              <motion.div
+                animate={{ rotate: [0, 1, 0, -1, 0] }}
+                transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <LogoSymbol className="w-80 h-80 xl:w-96 xl:h-96" />
+              </motion.div>
+
+              {/* Halo doré très discret derrière */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 blur-3xl opacity-30"
+                style={{
+                  background:
+                    'radial-gradient(circle at center, #F4D35E 0%, transparent 65%)',
+                }}
+              />
             </div>
           </motion.div>
         </div>
-
-        {/* Filet sépia 30% qui ferme le titre */}
-        <div
-          aria-hidden="true"
-          className="h-px w-full"
-          style={{ backgroundColor: 'rgba(42, 39, 36, 0.30)' }}
-        />
-
-        {/* État des lieux — bande tabulaire séparée */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-          className="py-8 md:py-10"
-        >
-          <div
-            className="mb-5 font-mono text-[10px] uppercase tracking-[0.22em] text-pierre"
-            style={{ fontFamily: '"IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace' }}
-          >
-            État des lieux ·                                      <span className="text-sepia">{dateLabel}</span>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
-            {counters.map((counter, idx) => (
-              <div key={counter.label} className="border-l border-sepia/20 pl-4">
-                <div
-                  className="font-mono text-[10px] uppercase tracking-[0.18em] text-pierre mb-2"
-                  style={{ fontFamily: '"IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace' }}
-                >
-                  {String(idx + 1).padStart(2, '0')}
-                </div>
-                <div className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-sepia leading-none tracking-tight">
-                  {counter.value}
-                </div>
-                <div className="mt-3 font-sans text-[11px] text-pierre uppercase tracking-[0.12em] leading-snug">
-                  {counter.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Filet de fermeture */}
-        <div
-          aria-hidden="true"
-          className="h-px w-full"
-          style={{ backgroundColor: 'rgba(42, 39, 36, 0.30)' }}
-        />
       </div>
     </section>
   );

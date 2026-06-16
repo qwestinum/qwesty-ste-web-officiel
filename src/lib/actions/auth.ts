@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export interface LoginFormState {
   success: boolean;
@@ -9,18 +9,22 @@ export interface LoginFormState {
 }
 
 /**
- * Envoie un magic link à l'email saisi.
- * Vérification basique du format email + appel Supabase.
+ * Connexion email + mot de passe.
+ *
+ * Vérification basique du format email + appel Supabase signInWithPassword.
+ * En cas de succès, la session est posée dans les cookies (client serveur)
+ * et on redirige vers /admin.
  *
  * NOTE : on ne vérifie PAS ici si l'email est dans admin_users.
- * La vérification se fait au callback (l'utilisateur peut se créer un compte
- * Supabase mais ne pourra pas accéder à /admin sans entrée dans admin_users).
+ * Cette vérification se fait dans le layout /admin (un compte Supabase valide
+ * sans entrée admin_users est déconnecté et renvoyé vers le login).
  */
-export async function sendMagicLink(
+export async function signIn(
   prevState: LoginFormState,
   formData: FormData
 ): Promise<LoginFormState> {
   const email = (formData.get('email') as string | null)?.trim().toLowerCase() ?? '';
+  const password = (formData.get('password') as string | null) ?? '';
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return {
@@ -29,41 +33,42 @@ export async function sendMagicLink(
     };
   }
 
+  if (!password) {
+    return {
+      success: false,
+      message: 'Veuillez saisir votre mot de passe.',
+    };
+  }
+
+  let shouldRedirect = false;
+
   try {
     const supabase = createClient();
 
-    // Construit l'URL de redirection après clic sur le lien
-    const headersList = headers();
-    const host = headersList.get('host') ?? '';
-    const protocol = host.includes('localhost') ? 'http' : 'https';
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `${protocol}://${host}`;
-    const redirectTo = `${siteUrl}/auth/callback`;
-
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: redirectTo,
-        shouldCreateUser: true,
-      },
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      console.error('sendMagicLink error:', error);
+      console.error('signIn error:', error);
       return {
         success: false,
-        message: "Impossible d'envoyer le lien. Réessayez ou contactez l'administrateur.",
+        message: 'Email ou mot de passe incorrect.',
       };
     }
 
-    return {
-      success: true,
-      message: `Un lien de connexion a été envoyé à ${email}. Vérifiez votre boîte mail (et vos spams).`,
-    };
+    shouldRedirect = true;
   } catch (err) {
-    console.error('sendMagicLink exception:', err);
+    console.error('signIn exception:', err);
     return {
       success: false,
-      message: "Une erreur est survenue. Réessayez dans quelques instants.",
+      message: 'Une erreur est survenue. Réessayez dans quelques instants.',
     };
   }
+
+  // redirect() doit être appelé en dehors du try/catch : il lève une
+  // exception NEXT_REDIRECT que le catch ne doit pas intercepter.
+  if (shouldRedirect) {
+    redirect('/admin');
+  }
+
+  return { success: false, message: '' };
 }

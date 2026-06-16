@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
               Espace administrateur
             </h1>
             <p className="mt-3 font-sans text-sm text-pierre">
-              Saisissez votre email pour recevoir un lien de connexion sécurisé.
+              Connectez-vous avec vos identifiants administrateur.
             </p>
           </div>
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
-import { sendMagicLink, type LoginFormState } from '@/lib/actions/auth';
+import { signIn, type LoginFormState } from '@/lib/actions/auth';
 
 const initialState: LoginFormState = {
   success: false,
@@ -9,7 +9,7 @@ const initialState: LoginFormState = {
 };
 
 export function LoginForm() {
-  const [state, formAction] = useFormState(sendMagicLink, initialState);
+  const [state, formAction] = useFormState(signIn, initialState);
 
   return (
     <form action={formAction} className="space-y-5">
@@ -32,17 +32,31 @@ export function LoginForm() {
         />
       </div>
 
+      <div>
+        <label
+          htmlFor="password"
+          className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+        >
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          autoComplete="current-password"
+          placeholder="••••••••"
+          className="w-full bg-lin border border-perle rounded-md px-4 py-3 font-sans text-base text-sepia placeholder:text-pierre/50 focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors"
+        />
+      </div>
+
       <SubmitButton />
 
       {state.message && (
         <div
-          role={state.success ? 'status' : 'alert'}
+          role="alert"
           aria-live="polite"
-          className={`mt-4 rounded-md border-2 p-4 font-sans text-sm ${
-            state.success
-              ? 'border-or bg-or-pale/20 text-sepia'
-              : 'border-or-fonce bg-or-pale/10 text-sepia'
-          }`}
+          className="mt-4 rounded-md border-2 border-or-fonce bg-or-pale/10 p-4 font-sans text-sm text-sepia"
         >
           {state.message}
         </div>
@@ -66,11 +80,11 @@ function SubmitButton() {
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.3" />
             <path d="M4 12a8 8 0 0 1 8-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
           </svg>
-          <span>Envoi en cours…</span>
+          <span>Connexion en cours…</span>
         </>
       ) : (
         <>
-          Recevoir le lien de connexion
+          Se connecter
           <span aria-hidden="true">→</span>
         </>
       )}

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { Article, Partner, UseCaseKpi } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 /**
  * Récupère tous les partenaires actifs ordonnés par display_order.
@@ -16,6 +17,7 @@ export async function getActivePartners(): Promise<Partner[]> {
     if (error) throw error;
     return (data ?? []) as Partner[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getActivePartners failed:', err);
     return [];
   }
@@ -37,6 +39,7 @@ export async function getLatestArticles(limit = 3): Promise<Article[]> {
     if (error) throw error;
     return (data ?? []) as Article[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getLatestArticles failed:', err);
     return [];
   }
@@ -79,6 +82,7 @@ export async function getHomeKpis(): Promise<UseCaseKpi[]> {
     }
     return flat.slice(0, 4);
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getHomeKpis failed:', err);
     return [];
   }
@@ -124,6 +128,7 @@ export async function getHeroCounters(): Promise<Array<{ value: string; label: s
 
     return fallback;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getHeroCounters failed:', err);
     return fallback;
   }

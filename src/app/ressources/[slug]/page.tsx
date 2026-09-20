@@ -5,15 +5,12 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBanner } from '@/components/shared/CtaBanner';
 import { ArticleContent } from '@/components/ressources/ArticleContent';
-import { getAllArticleSlugs, getArticleBySlug } from '@/lib/queries/articles';
+import { getArticleBySlug } from '@/lib/queries/articles';
 import { formatDate } from '@/lib/utils';
 
+// Client Supabase serveur -> `cookies()` : rendu dynamique obligatoire.
 export const dynamic = 'force-dynamic';
 
-export async function generateStaticParams() {
-  const slugs = await getAllArticleSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

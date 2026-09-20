@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { FlagshipModule, Formation } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 /**
  * Liste toutes les formations publiées (modulaires + flagship), triées par display_order.
@@ -16,6 +17,7 @@ export async function getPublishedFormations(): Promise<Formation[]> {
     if (error) throw error;
     return (data ?? []) as Formation[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getPublishedFormations failed:', err);
     return [];
   }
@@ -37,6 +39,7 @@ export async function getFormationBySlug(slug: string): Promise<Formation | null
     if (error) throw error;
     return (data as Formation | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getFormationBySlug failed:', err);
     return null;
   }
@@ -56,6 +59,7 @@ export async function getAllFormationSlugs(): Promise<string[]> {
     if (error) throw error;
     return ((data ?? []) as Array<{ slug: string }>).map((row) => row.slug);
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllFormationSlugs failed:', err);
     return [];
   }
@@ -75,6 +79,7 @@ export async function getFlagshipModules(): Promise<FlagshipModule[]> {
     if (error) throw error;
     return (data ?? []) as FlagshipModule[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getFlagshipModules failed:', err);
     return [];
   }

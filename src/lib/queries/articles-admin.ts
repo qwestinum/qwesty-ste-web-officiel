@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { Article, ArticleCategory, ContentStatus } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 interface ArticlesFilters {
   status?: ContentStatus | 'all';
@@ -31,6 +32,7 @@ export async function getAllArticlesAdmin(filters?: ArticlesFilters): Promise<Ar
     if (error) throw error;
     return (data as unknown as Article[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllArticlesAdmin failed:', err);
     return [];
   }
@@ -51,6 +53,7 @@ export async function getArticleByIdAdmin(id: string): Promise<Article | null> {
     if (error) throw error;
     return (data as unknown as Article | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getArticleByIdAdmin failed:', err);
     return null;
   }
@@ -78,6 +81,7 @@ export async function getArticlesCounters(): Promise<{
       archived: rows.filter((r) => r.status === 'archived').length,
     };
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getArticlesCounters failed:', err);
     return { total: 0, drafts: 0, published: 0, archived: 0 };
   }

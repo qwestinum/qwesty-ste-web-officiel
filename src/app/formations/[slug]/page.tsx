@@ -4,14 +4,14 @@ import { notFound } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBanner } from '@/components/shared/CtaBanner';
-import { getAllFormationSlugs, getFormationBySlug } from '@/lib/queries/formations';
+import { getFormationBySlug } from '@/lib/queries/formations';
 
-export const revalidate = 300;
+// Les requêtes publiques passent par le client Supabase serveur, qui lit
+// `cookies()` : la route ne peut donc pas être rendue statiquement. En ISR,
+// cet appel est fatal (pas de repli vers le dynamique) et la page renvoyait
+// une 500. Même directive que /ressources/[slug].
+export const dynamic = 'force-dynamic';
 
-export async function generateStaticParams() {
-  const slugs = await getAllFormationSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

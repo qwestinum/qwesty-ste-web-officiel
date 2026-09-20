@@ -5,6 +5,7 @@ import type {
   Partner,
   UseCase,
 } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 export async function getAllUseCasesAdmin(): Promise<UseCase[]> {
   try {
@@ -16,6 +17,7 @@ export async function getAllUseCasesAdmin(): Promise<UseCase[]> {
     if (error) throw error;
     return (data as unknown as UseCase[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllUseCasesAdmin failed:', err);
     return [];
   }
@@ -32,6 +34,7 @@ export async function getUseCaseByIdAdmin(id: string): Promise<UseCase | null> {
     if (error) throw error;
     return (data as unknown as UseCase | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getUseCaseByIdAdmin failed:', err);
     return null;
   }
@@ -47,6 +50,7 @@ export async function getAllFormationsAdmin(): Promise<Formation[]> {
     if (error) throw error;
     return (data as unknown as Formation[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllFormationsAdmin failed:', err);
     return [];
   }
@@ -63,6 +67,7 @@ export async function getFormationByIdAdmin(id: string): Promise<Formation | nul
     if (error) throw error;
     return (data as unknown as Formation | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getFormationByIdAdmin failed:', err);
     return null;
   }
@@ -78,6 +83,7 @@ export async function getAllFlagshipModulesAdmin(): Promise<FlagshipModule[]> {
     if (error) throw error;
     return (data as unknown as FlagshipModule[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllFlagshipModulesAdmin failed:', err);
     return [];
   }
@@ -93,6 +99,7 @@ export async function getAllPartnersAdmin(): Promise<Partner[]> {
     if (error) throw error;
     return (data as unknown as Partner[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllPartnersAdmin failed:', err);
     return [];
   }

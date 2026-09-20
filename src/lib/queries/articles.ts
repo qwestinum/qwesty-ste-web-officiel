@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { Article } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 /**
  * Liste tous les articles publiés, triés par date de publication descendante.
@@ -16,6 +17,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
     if (error) throw error;
     return (data ?? []) as Article[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getPublishedArticles failed:', err);
     return [];
   }
@@ -39,6 +41,7 @@ export async function getFeaturedArticle(): Promise<Article | null> {
     if (error) throw error;
     return (data as Article | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getFeaturedArticle failed:', err);
     return null;
   }
@@ -60,6 +63,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     if (error) throw error;
     return (data as Article | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getArticleBySlug failed:', err);
     return null;
   }
@@ -79,6 +83,7 @@ export async function getAllArticleSlugs(): Promise<string[]> {
     if (error) throw error;
     return ((data ?? []) as Array<{ slug: string }>).map((row) => row.slug);
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllArticleSlugs failed:', err);
     return [];
   }

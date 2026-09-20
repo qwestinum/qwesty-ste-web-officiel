@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { Lead, LeadStatus } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 interface LeadsCounters {
   total: number;
@@ -38,6 +39,7 @@ export async function getLeadsCounters(): Promise<LeadsCounters> {
       spam: rows.filter((r) => r.status === 'spam').length,
     };
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getLeadsCounters failed:', err);
     return { total: 0, new: 0, inProgress: 0, archived: 0, spam: 0 };
   }
@@ -58,6 +60,7 @@ export async function getRecentLeads(limit = 5): Promise<Lead[]> {
     if (error) throw error;
     return (data as unknown as Lead[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getRecentLeads failed:', err);
     return [];
   }
@@ -86,6 +89,7 @@ export async function getAllLeads(filters?: LeadsFilters): Promise<Lead[]> {
     if (error) throw error;
     return (data as unknown as Lead[]) ?? [];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllLeads failed:', err);
     return [];
   }
@@ -106,6 +110,7 @@ export async function getLeadById(id: string): Promise<Lead | null> {
     if (error) throw error;
     return (data as unknown as Lead | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getLeadById failed:', err);
     return null;
   }
@@ -141,6 +146,7 @@ export async function getLeadsActivityLast14Days(): Promise<ActivityPoint[]> {
     }
     return Object.entries(buckets).map(([date, count]) => ({ date, count }));
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getLeadsActivityLast14Days failed:', err);
     return [];
   }

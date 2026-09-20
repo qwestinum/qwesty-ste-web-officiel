@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { UseCase } from '@/lib/supabase/types';
+import { rethrowIfFrameworkError } from '@/lib/queries/framework-errors';
 
 /**
  * Liste tous les cas d'usage publiés.
@@ -16,6 +17,7 @@ export async function getPublishedUseCases(): Promise<UseCase[]> {
     if (error) throw error;
     return (data ?? []) as UseCase[];
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getPublishedUseCases failed:', err);
     return [];
   }
@@ -37,6 +39,7 @@ export async function getUseCaseBySlug(slug: string): Promise<UseCase | null> {
     if (error) throw error;
     return (data as UseCase | null) ?? null;
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getUseCaseBySlug failed:', err);
     return null;
   }
@@ -56,6 +59,7 @@ export async function getAllUseCaseSlugs(): Promise<string[]> {
     if (error) throw error;
     return ((data ?? []) as Array<{ slug: string }>).map((row) => row.slug);
   } catch (err) {
+    rethrowIfFrameworkError(err);
     console.error('getAllUseCaseSlugs failed:', err);
     return [];
   }

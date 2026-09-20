@@ -15,7 +15,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
 
           {/* Marque + contact */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-6">
             <LogoHorizontal />
             <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
               {SITE_CONFIG.description}
@@ -45,9 +45,6 @@ export function Footer() {
           </div>
           <div className="md:col-span-2">
             <FooterColumn title="Ressources" links={FOOTER_LINKS.ressources} />
-          </div>
-          <div className="md:col-span-2">
-            <FooterColumn title="Conformité" links={FOOTER_LINKS.conformite} />
           </div>
         </div>
 

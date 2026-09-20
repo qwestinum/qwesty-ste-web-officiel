@@ -38,13 +38,10 @@ export const FOOTER_LINKS = {
   ],
   ressources: [
     { href: '/ressources', label: 'Articles' },
-    { href: '/ressources#newsletter', label: 'Newsletter' },
     { href: '/formations', label: 'Catalogue formations' },
   ],
-  conformite: [
-    { href: '/confidentialite', label: 'Confidentialité' },
-    { href: '/mentions-legales', label: 'Mentions légales' },
-    { href: '/conditions', label: 'Conditions' },
-    { href: '/cookies', label: 'Cookies' },
-  ],
+  // La colonne « Conformité » (confidentialité, mentions légales, conditions,
+  // cookies) a été retirée : aucune de ces quatre pages n'existe, les liens
+  // renvoyaient une 404 depuis toutes les pages du site. À rétablir en même
+  // temps que les pages.
 } as const;

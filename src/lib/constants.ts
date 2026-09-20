@@ -17,6 +17,43 @@ export const SITE_CONFIG = {
   locations: ['Casablanca', 'Paris', 'Vienne'],
 } as const;
 
+/**
+ * Informations légales.
+ *
+ * Les champs laissés vides ne sont PAS affichés sur les pages : il suffit
+ * de les renseigner ici pour qu'ils apparaissent, sans toucher au JSX.
+ *
+ * Attention — trois d'entre eux sont obligatoires pour un site édité par
+ * une société française (art. 6 III LCEN) et restent à compléter :
+ * `siren`, `address` et `publicationDirector`. `capital` est obligatoire
+ * seulement s'il est mentionné ailleurs ; il peut rester vide.
+ */
+export const LEGAL_CONFIG = {
+  companyName: 'Qwestinum',
+  legalForm: 'Société par actions simplifiée unipersonnelle (SASU)',
+  capital: '',
+  siren: '',
+  vatNumber: '',
+  address: '',
+  publicationDirector: '',
+  host: {
+    name: 'Vercel Inc.',
+    url: 'https://vercel.com',
+    address: '',
+  },
+  /** Sous-traitants auxquels des données peuvent être transmises. */
+  processors: [
+    { name: 'Vercel', role: 'Hébergement du site', url: 'https://vercel.com/legal/privacy-policy' },
+    { name: 'Supabase', role: 'Base de données des demandes de contact', url: 'https://supabase.com/privacy' },
+    { name: 'Resend', role: 'Envoi de la notification email interne', url: 'https://resend.com/legal/privacy-policy' },
+    { name: 'Cal.com', role: 'Prise de rendez-vous, si vous réservez un créneau', url: 'https://cal.com/privacy' },
+  ],
+  /** Durée de conservation des demandes de contact. */
+  retention: '3 ans à compter du dernier contact',
+  /** Date de dernière mise à jour des pages légales. */
+  lastUpdated: '20 septembre 2026',
+} as const;
+
 export const NAV_LINKS = [
   { href: '/cas-usage', label: "Cas d'usage" },
   { href: '/formations', label: 'Formations' },
@@ -40,8 +77,10 @@ export const FOOTER_LINKS = {
     { href: '/ressources', label: 'Articles' },
     { href: '/formations', label: 'Catalogue formations' },
   ],
-  // La colonne « Conformité » (confidentialité, mentions légales, conditions,
-  // cookies) a été retirée : aucune de ces quatre pages n'existe, les liens
-  // renvoyaient une 404 depuis toutes les pages du site. À rétablir en même
-  // temps que les pages.
+  // N'ajouter ici que des pages qui existent réellement : ces liens sont
+  // rendus sur TOUTES les pages du site.
+  legal: [
+    { href: '/mentions-legales', label: 'Mentions légales' },
+    { href: '/confidentialite', label: 'Confidentialité' },
+  ],
 } as const;

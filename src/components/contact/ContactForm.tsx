@@ -142,7 +142,7 @@ export function ContactForm() {
             className="mt-1 size-4 shrink-0 accent-accent-deep"
           />
           <label htmlFor="consent" className="font-sans text-xs leading-relaxed text-ink-muted">
-            J'accepte que mes données soient utilisées par Qwestinum pour me recontacter au sujet de ma demande, conformément à notre politique de confidentialité. <span className="text-danger">*</span>
+            J'accepte que mes données soient utilisées par Qwestinum pour me recontacter au sujet de ma demande, conformément à notre <a href="/confidentialite" className="link-editorial">politique de confidentialité</a>. <span className="text-danger">*</span>
           </label>
         </div>
         {state.errors?.consent && (

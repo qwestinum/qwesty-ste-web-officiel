@@ -19,13 +19,19 @@ export const metadata: Metadata = {
 export const dynamic = 'force-static';
 
 export default function ConfidentialitePage() {
-  const { companyName, legalForm, capital, siren, address, processors, retention } =
+  const { companyName, legalFormShort, legalForm, capital, rcs, address, processors, retention } =
     LEGAL_CONFIG;
   const email = SITE_CONFIG.contact.email;
 
-  const identity = [legalForm, capital && `au capital de ${capital}`, address, siren && `SIREN ${siren}`]
+  // « Qwestinum, SASU au capital de X, adresse (RCS …) » — les segments non
+  // renseignés dans LEGAL_CONFIG disparaissent d'eux-mêmes.
+  const identity = [
+    capital ? `${legalFormShort} au capital de ${capital}` : legalForm,
+    address,
+  ]
     .filter(Boolean)
     .join(', ');
+  const identityLine = rcs ? `${identity} (RCS ${rcs})` : identity;
 
   return (
     <>
@@ -42,8 +48,8 @@ export default function ConfidentialitePage() {
           <LegalSection title="Responsable de traitement">
             <p>
               {companyName}
-              {identity ? `, ${identity}` : ''}, agit en qualité de responsable
-              de traitement pour les données collectées via ce site.
+              {identityLine ? `, ${identityLine}` : ''}, agit en qualité de
+              responsable de traitement pour les données collectées via ce site.
             </p>
             <p>
               Pour toute question relative à vos données :{' '}

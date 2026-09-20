@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-static';
 
 export default function MentionsLegalesPage() {
-  const { companyName, legalForm, capital, siren, vatNumber, address, publicationDirector, host } =
+  const { companyName, legalForm, capital, siren, rcs, vatNumber, address, publicationDirector, host } =
     LEGAL_CONFIG;
 
   return (
@@ -41,6 +41,7 @@ export default function MentionsLegalesPage() {
                 { label: 'Forme juridique', value: legalForm },
                 capital ? { label: 'Capital social', value: capital } : null,
                 siren ? { label: 'SIREN', value: siren } : null,
+                rcs ? { label: 'RCS', value: rcs } : null,
                 vatNumber ? { label: 'TVA intracommunautaire', value: vatNumber } : null,
                 address ? { label: 'Siège social', value: address } : null,
                 publicationDirector

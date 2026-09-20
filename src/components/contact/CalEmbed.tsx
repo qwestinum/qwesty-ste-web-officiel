@@ -2,6 +2,7 @@
 
 import { getCalApi } from '@calcom/embed-react';
 import { useEffect } from 'react';
+import { SITE_CONFIG } from '@/lib/constants';
 
 /**
  * Bouton qui déclenche une modale plein écran Cal.com.
@@ -46,7 +47,7 @@ export function CalEmbed() {
           La prise de rendez-vous en ligne n'est pas encore configurée.
         </p>
         <a
-          href="mailto:contact@qwestinum.com?subject=Diagnostic%20IA%20gratuit"
+          href={`mailto:${SITE_CONFIG.contact.email}?subject=Diagnostic%20IA%20gratuit`}
           className="btn-primary"
         >
           Demander un créneau par email

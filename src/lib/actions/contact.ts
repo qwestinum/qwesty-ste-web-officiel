@@ -5,6 +5,7 @@ import { headers } from 'next/headers';
 import { Resend } from 'resend';
 import crypto from 'crypto';
 import type { LeadSubject } from '@/lib/supabase/types';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export interface LeadFormState {
   success: boolean;
@@ -119,7 +120,7 @@ export async function submitLead(
       console.error('submitLead insert error:', error);
       return {
         success: false,
-        message: "Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@qwestinum.com.",
+        message: `Une erreur est survenue. Réessayez ou écrivez-nous directement à ${SITE_CONFIG.contact.email}.`,
       };
     }
 
@@ -143,7 +144,7 @@ export async function submitLead(
     console.error('submitLead exception:', err);
     return {
       success: false,
-      message: "Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@qwestinum.com.",
+      message: `Une erreur est survenue. Réessayez ou écrivez-nous directement à ${SITE_CONFIG.contact.email}.`,
     };
   }
 }
@@ -201,8 +202,8 @@ function escapeHtml(s: string): string {
 
 function buildLeadEmailHtml(data: LeadEmailData, subjectLabel: string): string {
   const messageHtml = escapeHtml(data.message).replace(/\n/g, '<br>');
-  const company = data.company ? escapeHtml(data.company) : '<em style="color: #807D75;">non renseigné</em>';
-  const phone = data.phone ? escapeHtml(data.phone) : '<em style="color: #807D75;">non renseigné</em>';
+  const company = data.company ? escapeHtml(data.company) : '<em style="color: #4A5670;">non renseigné</em>';
+  const phone = data.phone ? escapeHtml(data.phone) : '<em style="color: #4A5670;">non renseigné</em>';
 
   return `<!doctype html>
 <html lang="fr">
@@ -211,55 +212,55 @@ function buildLeadEmailHtml(data: LeadEmailData, subjectLabel: string): string {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nouveau lead Qwestinum</title>
 </head>
-<body style="margin: 0; padding: 24px; background: #F4F0E8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #2A2724;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background: #FFFFFF; border: 1px solid #D8D2C2; border-radius: 8px; overflow: hidden;">
+<body style="margin: 0; padding: 24px; background: #FBF9F5; font-family: Calibri, Carlito, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #0A1F4B;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E4E7EE; border-radius: 8px; overflow: hidden;">
     <tr>
-      <td style="background: #2A2724; padding: 24px 32px; color: #F4F0E8;">
-        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #D4A82C; font-weight: 600;">Qwestinum</div>
-        <h1 style="margin: 8px 0 0; font-family: Georgia, serif; font-size: 22px; font-weight: 400; color: #F4F0E8;">Nouveau lead reçu</h1>
-        <p style="margin: 4px 0 0; font-size: 13px; color: #D8D2C2;">Sujet : ${escapeHtml(subjectLabel)}</p>
+      <td style="background: #0A1F4B; padding: 24px 32px; color: #FBF9F5;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #2B9FD8; font-weight: 600;">Qwestinum</div>
+        <h1 style="margin: 8px 0 0; font-size: 22px; font-weight: 700; color: #FBF9F5;">Nouveau lead reçu</h1>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #E4E7EE;">Sujet : ${escapeHtml(subjectLabel)}</p>
       </td>
     </tr>
     <tr>
       <td style="padding: 32px;">
         <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
           <tr>
-            <td style="padding: 8px 0; color: #807D75; width: 130px; vertical-align: top;">Nom</td>
-            <td style="padding: 8px 0; color: #2A2724; font-weight: 500;">${escapeHtml(data.fullName)}</td>
+            <td style="padding: 8px 0; color: #4A5670; width: 130px; vertical-align: top;">Nom</td>
+            <td style="padding: 8px 0; color: #0A1F4B; font-weight: 500;">${escapeHtml(data.fullName)}</td>
           </tr>
           <tr>
-            <td style="padding: 8px 0; color: #807D75; vertical-align: top;">Email</td>
+            <td style="padding: 8px 0; color: #4A5670; vertical-align: top;">Email</td>
             <td style="padding: 8px 0;">
-              <a href="mailto:${escapeHtml(data.email)}" style="color: #A8861C; text-decoration: none;">${escapeHtml(data.email)}</a>
+              <a href="mailto:${escapeHtml(data.email)}" style="color: #1A6E99; text-decoration: none;">${escapeHtml(data.email)}</a>
             </td>
           </tr>
           <tr>
-            <td style="padding: 8px 0; color: #807D75; vertical-align: top;">Entreprise</td>
-            <td style="padding: 8px 0; color: #2A2724;">${company}</td>
+            <td style="padding: 8px 0; color: #4A5670; vertical-align: top;">Entreprise</td>
+            <td style="padding: 8px 0; color: #0A1F4B;">${company}</td>
           </tr>
           <tr>
-            <td style="padding: 8px 0; color: #807D75; vertical-align: top;">Téléphone</td>
-            <td style="padding: 8px 0; color: #2A2724;">${phone}</td>
+            <td style="padding: 8px 0; color: #4A5670; vertical-align: top;">Téléphone</td>
+            <td style="padding: 8px 0; color: #0A1F4B;">${phone}</td>
           </tr>
         </table>
 
-        <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #D8D2C2;">
-          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #807D75; font-weight: 600; margin-bottom: 12px;">Message</div>
-          <div style="font-size: 15px; line-height: 1.6; color: #2A2724; padding: 16px 20px; background: #F4F0E8; border-left: 3px solid #D4A82C; border-radius: 4px;">
+        <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #E4E7EE;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #4A5670; font-weight: 600; margin-bottom: 12px;">Message</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #0A1F4B; padding: 16px 20px; background: #FBF9F5; border-left: 3px solid #2B9FD8; border-radius: 4px;">
             ${messageHtml}
           </div>
         </div>
 
         <div style="margin-top: 28px; text-align: center;">
           <a href="mailto:${escapeHtml(data.email)}?subject=Re%3A%20Votre%20demande%20Qwestinum"
-             style="display: inline-block; background: #D4A82C; color: #2A2724; padding: 14px 28px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; border-radius: 2px;">
+             style="display: inline-block; background: #2B9FD8; color: #0A1F4B; padding: 14px 28px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; border-radius: 8px;">
             Répondre à ${escapeHtml(data.fullName.split(' ')[0])} →
           </a>
         </div>
       </td>
     </tr>
     <tr>
-      <td style="padding: 16px 32px; background: #F4F0E8; border-top: 1px solid #D8D2C2; font-size: 11px; color: #807D75; text-align: center;">
+      <td style="padding: 16px 32px; background: #FBF9F5; border-top: 1px solid #E4E7EE; font-size: 11px; color: #4A5670; text-align: center;">
         Lead enregistré dans la base Supabase · qwestinum.fr
       </td>
     </tr>

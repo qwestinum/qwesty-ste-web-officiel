@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://qwestinum.fr',
   ogImage: '/og-image.png',
   contact: {
-    email: 'contact@qwestinum.com',
+    email: 'contact@qwestinum.fr',
     phone: '+33 6 36 49 58 98',
   },
   locations: ['Casablanca', 'Paris', 'Vienne'],
@@ -23,18 +23,19 @@ export const SITE_CONFIG = {
  * Les champs laissés vides ne sont PAS affichés sur les pages : il suffit
  * de les renseigner ici pour qu'ils apparaissent, sans toucher au JSX.
  *
- * Attention — trois d'entre eux sont obligatoires pour un site édité par
- * une société française (art. 6 III LCEN) et restent à compléter :
- * `siren`, `address` et `publicationDirector`. `capital` est obligatoire
- * seulement s'il est mentionné ailleurs ; il peut rester vide.
+ * Reste à compléter : `publicationDirector`, obligatoire pour un site
+ * édité par une société française (art. 6 III LCEN), et `vatNumber`.
  */
 export const LEGAL_CONFIG = {
   companyName: 'Qwestinum',
   legalForm: 'Société par actions simplifiée unipersonnelle (SASU)',
-  capital: '',
-  siren: '',
+  /** Forme abrégée, pour les mentions en ligne de texte. */
+  legalFormShort: 'SASU',
+  capital: '3 333 €',
+  siren: '992 506 188',
+  rcs: 'Versailles 992 506 188',
   vatNumber: '',
-  address: '',
+  address: '45 rue Daniel Bricon, 78680 Épône',
   publicationDirector: '',
   host: {
     name: 'Vercel Inc.',

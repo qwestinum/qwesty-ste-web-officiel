@@ -1,3 +1,5 @@
+import { Emphasis } from '@/components/shared/Emphasis';
+
 const STEPS = [
   {
     num: '01',
@@ -12,7 +14,7 @@ const STEPS = [
   {
     num: '03',
     title: 'Déploiement',
-    desc: 'Intégration sécurisée à vos systèmes, préparation à l\u2019échelle, performances et observabilité.',
+    desc: 'Intégration sécurisée à vos systèmes, préparation à l’échelle, performances et observabilité.',
   },
   {
     num: '04',
@@ -21,43 +23,38 @@ const STEPS = [
   },
 ] as const;
 
+/**
+ * Le parcours en quatre temps.
+ * L'ancienne inversion sombre est abandonnée : la charte ORQA ne connaît
+ * que l'alternance crème / blanc. La mise en avant passe ici par les
+ * cartes « chaudes » (ivoire + filet jaune).
+ */
 export function Approach() {
   return (
-    <section className="bg-sepia text-lin py-20 md:py-28 relative overflow-hidden">
-
-      {/* Texture diagonale très subtile en fond */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(45deg, transparent 0px, transparent 30px, #D4A82C 30px, #D4A82C 31px)',
-        }}
-      />
-
-      <div className="container-page relative">
-        <div className="max-w-3xl mb-14 md:mb-20">
-          <span className="font-sans text-xs font-medium uppercase tracking-wide-2 text-or">
-            Notre méthode
-          </span>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tighter-2 text-lin">
-            Process First — le problème avant la <em className="italic text-or">technologie.</em>
+    <section className="section-padding bg-cream" id="methode">
+      <div className="container-page">
+        <div className="mb-14 max-w-3xl md:mb-20">
+          <span className="eyebrow">Notre méthode</span>
+          <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            Process First — le problème avant la <Emphasis>technologie.</Emphasis>
           </h2>
-          <p className="mt-6 font-sans text-lg leading-relaxed text-perle">
-            Parce que 90% des projets IA échouent non par manque de technologie, mais par manque de compréhension des processus qu'ils sont censés transformer.
+          <p className="mt-6 font-sans text-lg leading-relaxed text-ink-muted">
+            Parce que 90 % des projets IA échouent non par manque de technologie,
+            mais par manque de compréhension des processus qu&apos;ils sont censés
+            transformer.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-pierre/30">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((step) => (
-            <div key={step.num} className="bg-sepia p-8 md:p-10">
-              <div className="font-serif text-5xl font-medium tracking-tighter-2 text-or leading-none">
+            <div key={step.num} className="card-warm h-full p-7 sm:p-8">
+              <div className="font-sans text-4xl font-bold leading-none tracking-tight text-accent-deep">
                 {step.num}
               </div>
-              <h3 className="mt-6 font-serif text-xl font-medium tracking-tight-1 text-lin">
+              <h3 className="mt-6 font-sans text-xl font-bold tracking-tight text-ink">
                 {step.title}
               </h3>
-              <p className="mt-3 font-sans text-sm leading-relaxed text-perle">
+              <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
                 {step.desc}
               </p>
             </div>

@@ -8,10 +8,10 @@ interface ArticleCardProps {
 }
 
 const CATEGORY_LABELS: Record<string, { label: string; tone: string }> = {
-  strategie: { label: 'Stratégie', tone: 'bg-or-pale/40 text-or-fonce' },
-  methode: { label: 'Méthode', tone: 'bg-perle/60 text-sepia' },
-  'retours-experience': { label: 'Retour d\u2019expérience', tone: 'bg-sepia text-lin' },
-  'lucidite-ia': { label: 'Lucidité IA', tone: 'bg-or text-sepia' },
+  strategie: { label: 'Stratégie', tone: 'bg-halo text-ink' },
+  methode: { label: 'Méthode', tone: 'bg-accent/10 text-accent-deep' },
+  'retours-experience': { label: 'Retour d’expérience', tone: 'bg-ink text-cream' },
+  'lucidite-ia': { label: 'Lucidité IA', tone: 'bg-sun text-ink' },
 };
 
 export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) {
@@ -22,38 +22,34 @@ export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) 
     return (
       <Link
         href={`/ressources/${article.slug}`}
-        className="group block bg-lin border border-perle rounded-md p-8 md:p-12 transition-all hover:border-pierre/40"
+        className="card-warm group block rounded-3xl p-8 transition-shadow duration-200 hover:shadow-lift md:p-12"
       >
-        <div className="flex items-center gap-3 mb-6">
-          <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-sepia text-lin">
-            Article phare
-          </span>
-          <span
-            className={`font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm ${cat.tone}`}
-          >
-            {cat.label}
-          </span>
-          {date && <span className="font-sans text-xs text-pierre">{date}</span>}
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <span className="tag bg-ink text-cream">Article phare</span>
+          <span className={`tag ${cat.tone}`}>{cat.label}</span>
+          {date && <span className="font-sans text-xs text-ink-muted">{date}</span>}
         </div>
 
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal leading-tight-extra tracking-tighter-2 text-sepia max-w-3xl">
+        <h2 className="max-w-3xl font-sans text-3xl font-bold leading-display tracking-tight text-ink md:text-4xl lg:text-5xl">
           {article.title}
         </h2>
 
         {article.excerpt && (
-          <p className="mt-6 max-w-2xl font-sans text-base md:text-lg leading-relaxed text-pierre">
+          <p className="mt-6 max-w-2xl font-sans text-base leading-relaxed text-ink-muted md:text-lg">
             {article.excerpt}
           </p>
         )}
 
         <div className="mt-8 flex items-center gap-4">
           {article.author_name && (
-            <span className="font-sans text-xs text-pierre">Par {article.author_name}</span>
+            <span className="font-sans text-xs text-ink-muted">
+              Par {article.author_name}
+            </span>
           )}
           {article.reading_time_minutes && (
             <>
-              <span className="text-pierre">·</span>
-              <span className="font-sans text-xs text-pierre">
+              <span className="text-ink-muted">·</span>
+              <span className="font-sans text-xs text-ink-muted">
                 {article.reading_time_minutes} min de lecture
               </span>
             </>
@@ -61,8 +57,8 @@ export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) 
         </div>
 
         <div className="mt-8">
-          <span className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce group-hover:text-sepia transition-colors inline-flex items-center gap-1.5">
-            Lire l'article <span aria-hidden="true">→</span>
+          <span className="link-arrow">
+            Lire l&apos;article <span aria-hidden="true">→</span>
           </span>
         </div>
       </Link>
@@ -73,34 +69,30 @@ export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) 
   return (
     <Link
       href={`/ressources/${article.slug}`}
-      className="group flex flex-col bg-lin border border-perle rounded-md p-7 transition-all hover:border-pierre/40 hover:-translate-y-0.5"
+      className="card-cool group flex flex-col p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
     >
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          className={`font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm ${cat.tone}`}
-        >
-          {cat.label}
-        </span>
-        {date && <span className="font-sans text-xs text-pierre">{date}</span>}
+      <div className="mb-5 flex items-center gap-3">
+        <span className={`tag ${cat.tone}`}>{cat.label}</span>
+        {date && <span className="font-sans text-xs text-ink-muted">{date}</span>}
       </div>
 
-      <h3 className="font-serif text-xl md:text-2xl font-medium leading-tight tracking-tight-1 text-sepia">
+      <h3 className="font-sans text-xl font-bold leading-snug tracking-tight text-ink md:text-2xl">
         {article.title}
       </h3>
 
       {article.excerpt && (
-        <p className="mt-4 font-sans text-sm leading-relaxed text-pierre flex-1">
+        <p className="mt-4 flex-1 font-sans text-sm leading-relaxed text-ink-muted">
           {article.excerpt}
         </p>
       )}
 
-      <div className="mt-6 pt-5 border-t border-perle flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between border-t border-hairline pt-5">
         {article.reading_time_minutes && (
-          <span className="font-sans text-xs text-pierre">
+          <span className="font-sans text-xs text-ink-muted">
             {article.reading_time_minutes} min de lecture
           </span>
         )}
-        <span className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce group-hover:text-sepia transition-colors inline-flex items-center gap-1.5">
+        <span className="link-arrow">
           Lire <span aria-hidden="true">→</span>
         </span>
       </div>

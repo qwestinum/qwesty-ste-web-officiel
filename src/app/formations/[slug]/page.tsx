@@ -45,60 +45,60 @@ export default async function FormationDetailPage({
     <>
       <Header />
       <main>
-        <header className="border-b border-perle">
+        <header className="border-b border-hairline bg-cream">
           <div className="container-page py-14 md:py-20">
             <Link
               href="/formations"
-              className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors mb-8"
+              className="mb-8 inline-flex items-center gap-2 font-sans text-[15px] font-bold text-ink-muted transition-colors hover:text-ink"
             >
               <span aria-hidden="true">←</span> Toutes les formations
             </Link>
 
             <div className="flex flex-wrap gap-3 mb-6">
               {formation.level_label && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or-pale/40 text-or-fonce">
+                <span className="tag bg-halo text-ink">
                   {formation.level_label}
                 </span>
               )}
               {formation.duration_label && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm border border-perle text-pierre">
+                <span className="tag border border-hairline text-ink-muted">
                   {formation.duration_label}
                 </span>
               )}
               {formation.is_flagship && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or text-sepia">
+                <span className="tag bg-sun text-ink">
                   Programme flagship
                 </span>
               )}
             </div>
 
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight-extra tracking-tighter-2 text-sepia max-w-4xl">
+            <h1 className="max-w-4xl font-sans text-4xl font-bold leading-display tracking-tight text-ink md:text-5xl lg:text-6xl">
               {formation.title}
             </h1>
 
             {formation.audience && (
-              <p className="mt-6 max-w-3xl font-sans text-base md:text-lg italic text-pierre">
+              <p className="mt-6 max-w-3xl font-sans text-base md:text-lg italic text-ink-muted">
                 Pour : {formation.audience}
               </p>
             )}
 
             {formation.excerpt && (
-              <p className="mt-5 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-sepia">
+              <p className="mt-5 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-ink">
                 {formation.excerpt}
               </p>
             )}
           </div>
         </header>
 
-        <section className="py-16 md:py-20">
+        <section className="section-padding bg-white">
           <div className="container-page max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-12">
 
             {/* Description longue */}
             <div className="lg:col-span-2">
               {formation.description && (
                 <div className="mb-12">
-                  <span className="label-mark">Description</span>
-                  <p className="mt-4 font-sans text-base md:text-lg leading-relaxed text-sepia">
+                  <span className="eyebrow">Description</span>
+                  <p className="mt-4 font-sans text-base md:text-lg leading-relaxed text-ink">
                     {formation.description}
                   </p>
                 </div>
@@ -106,11 +106,11 @@ export default async function FormationDetailPage({
 
               {programme.length > 0 && (
                 <div>
-                  <span className="label-mark">Au programme</span>
+                  <span className="eyebrow">Au programme</span>
                   <ul className="mt-6 space-y-3">
                     {programme.map((item, i) => (
-                      <li key={i} className="flex gap-4 font-sans text-base leading-relaxed text-sepia">
-                        <span className="block w-1.5 h-1.5 rounded-full bg-or mt-2.5 shrink-0" />
+                      <li key={i} className="flex gap-4 font-sans text-base leading-relaxed text-ink">
+                        <span className="mt-2.5 block size-1.5 shrink-0 rounded-full bg-sun" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -121,27 +121,27 @@ export default async function FormationDetailPage({
 
             {/* Sidebar infos */}
             <aside className="lg:col-span-1">
-              <div className="bg-perle/30 border border-perle rounded-md p-6">
-                <h3 className="font-serif text-lg font-medium text-sepia tracking-tight-1">
+              <div className="card-warm p-6">
+                <h3 className="font-sans text-lg font-bold tracking-tight text-ink">
                   Informations pratiques
                 </h3>
                 <dl className="mt-5 space-y-4 text-sm">
                   {formation.duration_label && (
                     <div>
-                      <dt className="label-mark mb-1">Durée</dt>
-                      <dd className="font-sans text-sepia">{formation.duration_label}</dd>
+                      <dt className="eyebrow mb-1 block">Durée</dt>
+                      <dd className="font-sans text-ink">{formation.duration_label}</dd>
                     </div>
                   )}
                   {formation.formats && formation.formats.length > 0 && (
                     <div>
-                      <dt className="label-mark mb-1">Formats</dt>
-                      <dd className="font-sans text-sepia">{formation.formats.join(' · ')}</dd>
+                      <dt className="eyebrow mb-1 block">Formats</dt>
+                      <dd className="font-sans text-ink">{formation.formats.join(' · ')}</dd>
                     </div>
                   )}
                   {formation.price_label && (
                     <div>
-                      <dt className="label-mark mb-1">Tarif</dt>
-                      <dd className="font-sans text-sepia">{formation.price_label}</dd>
+                      <dt className="eyebrow mb-1 block">Tarif</dt>
+                      <dd className="font-sans text-ink">{formation.price_label}</dd>
                     </div>
                   )}
                 </dl>

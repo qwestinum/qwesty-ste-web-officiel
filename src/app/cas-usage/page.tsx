@@ -42,15 +42,15 @@ export default async function CasUsagePage() {
           <>
             {/* Missions clients */}
             {clientCases.length > 0 && (
-              <section className="py-16 md:py-20">
+              <section className="section-padding bg-white">
                 <div className="container-page">
                   <div className="mb-10">
-                    <span className="label-mark">Missions clients</span>
-                    <h2 className="mt-3 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
+                    <span className="eyebrow">Missions clients</span>
+                    <h2 className="mt-3 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
                       Cas anonymisés, KPI mesurés.
                     </h2>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {clientCases.map((c) => (
                       <UseCaseCard key={c.id} useCase={c} />
                     ))}
@@ -61,15 +61,15 @@ export default async function CasUsagePage() {
 
             {/* Solutions produit */}
             {productCases.length > 0 && (
-              <section className="bg-perle/30 border-y border-perle py-16 md:py-20">
+              <section className="section-padding bg-cream">
                 <div className="container-page">
                   <div className="mb-10">
-                    <span className="label-mark">Solutions propriétaires</span>
-                    <h2 className="mt-3 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
+                    <span className="eyebrow">Solutions propriétaires</span>
+                    <h2 className="mt-3 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
                       Produits Qwestinum disponibles.
                     </h2>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {productCases.map((c) => (
                       <UseCaseCard key={c.id} useCase={c} />
                     ))}

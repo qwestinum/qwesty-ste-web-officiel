@@ -9,9 +9,9 @@ export const metadata: Metadata = { title: 'Articles' };
 export const dynamic = 'force-dynamic';
 
 const STATUS_CONFIG: Record<ContentStatus, { label: string; classes: string }> = {
-  draft: { label: 'Brouillon', classes: 'bg-perle text-sepia' },
-  published: { label: 'Publié', classes: 'bg-or text-sepia' },
-  archived: { label: 'Archivé', classes: 'bg-sepia text-lin' },
+  draft: { label: 'Brouillon', classes: 'bg-cream text-ink' },
+  published: { label: 'Publié', classes: 'bg-accent text-ink' },
+  archived: { label: 'Archivé', classes: 'bg-ink text-cream' },
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -40,11 +40,11 @@ export default async function AdminArticlesPage({
     <div className="px-4 sm:px-6 lg:px-10 py-8 lg:py-10 max-w-6xl mx-auto">
       <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <span className="label-mark">Contenu</span>
-          <h1 className="mt-2 font-serif text-3xl md:text-4xl font-medium text-sepia tracking-tight-1">
+          <span className="eyebrow">Contenu</span>
+          <h1 className="mt-2 font-bold text-3xl md:text-4xl text-ink tracking-tight-1">
             Articles
           </h1>
-          <p className="mt-2 font-sans text-sm text-pierre">
+          <p className="mt-2 font-sans text-sm text-ink-muted">
             {articles.length} {articles.length > 1 ? 'articles' : 'article'}
             {status !== 'all' ? ` · filtré par "${STATUS_CONFIG[status]?.label ?? status}"` : ''}
           </p>
@@ -61,8 +61,8 @@ export default async function AdminArticlesPage({
             <Link
               key={f.value}
               href={href}
-              className={`inline-flex items-center px-3 py-1.5 rounded-sm font-sans text-xs font-semibold uppercase tracking-wide-2 transition-colors ${
-                active ? 'bg-sepia text-lin' : 'bg-perle/40 text-pierre hover:bg-perle hover:text-sepia'
+              className={`inline-flex items-center px-3 py-1.5 rounded-lg font-sans text-xs font-semibold uppercase tracking-wide-2 transition-colors ${
+                active ? 'bg-ink text-cream' : 'bg-cream/40 text-ink-muted hover:bg-cream hover:text-ink'
               }`}
             >
               {f.label}
@@ -72,8 +72,8 @@ export default async function AdminArticlesPage({
       </div>
 
       {articles.length === 0 ? (
-        <div className="bg-perle/20 border border-perle rounded-md p-12 text-center">
-          <p className="font-sans text-sm text-pierre mb-4">
+        <div className="bg-cream/20 border border-hairline rounded-xl p-12 text-center">
+          <p className="font-sans text-sm text-ink-muted mb-4">
             {status === 'all'
               ? "Aucun article pour l'instant. Créez votre premier brouillon."
               : 'Aucun article ne correspond à ce filtre.'}
@@ -81,39 +81,39 @@ export default async function AdminArticlesPage({
           {status === 'all' && <CreateArticleButton />}
         </div>
       ) : (
-        <div className="bg-lin border border-perle rounded-md overflow-hidden">
-          <ul className="divide-y divide-perle">
+        <div className="bg-white border border-hairline rounded-xl overflow-hidden">
+          <ul className="divide-y divide-hairline">
             {articles.map((article) => (
               <li key={article.id}>
                 <Link
                   href={`/admin/articles/${article.id}/edit`}
-                  className="flex items-center gap-4 p-4 md:p-5 hover:bg-perle/30 transition-colors"
+                  className="flex items-center gap-4 p-4 md:p-5 hover:bg-cream/30 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1.5 flex-wrap">
-                      <span className="font-serif text-base font-medium text-sepia truncate">
+                      <span className="font-bold text-base text-ink truncate">
                         {article.title}
                       </span>
                       <span
-                        className={`font-sans text-[9px] font-semibold uppercase tracking-wide-2 rounded-sm px-1.5 py-0.5 shrink-0 ${
+                        className={`font-sans text-[9px] font-semibold uppercase tracking-wide-2 rounded-lg px-1.5 py-0.5 shrink-0 ${
                           STATUS_CONFIG[article.status].classes
                         }`}
                       >
                         {STATUS_CONFIG[article.status].label}
                       </span>
                       {article.is_featured && (
-                        <span className="font-sans text-[9px] font-semibold uppercase tracking-wide-2 rounded-sm px-1.5 py-0.5 bg-or-pale/40 text-or-fonce">
+                        <span className="font-sans text-[9px] font-semibold uppercase tracking-wide-2 rounded-lg px-1.5 py-0.5 bg-sun/40 text-accent-deep">
                           Phare
                         </span>
                       )}
                     </div>
-                    <div className="font-sans text-xs text-pierre truncate">
+                    <div className="font-sans text-xs text-ink-muted truncate">
                       {CATEGORY_LABELS[article.category] ?? article.category} · /{article.slug}
                       {' · '}
                       modifié {formatDateTime(article.updated_at)}
                     </div>
                   </div>
-                  <span className="text-pierre shrink-0" aria-hidden="true">→</span>
+                  <span className="text-ink-muted shrink-0" aria-hidden="true">→</span>
                 </Link>
               </li>
             ))}

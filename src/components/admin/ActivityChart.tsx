@@ -72,7 +72,7 @@ export function ActivityChart({ data }: ActivityChartProps) {
           return (
             <div
               key={d.date}
-              className="text-center font-sans text-[9px] text-pierre tabular-nums"
+              className="text-center font-sans text-[9px] text-ink-muted tabular-nums"
             >
               {showLabel ? `${date.getDate()}/${date.getMonth() + 1}` : ''}
             </div>

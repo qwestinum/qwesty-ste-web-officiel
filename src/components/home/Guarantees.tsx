@@ -1,3 +1,5 @@
+import { Emphasis } from '@/components/shared/Emphasis';
+
 const GUARANTEES = [
   {
     title: 'RGPD compliant',
@@ -11,7 +13,7 @@ const GUARANTEES = [
   },
   {
     title: 'AI Act ready',
-    desc: 'Conformité aux exigences européennes sur l\u2019IA.',
+    desc: 'Conformité aux exigences européennes sur l’IA.',
     icon: (
       <>
         <rect x="3" y="11" width="18" height="11" rx="2" />
@@ -43,29 +45,29 @@ const GUARANTEES = [
 
 export function Guarantees() {
   return (
-    <section className="bg-perle/40 border-y border-perle py-20 md:py-24">
+    <section className="section-padding bg-cream" id="conformite">
       <div className="container-page">
 
-        <div className="text-center max-w-2xl mx-auto mb-14 md:mb-16">
-          <span className="label-mark">Garanties & conformité</span>
-          <h2 className="mt-4 font-serif text-3xl md:text-4xl font-normal leading-tight tracking-tighter-2 text-sepia">
-            Quatre engagements <em className="italic text-or-fonce">non négociables.</em>
+        <div className="mx-auto mb-14 max-w-2xl text-center md:mb-16">
+          <span className="eyebrow">Garanties &amp; conformité</span>
+          <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+            Quatre engagements <Emphasis>non négociables.</Emphasis>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {GUARANTEES.map((g) => (
             <article
               key={g.title}
-              className="bg-lin border border-perle rounded-md p-6 flex gap-4 items-start"
+              className="card-cool flex items-start gap-4 p-6"
             >
-              <div className="w-11 h-11 rounded shrink-0 bg-sepia flex items-center justify-center">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/10">
                 <svg
                   width="22"
                   height="22"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#FBFAF7"
+                  stroke="#1A6E99"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -74,10 +76,10 @@ export function Guarantees() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-serif text-base font-medium tracking-tight-1 text-sepia">
+                <h3 className="font-sans text-base font-bold tracking-tight text-ink">
                   {g.title}
                 </h3>
-                <p className="mt-1 font-sans text-xs leading-relaxed text-pierre">
+                <p className="mt-1 font-sans text-xs leading-relaxed text-ink-muted">
                   {g.desc}
                 </p>
               </div>

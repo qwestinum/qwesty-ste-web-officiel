@@ -9,44 +9,44 @@ export function FormationCard({ formation }: FormationCardProps) {
   return (
     <Link
       href={`/formations/${formation.slug}`}
-      className="group flex flex-col bg-lin border border-perle rounded-md p-7 transition-all hover:border-pierre/40 hover:-translate-y-0.5"
+      className="card-cool group flex flex-col p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
     >
       {/* Tag niveau + durée */}
-      <div className="flex items-center justify-between gap-3 mb-5">
+      <div className="mb-5 flex items-center justify-between gap-3">
         {formation.level_label && (
-          <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or-pale/40 text-or-fonce">
-            {formation.level_label}
-          </span>
+          <span className="tag bg-halo text-ink">{formation.level_label}</span>
         )}
         {formation.duration_label && (
-          <span className="font-sans text-xs text-pierre">{formation.duration_label}</span>
+          <span className="font-sans text-xs text-ink-muted">
+            {formation.duration_label}
+          </span>
         )}
       </div>
 
-      <h3 className="font-serif text-xl md:text-2xl font-medium leading-tight tracking-tight-1 text-sepia">
+      <h3 className="font-sans text-xl font-bold leading-snug tracking-tight text-ink md:text-2xl">
         {formation.title}
       </h3>
 
       {formation.audience && (
-        <p className="mt-2 font-sans text-xs italic text-pierre">
+        <p className="mt-2 font-sans text-xs italic text-ink-muted">
           {formation.audience}
         </p>
       )}
 
       {formation.excerpt && (
-        <p className="mt-4 font-sans text-sm leading-relaxed text-pierre flex-1">
+        <p className="mt-4 flex-1 font-sans text-sm leading-relaxed text-ink-muted">
           {formation.excerpt}
         </p>
       )}
 
       {/* Footer formats + CTA */}
-      <div className="mt-6 pt-5 border-t border-perle flex items-center justify-between gap-3 flex-wrap">
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-5">
         {formation.formats && formation.formats.length > 0 && (
-          <span className="font-sans text-[10px] text-pierre uppercase tracking-wide-1">
+          <span className="font-sans text-[10px] uppercase tracking-wide-1 text-ink-muted">
             {formation.formats.join(' · ')}
           </span>
         )}
-        <span className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce group-hover:text-sepia transition-colors inline-flex items-center gap-1.5 ml-auto">
+        <span className="link-arrow ml-auto">
           Découvrir <span aria-hidden="true">→</span>
         </span>
       </div>

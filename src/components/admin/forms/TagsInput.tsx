@@ -35,19 +35,19 @@ export function TagsInput({ value, onChange, placeholder = 'Ajouter… Entrée o
 
   return (
     <div
-      className="flex flex-wrap gap-1.5 p-2 bg-lin border border-perle rounded-sm focus-within:border-or-fonce focus-within:shadow-[0_0_0_2px_rgba(212,168,44,0.2)] transition-all cursor-text min-h-[2.5rem]"
+      className="flex flex-wrap gap-1.5 p-2 bg-white border border-hairline rounded-lg focus-within:border-accent-deep focus-within:shadow-[0_0_0_2px_rgba(212,168,44,0.2)] transition-all cursor-text min-h-[2.5rem]"
       onClick={() => inputRef.current?.focus()}
     >
       {value.map((tag) => (
         <span
           key={tag}
-          className="inline-flex items-center gap-1 bg-perle/60 text-sepia font-sans text-xs px-2 py-0.5 rounded-sm"
+          className="inline-flex items-center gap-1 bg-cream/60 text-ink font-sans text-xs px-2 py-0.5 rounded-lg"
         >
           {tag}
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onChange(value.filter((t) => t !== tag)); }}
-            className="text-pierre hover:text-sepia leading-none"
+            className="text-ink-muted hover:text-ink leading-none"
             aria-label={`Supprimer ${tag}`}
           >
             ×
@@ -62,7 +62,7 @@ export function TagsInput({ value, onChange, placeholder = 'Ajouter… Entrée o
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         placeholder={value.length === 0 ? placeholder : ''}
-        className="flex-1 min-w-[120px] bg-transparent outline-none font-sans text-sm text-sepia placeholder:text-pierre/50"
+        className="flex-1 min-w-[120px] bg-transparent outline-none font-sans text-sm text-ink placeholder:text-ink-muted/50"
       />
     </div>
   );

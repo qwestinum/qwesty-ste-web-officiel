@@ -11,12 +11,14 @@ export function EmptyState({ title, description }: EmptyStateProps) {
   return (
     <div className="container-page py-20 text-center">
       <div className="mx-auto max-w-md">
-        <div className="mx-auto h-12 w-12 rounded-full border border-perle flex items-center justify-center mb-6">
-          <span className="font-serif text-2xl italic text-pierre">i</span>
+        <div className="mx-auto mb-6 flex size-12 items-center justify-center rounded-full bg-accent/10">
+          <span className="font-sans text-xl font-bold text-accent-deep">i</span>
         </div>
-        <h2 className="font-serif text-2xl text-sepia">{title}</h2>
+        <h2 className="font-sans text-2xl font-bold tracking-tight text-ink">
+          {title}
+        </h2>
         {description && (
-          <p className="mt-3 font-sans text-sm text-pierre leading-relaxed">
+          <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
             {description}
           </p>
         )}

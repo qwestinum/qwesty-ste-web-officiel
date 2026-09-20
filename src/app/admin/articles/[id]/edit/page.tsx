@@ -25,12 +25,12 @@ export default async function ArticleEditPage({ params }: { params: { id: string
       <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
         <Link
           href="/admin/articles"
-          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors"
+          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted hover:text-ink transition-colors"
         >
           <span aria-hidden="true">←</span> Tous les articles
         </Link>
 
-        <div className="font-sans text-xs text-pierre font-mono">
+        <div className="font-sans text-xs text-ink-muted font-mono">
           ID : {article.id.slice(0, 8)}…
         </div>
       </div>

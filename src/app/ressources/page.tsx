@@ -44,7 +44,7 @@ export default async function RessourcesPage() {
         ) : (
           <>
             {featured && (
-              <section className="border-b border-perle py-12 md:py-16">
+              <section className="bg-cream py-12 md:py-16">
                 <div className="container-page">
                   <ArticleCard article={featured} variant="featured" />
                 </div>
@@ -52,12 +52,12 @@ export default async function RessourcesPage() {
             )}
 
             {others.length > 0 && (
-              <section className="py-16 md:py-20">
+              <section className="section-padding bg-white">
                 <div className="container-page">
-                  <h2 className="label-mark mb-10">
+                  <h2 className="eyebrow mb-10 block">
                     {featured ? 'Autres articles' : 'Articles'}
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {others.map((article) => (
                       <ArticleCard key={article.id} article={article} />
                     ))}
@@ -71,7 +71,7 @@ export default async function RessourcesPage() {
         <CtaBanner
           text="Un sujet que vous aimeriez voir traité ? Les meilleurs articles naissent souvent des questions que posent nos clients."
           ctaLabel="Suggérer un sujet"
-          variant="sepia"
+          variant="emphasis"
         />
       </main>
       <Footer />

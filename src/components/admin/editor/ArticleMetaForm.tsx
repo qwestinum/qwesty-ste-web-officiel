@@ -93,8 +93,8 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
   return (
     <div className="space-y-6">
       {/* Statut + actions */}
-      <div className="bg-lin border border-perle rounded-md p-5">
-        <h3 className="label-mark mb-3">Statut</h3>
+      <div className="bg-white border border-hairline rounded-xl p-5">
+        <h3 className="eyebrow mb-3">Statut</h3>
         <div className="flex flex-wrap gap-2 mb-4">
           <StatusBadge status={status} />
         </div>
@@ -125,7 +125,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             href={`/admin/articles/${article.id}/preview`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-center px-4 py-2.5 rounded-sm border border-perle font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia hover:border-or-fonce hover:text-or-fonce transition-colors"
+            className="block w-full text-center px-4 py-2.5 rounded-lg border border-hairline font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink hover:border-accent-deep hover:text-accent-deep transition-colors"
           >
             Aperçu →
           </a>
@@ -133,15 +133,15 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
       </div>
 
       {/* Métadonnées */}
-      <div className="bg-lin border border-perle rounded-md p-5 space-y-4">
-        <h3 className="label-mark">Métadonnées</h3>
+      <div className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+        <h3 className="eyebrow">Métadonnées</h3>
 
         <Field label="Titre" required>
           <input
             type="text"
             value={meta.title}
             onChange={(e) => update('title', e.target.value)}
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep"
           />
         </Field>
 
@@ -157,7 +157,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             type="text"
             value={meta.slug}
             onChange={(e) => handleSlugChange(e.target.value)}
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-mono text-xs text-sepia focus:outline-none focus:border-or-fonce"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-mono text-xs text-ink focus:outline-none focus:border-accent-deep"
           />
         </Field>
 
@@ -165,7 +165,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
           <select
             value={meta.category}
             onChange={(e) => update('category', e.target.value as ArticleCategory)}
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep"
           >
             {CATEGORY_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -178,7 +178,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             value={meta.excerpt ?? ''}
             onChange={(e) => update('excerpt', e.target.value)}
             rows={3}
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce resize-y"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep resize-y"
           />
         </Field>
 
@@ -188,7 +188,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             value={meta.cover_image_url ?? ''}
             onChange={(e) => update('cover_image_url', e.target.value)}
             placeholder="https://..."
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-xs text-sepia focus:outline-none focus:border-or-fonce"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-xs text-ink focus:outline-none focus:border-accent-deep"
           />
         </Field>
 
@@ -198,7 +198,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             value={meta.author_name ?? ''}
             onChange={(e) => update('author_name', e.target.value)}
             placeholder="Imad Belfaqir"
-            className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce"
+            className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep"
           />
         </Field>
 
@@ -208,19 +208,19 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
             id="is_featured"
             checked={meta.is_featured}
             onChange={(e) => update('is_featured', e.target.checked)}
-            className="h-4 w-4 accent-or-fonce"
+            className="h-4 w-4 accent-accent-deep"
           />
-          <label htmlFor="is_featured" className="font-sans text-sm text-sepia">
+          <label htmlFor="is_featured" className="font-sans text-sm text-ink">
             Article phare (mis en avant sur /ressources)
           </label>
         </div>
       </div>
 
       {/* SEO */}
-      <details className="bg-lin border border-perle rounded-md p-5 group">
-        <summary className="label-mark cursor-pointer list-none flex items-center justify-between">
+      <details className="bg-white border border-hairline rounded-xl p-5 group">
+        <summary className="eyebrow cursor-pointer list-none flex items-center justify-between">
           <span>SEO</span>
-          <span className="font-sans text-[10px] text-pierre group-open:rotate-180 transition-transform">▾</span>
+          <span className="font-sans text-[10px] text-ink-muted group-open:rotate-180 transition-transform">▾</span>
         </summary>
         <div className="space-y-4 mt-4">
           <Field label="Titre SEO" hint="Affiché dans l'onglet du navigateur et Google">
@@ -229,7 +229,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
               value={meta.seo_title ?? ''}
               onChange={(e) => update('seo_title', e.target.value)}
               maxLength={70}
-              className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce"
+              className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep"
             />
           </Field>
 
@@ -239,7 +239,7 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
               onChange={(e) => update('seo_description', e.target.value)}
               maxLength={160}
               rows={3}
-              className="w-full bg-lin border border-perle rounded-sm px-3 py-2 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce resize-y"
+              className="w-full bg-white border border-hairline rounded-lg px-3 py-2 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep resize-y"
             />
           </Field>
         </div>
@@ -258,8 +258,8 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
       {/* Feedback */}
       {feedback && (
         <div
-          className={`rounded-md border p-3 font-sans text-xs text-sepia ${
-            feedbackType === 'success' ? 'border-or bg-or-pale/20' : 'border-sepia bg-perle/30'
+          className={`rounded-xl border p-3 font-sans text-xs text-ink ${
+            feedbackType === 'success' ? 'border-accent bg-sun/20' : 'border-ink bg-cream/30'
           }`}
         >
           {feedback}
@@ -267,18 +267,18 @@ export function ArticleMetaForm({ article }: ArticleMetaFormProps) {
       )}
 
       {/* Suppression — zone danger */}
-      <details className="bg-perle/20 border border-perle rounded-md p-5 group">
-        <summary className="label-mark cursor-pointer list-none">
+      <details className="bg-cream/20 border border-hairline rounded-xl p-5 group">
+        <summary className="eyebrow cursor-pointer list-none">
           Zone danger
         </summary>
-        <p className="mt-3 font-sans text-xs text-pierre">
+        <p className="mt-3 font-sans text-xs text-ink-muted">
           La suppression est définitive et ne peut pas être annulée.
         </p>
         <button
           type="button"
           onClick={handleDelete}
           disabled={isPending}
-          className="mt-3 w-full px-4 py-2 rounded-sm bg-sepia text-lin font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors disabled:opacity-50"
+          className="mt-3 w-full px-4 py-2 rounded-lg bg-ink text-cream font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors disabled:opacity-50"
         >
           Supprimer définitivement
         </button>
@@ -300,11 +300,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block font-sans text-[11px] font-medium uppercase tracking-wide-2 text-pierre mb-1.5">
-        {label} {required && <span className="text-or-fonce">*</span>}
+      <label className="block font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-ink-muted mb-1.5">
+        {label} {required && <span className="text-accent-deep">*</span>}
       </label>
       {children}
-      {hint && <p className="mt-1 font-sans text-[11px] text-pierre/80">{hint}</p>}
+      {hint && <p className="mt-1 font-sans text-[11px] text-ink-muted/80">{hint}</p>}
     </div>
   );
 }
@@ -327,8 +327,8 @@ function ActionButton({
       disabled={disabled}
       className={
         primary
-          ? 'w-full px-4 py-2.5 rounded-sm bg-or text-sepia font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce hover:text-lin transition-colors disabled:opacity-50'
-          : 'w-full px-4 py-2.5 rounded-sm border border-perle font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia hover:border-pierre hover:bg-perle/30 transition-colors disabled:opacity-50'
+          ? 'w-full px-4 py-2.5 rounded-lg bg-accent text-ink font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep hover:text-cream transition-colors disabled:opacity-50'
+          : 'w-full px-4 py-2.5 rounded-lg border border-hairline font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink hover:border-ink-muted hover:bg-cream/30 transition-colors disabled:opacity-50'
       }
     >
       {children}
@@ -338,13 +338,13 @@ function ActionButton({
 
 function StatusBadge({ status }: { status: ContentStatus }) {
   const config = {
-    draft: { label: 'Brouillon', classes: 'bg-perle text-sepia' },
-    published: { label: 'Publié', classes: 'bg-or text-sepia' },
-    archived: { label: 'Archivé', classes: 'bg-sepia text-lin' },
+    draft: { label: 'Brouillon', classes: 'bg-cream text-ink' },
+    published: { label: 'Publié', classes: 'bg-accent text-ink' },
+    archived: { label: 'Archivé', classes: 'bg-ink text-cream' },
   }[status];
   return (
     <span
-      className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-sm px-2 py-1 ${config.classes}`}
+      className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-lg px-2 py-1 ${config.classes}`}
     >
       {config.label}
     </span>

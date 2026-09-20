@@ -38,7 +38,7 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
 
       <Link
         href="/admin/leads"
-        className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors mb-6"
+        className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted hover:text-ink transition-colors mb-6"
       >
         <span aria-hidden="true">←</span> Tous les leads
       </Link>
@@ -46,20 +46,20 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
       {/* Header lead */}
       <header className="mb-8">
         <div className="flex flex-wrap items-center gap-3 mb-3">
-          <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or-pale/40 text-or-fonce">
+          <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-lg bg-sun/40 text-accent-deep">
             {SUBJECT_LABELS[lead.subject] ?? lead.subject}
           </span>
           <LeadStatusPill status={lead.status} />
-          <span className="font-sans text-xs text-pierre">
+          <span className="font-sans text-xs text-ink-muted">
             Reçu le {formatDateTime(lead.created_at)}
           </span>
         </div>
 
-        <h1 className="font-serif text-3xl md:text-4xl font-medium text-sepia tracking-tight-1">
+        <h1 className="font-bold text-3xl md:text-4xl text-ink tracking-tight-1">
           {lead.full_name}
         </h1>
         {lead.company && (
-          <p className="mt-1 font-sans text-base text-pierre">{lead.company}</p>
+          <p className="mt-1 font-sans text-base text-ink-muted">{lead.company}</p>
         )}
       </header>
 
@@ -69,16 +69,16 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
         <div className="lg:col-span-2 space-y-6">
 
           {/* Message */}
-          <section className="bg-lin border border-perle rounded-md p-6 md:p-7">
-            <h2 className="label-mark mb-3">Message</h2>
-            <div className="font-sans text-base leading-relaxed text-sepia whitespace-pre-wrap">
+          <section className="bg-white border border-hairline rounded-xl p-6 md:p-7">
+            <h2 className="eyebrow mb-3">Message</h2>
+            <div className="font-sans text-base leading-relaxed text-ink whitespace-pre-wrap">
               {lead.message}
             </div>
           </section>
 
           {/* Notes admin */}
-          <section className="bg-perle/30 border border-perle rounded-md p-6 md:p-7">
-            <h2 className="label-mark mb-3">Notes internes</h2>
+          <section className="bg-cream/30 border border-hairline rounded-xl p-6 md:p-7">
+            <h2 className="eyebrow mb-3">Notes internes</h2>
             <LeadNotesEditor leadId={lead.id} initialNotes={lead.notes ?? ''} />
           </section>
         </div>
@@ -87,8 +87,8 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
         <aside className="space-y-6">
 
           {/* Actions principales */}
-          <div className="bg-lin border border-perle rounded-md p-5">
-            <h2 className="label-mark mb-3">Répondre</h2>
+          <div className="bg-white border border-hairline rounded-xl p-5">
+            <h2 className="eyebrow mb-3">Répondre</h2>
             <a
               href={replyMailto}
               className="btn-primary w-full !py-3 mb-3"
@@ -96,27 +96,27 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
               Répondre par email
               <span aria-hidden="true">→</span>
             </a>
-            <p className="font-sans text-[11px] text-pierre">
+            <p className="font-sans text-[11px] text-ink-muted">
               Ouvre votre client mail avec l'objet et le destinataire pré-remplis.
             </p>
           </div>
 
           {/* Statut */}
-          <div className="bg-lin border border-perle rounded-md p-5">
-            <h2 className="label-mark mb-3">Changer le statut</h2>
+          <div className="bg-white border border-hairline rounded-xl p-5">
+            <h2 className="eyebrow mb-3">Changer le statut</h2>
             <LeadStatusActions leadId={lead.id} currentStatus={lead.status} />
           </div>
 
           {/* Coordonnées */}
-          <div className="bg-lin border border-perle rounded-md p-5">
-            <h2 className="label-mark mb-3">Coordonnées</h2>
+          <div className="bg-white border border-hairline rounded-xl p-5">
+            <h2 className="eyebrow mb-3">Coordonnées</h2>
             <dl className="space-y-3 text-sm">
               <div>
-                <dt className="text-[10px] uppercase tracking-wide-1 text-pierre mb-0.5">Email</dt>
+                <dt className="text-[10px] uppercase tracking-wide-1 text-ink-muted mb-0.5">Email</dt>
                 <dd>
                   <a
                     href={`mailto:${lead.email}`}
-                    className="text-or-fonce hover:text-sepia transition-colors break-all"
+                    className="text-accent-deep hover:text-ink transition-colors break-all"
                   >
                     {lead.email}
                   </a>
@@ -124,11 +124,11 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
               </div>
               {lead.phone && (
                 <div>
-                  <dt className="text-[10px] uppercase tracking-wide-1 text-pierre mb-0.5">Téléphone</dt>
+                  <dt className="text-[10px] uppercase tracking-wide-1 text-ink-muted mb-0.5">Téléphone</dt>
                   <dd>
                     <a
                       href={`tel:${lead.phone.replace(/\s/g, '')}`}
-                      className="text-sepia hover:text-or-fonce transition-colors"
+                      className="text-ink hover:text-accent-deep transition-colors"
                     >
                       {lead.phone}
                     </a>
@@ -137,20 +137,20 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
               )}
               {lead.company && (
                 <div>
-                  <dt className="text-[10px] uppercase tracking-wide-1 text-pierre mb-0.5">Entreprise</dt>
-                  <dd className="text-sepia">{lead.company}</dd>
+                  <dt className="text-[10px] uppercase tracking-wide-1 text-ink-muted mb-0.5">Entreprise</dt>
+                  <dd className="text-ink">{lead.company}</dd>
                 </div>
               )}
             </dl>
           </div>
 
           {/* Métadonnées techniques */}
-          <details className="bg-perle/20 border border-perle rounded-md p-5 group">
-            <summary className="label-mark cursor-pointer list-none flex items-center justify-between">
+          <details className="bg-cream/20 border border-hairline rounded-xl p-5 group">
+            <summary className="eyebrow cursor-pointer list-none flex items-center justify-between">
               <span>Métadonnées</span>
-              <span className="font-sans text-[10px] text-pierre group-open:rotate-180 transition-transform">▾</span>
+              <span className="font-sans text-[10px] text-ink-muted group-open:rotate-180 transition-transform">▾</span>
             </summary>
-            <dl className="mt-4 space-y-2 text-xs font-mono text-pierre">
+            <dl className="mt-4 space-y-2 text-xs font-mono text-ink-muted">
               <div>
                 <dt className="text-[10px] uppercase">ID</dt>
                 <dd className="break-all">{lead.id}</dd>

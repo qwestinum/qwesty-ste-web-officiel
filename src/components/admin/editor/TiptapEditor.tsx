@@ -146,27 +146,27 @@ export function TiptapEditor({ articleId, initialContent }: TiptapEditorProps) {
 
   if (!editor) {
     return (
-      <div className="bg-perle/30 border border-perle rounded-md p-12 text-center">
-        <p className="font-sans text-sm text-pierre">Chargement de l'éditeur…</p>
+      <div className="bg-cream/30 border border-hairline rounded-xl p-12 text-center">
+        <p className="font-sans text-sm text-ink-muted">Chargement de l'éditeur…</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-lin border border-perle rounded-md">
+    <div className="bg-white border border-hairline rounded-xl">
       <EditorToolbar editor={editor} onImageUpload={handleImageUpload} />
 
       <div className="px-6 md:px-10 py-8 min-h-[480px]">
         <EditorContent editor={editor} />
       </div>
 
-      <div className="border-t border-perle px-4 py-2.5 flex items-center justify-between text-xs">
+      <div className="border-t border-hairline px-4 py-2.5 flex items-center justify-between text-xs">
         <SaveStatusIndicator status={saveStatus} errorMsg={errorMsg} />
         <button
           type="button"
           onClick={() => void doSave(editor, true)}
           disabled={saveStatus === 'saving'}
-          className="font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-pierre hover:text-or-fonce transition-colors disabled:opacity-50"
+          className="font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-ink-muted hover:text-accent-deep transition-colors disabled:opacity-50"
         >
           {saveStatus === 'saving' ? 'Sauvegarde…' : 'Sauvegarder maintenant'}
           <span className="ml-2 text-[10px] opacity-50">⌘S</span>
@@ -184,15 +184,15 @@ function SaveStatusIndicator({
   errorMsg: string | null;
 }) {
   const styles = {
-    idle: { text: 'À jour', dot: 'bg-pierre/40' },
-    dirty: { text: 'Modifications non sauvegardées', dot: 'bg-or' },
-    saving: { text: 'Sauvegarde en cours…', dot: 'bg-or animate-pulse' },
-    saved: { text: 'Sauvegardé', dot: 'bg-or-fonce' },
-    error: { text: errorMsg ?? 'Erreur de sauvegarde', dot: 'bg-sepia' },
+    idle: { text: 'À jour', dot: 'bg-ink-muted/40' },
+    dirty: { text: 'Modifications non sauvegardées', dot: 'bg-accent' },
+    saving: { text: 'Sauvegarde en cours…', dot: 'bg-accent animate-pulse' },
+    saved: { text: 'Sauvegardé', dot: 'bg-accent-deep' },
+    error: { text: errorMsg ?? 'Erreur de sauvegarde', dot: 'bg-ink' },
   }[status];
 
   return (
-    <div className="flex items-center gap-2 font-sans text-xs text-pierre">
+    <div className="flex items-center gap-2 font-sans text-xs text-ink-muted">
       <span className={`block w-1.5 h-1.5 rounded-full ${styles.dot}`} />
       <span>{styles.text}</span>
     </div>

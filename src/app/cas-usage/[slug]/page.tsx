@@ -53,39 +53,39 @@ export default async function CasDetailPage({
       <Header />
       <main>
         {/* Header du cas */}
-        <header className="border-b border-perle">
+        <header className="border-b border-hairline bg-cream">
           <div className="container-page py-14 md:py-20">
             <Link
               href="/cas-usage"
-              className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors mb-8"
+              className="mb-8 inline-flex items-center gap-2 font-sans text-[15px] font-bold text-ink-muted transition-colors hover:text-ink"
             >
               <span aria-hidden="true">←</span> Tous les cas d'usage
             </Link>
 
             <div className="flex flex-wrap gap-2 mb-6">
               {useCase.sector && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or-pale/40 text-or-fonce">
+                <span className="tag bg-halo text-ink">
                   {useCase.sector}
                 </span>
               )}
               {useCase.status_label && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm border border-perle text-pierre">
+                <span className="tag border border-hairline text-ink-muted">
                   {useCase.status_label}
                 </span>
               )}
               {useCase.case_type === 'product' && (
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-sepia text-lin">
+                <span className="tag bg-ink text-cream">
                   Solution propriétaire
                 </span>
               )}
             </div>
 
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight-extra tracking-tighter-2 text-sepia max-w-4xl">
+            <h1 className="max-w-4xl font-sans text-4xl font-bold leading-display tracking-tight text-ink md:text-5xl lg:text-6xl">
               {useCase.title}
             </h1>
 
             {useCase.subtitle && (
-              <p className="mt-7 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-pierre">
+              <p className="mt-7 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-ink-muted">
                 {useCase.subtitle}
               </p>
             )}
@@ -93,13 +93,13 @@ export default async function CasDetailPage({
         </header>
 
         {/* Contenu : problème + solution */}
-        <section className="py-16 md:py-20">
+        <section className="section-padding bg-white">
           <div className="container-page max-w-4xl">
 
             {useCase.problem && (
               <div className="mb-14">
-                <span className="label-mark">Le problème</span>
-                <p className="mt-4 font-sans text-lg md:text-xl leading-relaxed text-sepia">
+                <span className="eyebrow">Le problème</span>
+                <p className="mt-4 font-sans text-lg md:text-xl leading-relaxed text-ink">
                   {useCase.problem}
                 </p>
               </div>
@@ -107,11 +107,11 @@ export default async function CasDetailPage({
 
             {solutionItems.length > 0 && (
               <div className="mb-14">
-                <span className="label-mark">La solution déployée</span>
+                <span className="eyebrow">La solution déployée</span>
                 <ul className="mt-6 space-y-4">
                   {solutionItems.map((item, i) => (
-                    <li key={i} className="flex gap-4 font-sans text-base md:text-lg leading-relaxed text-sepia">
-                      <span className="block w-1.5 h-1.5 rounded-full bg-or mt-3 shrink-0" />
+                    <li key={i} className="flex gap-4 font-sans text-base md:text-lg leading-relaxed text-ink">
+                      <span className="mt-3 block size-1.5 shrink-0 rounded-full bg-sun" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -123,30 +123,20 @@ export default async function CasDetailPage({
 
         {/* KPI en bandeau */}
         {kpis.length > 0 && (
-          <section className="bg-sepia text-lin py-16 md:py-20 relative overflow-hidden">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(45deg, transparent 0px, transparent 30px, #D4A82C 30px, #D4A82C 31px)',
-              }}
-            />
-            <div className="container-page relative">
-              <span className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or">
-                Résultats mesurés
-              </span>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <section className="section-padding bg-cream">
+            <div className="container-page">
+              <span className="eyebrow">Résultats mesurés</span>
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {kpis.map((kpi, i) => (
-                  <div key={i}>
-                    <div className="font-serif text-4xl md:text-5xl font-medium leading-tight-extra tracking-tighter-2 text-or">
+                  <div key={i} className="card-warm p-6">
+                    <div className="font-sans text-4xl font-bold leading-none tracking-tight text-accent-deep md:text-5xl">
                       {kpi.value}
                     </div>
-                    <div className="mt-3 font-sans text-sm leading-relaxed text-perle">
+                    <div className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
                       {kpi.label}
                     </div>
                     {kpi.projected && (
-                      <div className="mt-2 font-sans text-[11px] italic text-pierre">
+                      <div className="mt-2 font-sans text-[11px] italic text-ink-muted">
                         projection
                       </div>
                     )}

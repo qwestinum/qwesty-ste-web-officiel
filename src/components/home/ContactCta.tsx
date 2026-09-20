@@ -1,55 +1,50 @@
 import Link from 'next/link';
 import { SITE_CONFIG } from '@/lib/constants';
+import { Emphasis } from '@/components/shared/Emphasis';
 
+/**
+ * CTA final. L'ancienne inversion sombre laisse place au bloc « chaud »
+ * de la charte ORQA : grande carte ivoire cerclée de jaune, posée sur le
+ * crème, avec un halo radial derrière.
+ */
 export function ContactCta() {
   return (
-    <section
-      id="contact"
-      className="bg-sepia text-lin py-24 md:py-32 relative overflow-hidden"
-    >
-      {/* Texture diagonale très discrète */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(45deg, transparent 0px, transparent 32px, #D4A82C 32px, #D4A82C 33px)',
-        }}
-      />
-
+    <section id="contact" className="relative overflow-hidden bg-cream section-padding">
       <div className="container-page relative">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="relative mx-auto max-w-4xl">
+          <div
+            aria-hidden="true"
+            className="halo-radial pointer-events-none absolute -inset-x-16 -inset-y-16"
+          />
 
-          <h2 className="font-serif text-4xl md:text-6xl font-normal leading-tight-extra tracking-tighter-2 text-lin">
-            Passez de l'idée à <em className="italic text-or">l'impact.</em>
-          </h2>
+          <div className="card-warm relative rounded-3xl p-8 text-center sm:p-10 lg:p-14">
+            <h2 className="font-sans text-3xl font-bold leading-display tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Passez de l&apos;idée à <Emphasis>l&apos;impact.</Emphasis>
+            </h2>
 
-          <p className="mt-8 max-w-2xl mx-auto font-sans text-lg leading-relaxed text-perle">
-            Parlez-nous de vos objectifs. Nous proposons un diagnostic IA gratuit de 30 minutes pour identifier 2 à 3 cas d'usage à fort impact dans votre organisation.
-          </p>
+            <p className="mx-auto mt-6 max-w-2xl font-sans text-lg leading-relaxed text-ink-muted">
+              Parlez-nous de vos objectifs. Nous proposons un diagnostic IA
+              gratuit de 30 minutes pour identifier 2 à 3 cas d&apos;usage à fort
+              impact dans votre organisation.
+            </p>
 
-          <div className="mt-12">
-            <Link
-              href="/contact#diagnostic"
-              className="inline-flex items-center gap-2 rounded-sm bg-or px-9 py-5 font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia transition-all hover:bg-or-pale hover:-translate-y-0.5"
-            >
-              Réserver un créneau
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+            <div className="mt-9">
+              <Link href="/contact#diagnostic" className="btn-primary w-full sm:w-auto">
+                Réserver un créneau
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
 
-          <div className="mt-16 pt-10 border-t border-pierre/30 flex flex-wrap justify-center items-center gap-x-10 gap-y-3">
-            {SITE_CONFIG.locations.map((loc) => (
-              <div
-                key={loc}
-                className="flex items-center gap-2.5"
-              >
-                <span className="block w-1.5 h-1.5 rounded-full bg-or" />
-                <span className="font-sans text-sm font-medium tracking-wide-1 text-perle">
-                  {loc}
-                </span>
-              </div>
-            ))}
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-t border-sun/40 pt-8">
+              {SITE_CONFIG.locations.map((loc) => (
+                <div key={loc} className="flex items-center gap-2.5">
+                  <span className="dot-sun" />
+                  <span className="font-sans text-sm font-bold tracking-wide-1 text-ink-muted">
+                    {loc}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

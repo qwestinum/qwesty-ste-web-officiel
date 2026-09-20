@@ -51,27 +51,27 @@ export function LeadStatusActions({ leadId, currentStatus }: LeadStatusActionsPr
             onClick={() => handleClick(s.value)}
             disabled={isPending && active}
             className={cn(
-              'w-full text-left px-3 py-2.5 rounded-sm border transition-colors',
+              'w-full text-left px-3 py-2.5 rounded-lg border transition-colors',
               active
-                ? 'border-or bg-or-pale/30 text-sepia'
-                : 'border-perle bg-lin text-sepia hover:border-pierre/40 hover:bg-perle/30'
+                ? 'border-accent bg-sun/30 text-ink'
+                : 'border-hairline bg-white text-ink hover:border-ink-muted/40 hover:bg-cream/30'
             )}
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="font-sans text-sm font-medium">{s.label}</span>
+              <span className="font-sans text-sm font-semibold">{s.label}</span>
               {active && (
-                <span className="font-sans text-[10px] uppercase tracking-wide-1 text-or-fonce">
+                <span className="font-sans text-[10px] uppercase tracking-wide-1 text-accent-deep">
                   Actuel
                 </span>
               )}
             </div>
-            <div className="font-sans text-[11px] text-pierre mt-0.5">{s.description}</div>
+            <div className="font-sans text-[11px] text-ink-muted mt-0.5">{s.description}</div>
           </button>
         );
       })}
 
       {feedback && (
-        <p className="font-sans text-xs text-or-fonce mt-2">{feedback}</p>
+        <p className="font-sans text-xs text-accent-deep mt-2">{feedback}</p>
       )}
     </div>
   );

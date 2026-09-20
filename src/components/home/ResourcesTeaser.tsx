@@ -1,47 +1,46 @@
 import Link from 'next/link';
 import type { Article } from '@/lib/supabase/types';
 import { formatDate } from '@/lib/utils';
+import { Emphasis } from '@/components/shared/Emphasis';
 
 interface ResourcesTeaserProps {
   articles: Article[];
 }
 
 const CATEGORY_LABELS: Record<string, { label: string; tone: string }> = {
-  strategie: { label: 'Stratégie', tone: 'bg-or-pale/40 text-or-fonce' },
-  methode: { label: 'Méthode', tone: 'bg-perle/60 text-sepia' },
-  'retours-experience': { label: 'Retour d\u2019expérience', tone: 'bg-sepia text-lin' },
-  'lucidite-ia': { label: 'Lucidité IA', tone: 'bg-or text-sepia' },
+  strategie: { label: 'Stratégie', tone: 'bg-halo text-ink' },
+  methode: { label: 'Méthode', tone: 'bg-accent/10 text-accent-deep' },
+  'retours-experience': { label: 'Retour d’expérience', tone: 'bg-ink text-cream' },
+  'lucidite-ia': { label: 'Lucidité IA', tone: 'bg-sun text-ink' },
 };
 
 export function ResourcesTeaser({ articles }: ResourcesTeaserProps) {
   if (articles.length === 0) return null;
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="section-padding bg-white">
       <div className="container-page">
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 md:mb-16 gap-4">
+        <div className="mb-14 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <span className="label-mark">Ressources</span>
-            <h2 className="mt-4 font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tighter-2 text-sepia">
-              Nos dernières <em className="italic text-or-fonce">analyses.</em>
+            <span className="eyebrow">Ressources</span>
+            <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Nos dernières <Emphasis>analyses.</Emphasis>
             </h2>
-            <p className="mt-5 font-sans text-base md:text-lg leading-relaxed text-pierre">
-              Méthodes, tribunes, cas d\u2019étude et chroniques d\u2019échecs documentés.
+            <p className="mt-5 font-sans text-base leading-relaxed text-ink-muted md:text-lg">
+              Méthodes, tribunes, cas d&apos;étude et chroniques d&apos;échecs
+              documentés.
             </p>
           </div>
-          <Link
-            href="/ressources"
-            className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce hover:text-sepia transition-colors inline-flex items-center gap-2 self-start md:self-auto"
-          >
+          <Link href="/ressources" className="btn-link self-start text-[15px] md:self-auto">
             Toutes les ressources
             <span aria-hidden="true">→</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {articles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleTeaserCard key={article.id} article={article} />
           ))}
         </div>
       </div>
@@ -49,43 +48,41 @@ export function ResourcesTeaser({ articles }: ResourcesTeaserProps) {
   );
 }
 
-function ArticleCard({ article }: { article: Article }) {
+function ArticleTeaserCard({ article }: { article: Article }) {
   const cat = CATEGORY_LABELS[article.category] ?? CATEGORY_LABELS.strategie;
   const date = formatDate(article.published_at);
 
   return (
     <Link
       href={`/ressources/${article.slug}`}
-      className="group flex flex-col bg-lin border border-perle rounded-md p-7 transition-all hover:border-pierre/40 hover:-translate-y-0.5"
+      className="card-cool group flex flex-col p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
     >
-      <div className="flex items-center gap-3 mb-5">
+      <div className="mb-5 flex items-center gap-3">
         <span
-          className={`font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm ${cat.tone}`}
+          className={`rounded-full px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-eyebrow ${cat.tone}`}
         >
           {cat.label}
         </span>
-        {date && (
-          <span className="font-sans text-xs text-pierre">{date}</span>
-        )}
+        {date && <span className="font-sans text-xs text-ink-muted">{date}</span>}
       </div>
 
-      <h3 className="font-serif text-xl md:text-2xl font-medium leading-tight tracking-tight-1 text-sepia">
+      <h3 className="font-sans text-xl font-bold leading-snug tracking-tight text-ink md:text-2xl">
         {article.title}
       </h3>
 
       {article.excerpt && (
-        <p className="mt-4 font-sans text-sm leading-relaxed text-pierre flex-1">
+        <p className="mt-4 flex-1 font-sans text-sm leading-relaxed text-ink-muted">
           {article.excerpt}
         </p>
       )}
 
-      <div className="mt-6 pt-5 border-t border-perle flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between border-t border-hairline pt-5">
         {article.reading_time_minutes && (
-          <span className="font-sans text-xs text-pierre">
+          <span className="font-sans text-xs text-ink-muted">
             {article.reading_time_minutes} min de lecture
           </span>
         )}
-        <span className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce group-hover:text-sepia transition-colors inline-flex items-center gap-1.5">
+        <span className="inline-flex items-center gap-1.5 font-sans text-[15px] font-bold text-ink underline decoration-accent decoration-2 underline-offset-[6px] transition-colors group-hover:decoration-accent-deep">
           Lire <span aria-hidden="true">→</span>
         </span>
       </div>

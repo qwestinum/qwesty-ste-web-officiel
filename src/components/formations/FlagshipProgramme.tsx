@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { FlagshipModule } from '@/lib/supabase/types';
+import { Emphasis } from '@/components/shared/Emphasis';
 
 interface FlagshipProgrammeProps {
   modules: FlagshipModule[];
@@ -7,37 +8,33 @@ interface FlagshipProgrammeProps {
 
 /**
  * Bloc dédié au programme flagship (6 mois) sur la page Formations.
- * Bloc sépia plein largeur, modules en grille.
+ * L'ancien pavé sépia pleine largeur est remplacé par la mise en avant
+ * de la charte ORQA : fond crème, modules en cartes, les modules clés
+ * en carte « chaude » (ivoire + filet jaune).
  */
 export function FlagshipProgramme({ modules }: FlagshipProgrammeProps) {
   return (
-    <section className="bg-sepia text-lin py-20 md:py-28 relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(45deg, transparent 0px, transparent 30px, #D4A82C 30px, #D4A82C 31px)',
-        }}
-      />
-
-      <div className="container-page relative">
+    <section className="section-padding bg-cream" id="flagship">
+      <div className="container-page">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14 md:mb-16">
+        <div className="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between md:mb-16">
           <div className="max-w-2xl">
-            <span className="inline-block font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-sepia bg-or px-3 py-1.5 rounded-sm">
+            <span className="tag bg-sun text-ink">
               Programme flagship · 6 mois
             </span>
-            <h2 className="mt-6 font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight-extra tracking-tighter-2 text-lin">
-              IA, Process &<br />
-              <em className="italic text-or">Transformation.</em>
+            <h2 className="mt-6 font-sans text-3xl font-bold leading-display tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              IA, Process &amp;<br />
+              <Emphasis>Transformation.</Emphasis>
             </h2>
-            <p className="mt-6 font-sans text-lg leading-relaxed text-perle">
-              Six mois pour former des professionnels capables de transformer leur organisation grâce à l'IA — de la stratégie jusqu'à l'exécution opérationnelle. Sans jargon, sans hype, avec des résultats mesurables.
+            <p className="mt-6 font-sans text-lg leading-relaxed text-ink-muted">
+              Six mois pour former des professionnels capables de transformer
+              leur organisation grâce à l&apos;IA — de la stratégie jusqu&apos;à
+              l&apos;exécution opérationnelle. Sans jargon, sans hype, avec des
+              résultats mesurables.
             </p>
           </div>
 
-          <div className="flex gap-8 shrink-0">
+          <div className="flex shrink-0 gap-8">
             <FlagshipStat value="6" label="Mois" />
             <FlagshipStat value={modules.length.toString()} label="Modules" />
             <FlagshipStat value="100%" label="Projet réel" />
@@ -46,7 +43,7 @@ export function FlagshipProgramme({ modules }: FlagshipProgrammeProps) {
 
         {/* Grille des modules */}
         {modules.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-pierre/30 mb-12">
+          <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {modules.map((module) => (
               <ModuleCard key={module.id} module={module} />
             ))}
@@ -54,18 +51,12 @@ export function FlagshipProgramme({ modules }: FlagshipProgrammeProps) {
         )}
 
         {/* CTA */}
-        <div className="flex flex-wrap gap-4 items-center">
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 rounded-sm bg-or px-7 py-4 font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia transition-all hover:bg-or-pale hover:-translate-y-0.5"
-          >
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="/#contact" className="btn-primary">
             Candidater au programme
             <span aria-hidden="true">→</span>
           </Link>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 rounded-sm border border-perle/30 px-7 py-4 font-sans text-xs font-medium uppercase tracking-wide-2 text-lin hover:border-or hover:text-or transition-colors"
-          >
+          <Link href="/#contact" className="btn-secondary">
             Télécharger le dossier complet
           </Link>
         </div>
@@ -76,12 +67,14 @@ export function FlagshipProgramme({ modules }: FlagshipProgrammeProps) {
 
 function FlagshipStat({ value, label }: { value: string; label: string }) {
   return (
-    <div>
-      <div className="font-serif text-3xl md:text-4xl font-medium leading-none tracking-tighter-2 text-or">
-        {value}
-      </div>
-      <div className="mt-2 font-sans text-[11px] uppercase tracking-wide-1 text-perle">
-        {label}
+    <div className="stat-rule">
+      <div>
+        <div className="font-sans text-3xl font-bold leading-none tracking-tight text-ink md:text-4xl">
+          {value}
+        </div>
+        <div className="mt-2 font-sans text-[11px] uppercase tracking-wide-1 text-ink-muted">
+          {label}
+        </div>
       </div>
     </div>
   );
@@ -90,23 +83,23 @@ function FlagshipStat({ value, label }: { value: string; label: string }) {
 function ModuleCard({ module }: { module: FlagshipModule }) {
   return (
     <div
-      className={`bg-sepia p-6 md:p-7 transition-colors duration-200 ${
-        module.is_highlight ? 'bg-or/[0.06] border-l-2 border-or' : 'hover:bg-or/[0.04]'
+      className={`h-full p-6 transition-shadow duration-200 hover:shadow-lift md:p-7 ${
+        module.is_highlight ? 'card-warm' : 'card-cool'
       }`}
     >
-      <div className="font-sans text-[11px] font-semibold uppercase tracking-wide-1 text-or">
+      <div className="font-sans text-[11px] font-bold uppercase tracking-wide-1 text-accent-deep">
         Module {module.module_number}
       </div>
-      <h3 className="mt-3 font-serif text-base md:text-lg font-medium leading-tight tracking-tight-1 text-lin">
+      <h3 className="mt-3 font-sans text-base font-bold leading-snug tracking-tight text-ink md:text-lg">
         {module.title}
       </h3>
       {module.description && (
-        <p className="mt-2 font-sans text-xs leading-relaxed text-perle">
+        <p className="mt-2 font-sans text-xs leading-relaxed text-ink-muted">
           {module.description}
         </p>
       )}
       {module.tag && (
-        <p className="mt-3 font-sans text-[10px] uppercase tracking-wide-1 text-pierre">
+        <p className="mt-3 font-sans text-[10px] uppercase tracking-wide-1 text-ink-muted">
           {module.tag}
         </p>
       )}

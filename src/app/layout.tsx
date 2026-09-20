@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { fraunces, inter } from '@/styles/fonts';
+import { carlito, fraunces } from '@/styles/fonts';
 import { SITE_CONFIG } from '@/lib/constants';
 import './globals.css';
 
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="fr" className={`${carlito.variable} ${fraunces.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -2,30 +2,34 @@ import Link from 'next/link';
 import { LogoHorizontal } from '@/components/brand/Logo';
 import { FOOTER_LINKS, SITE_CONFIG } from '@/lib/constants';
 
+/**
+ * Pied de page — fond dédié `footer` (#E9EDEB) comme sur la charte ORQA,
+ * ce qui le détache du crème du corps sans passer par une inversion sombre.
+ */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-perle bg-lin">
+    <footer className="border-t border-hairline bg-footer">
       <div className="container-page py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
 
           {/* Marque + contact */}
           <div className="md:col-span-4">
             <LogoHorizontal />
-            <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-pierre">
+            <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
               {SITE_CONFIG.description}
             </p>
             <div className="mt-6 space-y-1 font-sans text-sm">
               <a
                 href={`mailto:${SITE_CONFIG.contact.email}`}
-                className="block text-sepia hover:text-or-fonce transition-colors"
+                className="block font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:decoration-accent-deep"
               >
                 {SITE_CONFIG.contact.email}
               </a>
               <a
                 href={`tel:${SITE_CONFIG.contact.phone.replace(/\s/g, '')}`}
-                className="block text-pierre"
+                className="block text-ink-muted"
               >
                 {SITE_CONFIG.contact.phone}
               </a>
@@ -48,8 +52,8 @@ export function Footer() {
         </div>
 
         {/* Footer bottom */}
-        <div className="mt-14 pt-8 border-t border-perle flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="font-sans text-xs text-pierre">
+        <div className="mt-14 flex flex-col gap-6 border-t border-hairline pt-8 md:flex-row md:items-center md:justify-between">
+          <div className="font-sans text-xs text-ink-muted">
             © {year} Qwestinum · Tous droits réservés
           </div>
 
@@ -59,7 +63,7 @@ export function Footer() {
             <ComplianceBadge label="Hébergement UE" />
           </div>
 
-          <div className="font-sans text-xs text-pierre">
+          <div className="font-sans text-xs text-ink-muted">
             {SITE_CONFIG.locations.join(' · ')}
           </div>
         </div>
@@ -77,13 +81,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h4 className="label-mark mb-4">{title}</h4>
+      <h4 className="eyebrow mb-4">{title}</h4>
       <ul className="space-y-2">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="font-sans text-sm text-pierre hover:text-or-fonce transition-colors"
+              className="font-sans text-sm text-ink-muted transition-colors hover:text-ink"
             >
               {link.label}
             </Link>
@@ -97,8 +101,8 @@ function FooterColumn({
 function ComplianceBadge({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="block w-1.5 h-1.5 rounded-full bg-or" />
-      <span className="font-sans text-xs text-pierre tracking-wide-1">{label}</span>
+      <span className="dot-sun" />
+      <span className="font-sans text-xs text-ink-muted tracking-wide-1">{label}</span>
     </div>
   );
 }

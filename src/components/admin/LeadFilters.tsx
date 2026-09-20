@@ -46,10 +46,10 @@ export function LeadFilters({ currentStatus, currentSearch }: LeadFiltersProps) 
               key={filter.value}
               href={buildHref(filter.value, currentSearch)}
               className={cn(
-                'inline-flex items-center px-3 py-1.5 rounded-sm font-sans text-xs font-semibold uppercase tracking-wide-2 transition-colors',
+                'inline-flex items-center px-3 py-1.5 rounded-lg font-sans text-xs font-semibold uppercase tracking-wide-2 transition-colors',
                 active
-                  ? 'bg-sepia text-lin'
-                  : 'bg-perle/40 text-pierre hover:bg-perle hover:text-sepia'
+                  ? 'bg-ink text-cream'
+                  : 'bg-cream/40 text-ink-muted hover:bg-cream hover:text-ink'
               )}
             >
               {filter.label}
@@ -65,18 +65,18 @@ export function LeadFilters({ currentStatus, currentSearch }: LeadFiltersProps) 
           name="q"
           defaultValue={currentSearch}
           placeholder="Rechercher par nom, email, entreprise, message…"
-          className="flex-1 bg-lin border border-perle rounded-md px-4 py-2.5 font-sans text-sm text-sepia placeholder:text-pierre/50 focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors"
+          className="flex-1 bg-white border border-hairline rounded-xl px-4 py-2.5 font-sans text-sm text-ink placeholder:text-ink-muted/50 focus:outline-none focus:border-accent-deep focus:ring-2 focus:ring-accent/20 transition-colors"
         />
         <button
           type="submit"
-          className="bg-sepia text-lin px-5 py-2.5 rounded-md font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors"
+          className="bg-ink text-cream px-5 py-2.5 rounded-xl font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors"
         >
           Rechercher
         </button>
         {currentSearch && (
           <Link
             href={buildHref(currentStatus, '')}
-            className="inline-flex items-center px-3 py-2.5 rounded-md font-sans text-xs text-pierre hover:text-sepia transition-colors"
+            className="inline-flex items-center px-3 py-2.5 rounded-xl font-sans text-xs text-ink-muted hover:text-ink transition-colors"
           >
             ✕
           </Link>

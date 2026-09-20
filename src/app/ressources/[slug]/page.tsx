@@ -59,40 +59,40 @@ export default async function ArticleDetailPage({
     <>
       <Header />
       <main>
-        <header className="border-b border-perle">
+        <header className="border-b border-hairline bg-cream">
           <div className="container-page py-14 md:py-20">
             <Link
               href="/ressources"
-              className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors mb-8"
+              className="mb-8 inline-flex items-center gap-2 font-sans text-[15px] font-bold text-ink-muted transition-colors hover:text-ink"
             >
               <span aria-hidden="true">←</span> Toutes les ressources
             </Link>
 
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-wide-2 px-2.5 py-1 rounded-sm bg-or-pale/40 text-or-fonce">
+              <span className="tag bg-halo text-ink">
                 {categoryLabel}
               </span>
-              {date && <span className="font-sans text-xs text-pierre">{date}</span>}
+              {date && <span className="font-sans text-xs text-ink-muted">{date}</span>}
             </div>
 
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight-extra tracking-tighter-2 text-sepia max-w-4xl">
+            <h1 className="max-w-4xl font-sans text-4xl font-bold leading-display tracking-tight text-ink md:text-5xl lg:text-6xl">
               {article.title}
             </h1>
 
             {article.excerpt && (
-              <p className="mt-7 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-pierre">
+              <p className="mt-7 max-w-3xl font-sans text-lg md:text-xl leading-relaxed text-ink-muted">
                 {article.excerpt}
               </p>
             )}
 
             <div className="mt-8 flex items-center gap-4 flex-wrap">
               {article.author_name && (
-                <span className="font-sans text-sm text-pierre">Par {article.author_name}</span>
+                <span className="font-sans text-sm text-ink-muted">Par {article.author_name}</span>
               )}
               {article.reading_time_minutes && (
                 <>
-                  <span className="text-pierre">·</span>
-                  <span className="font-sans text-sm text-pierre">
+                  <span className="text-ink-muted">·</span>
+                  <span className="font-sans text-sm text-ink-muted">
                     {article.reading_time_minutes} min de lecture
                   </span>
                 </>
@@ -107,18 +107,18 @@ export default async function ArticleDetailPage({
             <img
               src={article.cover_image_url}
               alt={article.title}
-              className="w-full rounded-md border border-perle"
+              className="w-full rounded-2xl border border-hairline shadow-soft"
             />
           </div>
         )}
 
         {/* Contenu Tiptap */}
-        <article className="py-10 md:py-16">
+        <article className="bg-white py-10 md:py-16">
           {article.content_html ? (
             <ArticleContent html={article.content_html} />
           ) : (
             <div className="container-page max-w-3xl">
-              <p className="font-sans text-pierre italic">
+              <p className="font-sans italic text-ink-muted">
                 Le contenu de cet article n'est pas encore disponible.
               </p>
             </div>

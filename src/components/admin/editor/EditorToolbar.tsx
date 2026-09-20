@@ -44,7 +44,7 @@ export function EditorToolbar({ editor, onImageUpload }: EditorToolbarProps) {
   }
 
   return (
-    <div className="border-b border-perle bg-perle/20 px-3 py-2">
+    <div className="border-b border-hairline bg-cream/20 px-3 py-2">
       <div className="flex flex-wrap items-center gap-1">
 
         <ToolbarGroup>
@@ -169,18 +169,18 @@ export function EditorToolbar({ editor, onImageUpload }: EditorToolbarProps) {
             placeholder="URL (ex: https://...) — vide pour supprimer le lien"
             defaultValue={editor.getAttributes('link').href ?? ''}
             autoFocus
-            className="flex-1 bg-lin border border-perle rounded-sm px-3 py-1.5 font-sans text-sm text-sepia focus:outline-none focus:border-or-fonce"
+            className="flex-1 bg-white border border-hairline rounded-lg px-3 py-1.5 font-sans text-sm text-ink focus:outline-none focus:border-accent-deep"
           />
           <button
             type="submit"
-            className="bg-sepia text-lin px-3 py-1.5 rounded-sm font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors"
+            className="bg-ink text-cream px-3 py-1.5 rounded-lg font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors"
           >
             OK
           </button>
           <button
             type="button"
             onClick={() => setLinkInputOpen(false)}
-            className="px-3 py-1.5 rounded-sm font-sans text-xs text-pierre hover:text-sepia"
+            className="px-3 py-1.5 rounded-lg font-sans text-xs text-ink-muted hover:text-ink"
           >
             ✕
           </button>
@@ -188,7 +188,7 @@ export function EditorToolbar({ editor, onImageUpload }: EditorToolbarProps) {
       )}
 
       {uploading && (
-        <p className="mt-2 font-sans text-xs text-or-fonce">
+        <p className="mt-2 font-sans text-xs text-accent-deep">
           Upload de l'image en cours…
         </p>
       )}
@@ -209,7 +209,7 @@ function ToolbarGroup({ children }: { children: React.ReactNode }) {
 }
 
 function ToolbarSeparator() {
-  return <div className="w-px h-5 bg-perle mx-1" />;
+  return <div className="w-px h-5 bg-cream mx-1" />;
 }
 
 function ToolbarButton({
@@ -233,10 +233,10 @@ function ToolbarButton({
       title={label}
       aria-label={label}
       className={cn(
-        'h-8 min-w-[32px] px-2 rounded-sm font-sans text-sm transition-colors flex items-center justify-center',
+        'h-8 min-w-[32px] px-2 rounded-lg font-sans text-sm transition-colors flex items-center justify-center',
         active
-          ? 'bg-or-pale/40 text-or-fonce'
-          : 'text-sepia hover:bg-perle/60',
+          ? 'bg-sun/40 text-accent-deep'
+          : 'text-ink hover:bg-cream/60',
         disabled && 'opacity-40 cursor-not-allowed hover:bg-transparent'
       )}
     >

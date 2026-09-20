@@ -4,10 +4,10 @@ const STATUS_CONFIG: Record<
   LeadStatus,
   { label: string; classes: string }
 > = {
-  new: { label: 'Nouveau', classes: 'bg-or text-sepia' },
-  'in-progress': { label: 'En cours', classes: 'bg-or-pale/60 text-or-fonce' },
-  archived: { label: 'Archivé', classes: 'bg-perle text-pierre' },
-  spam: { label: 'Spam', classes: 'bg-sepia text-lin' },
+  new: { label: 'Nouveau', classes: 'bg-accent text-ink' },
+  'in-progress': { label: 'En cours', classes: 'bg-sun/60 text-accent-deep' },
+  archived: { label: 'Archivé', classes: 'bg-cream text-ink-muted' },
+  spam: { label: 'Spam', classes: 'bg-ink text-cream' },
 };
 
 interface LeadStatusPillProps {
@@ -21,7 +21,7 @@ export function LeadStatusPill({ status, size = 'sm' }: LeadStatusPillProps) {
 
   return (
     <span
-      className={`inline-flex items-center font-sans font-semibold uppercase tracking-wide-2 rounded-sm ${sizeClasses} ${config.classes}`}
+      className={`inline-flex items-center font-sans font-semibold uppercase tracking-wide-2 rounded-lg ${sizeClasses} ${config.classes}`}
     >
       {config.label}
     </span>

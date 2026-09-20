@@ -17,10 +17,10 @@ const CASE_TYPE_OPTIONS = [
 ] as const;
 
 const ACCENT_COLOR_OPTIONS = [
-  { value: 'or', label: 'Or', swatch: 'bg-or' },
-  { value: 'or-pale', label: 'Or pâle', swatch: 'bg-or-pale' },
-  { value: 'sepia', label: 'Sépia', swatch: 'bg-sepia' },
-  { value: 'pierre', label: 'Pierre', swatch: 'bg-pierre' },
+  { value: 'or', label: 'Or', swatch: 'bg-accent' },
+  { value: 'or-pale', label: 'Or pâle', swatch: 'bg-sun' },
+  { value: 'sepia', label: 'Sépia', swatch: 'bg-ink' },
+  { value: 'pierre', label: 'Pierre', swatch: 'bg-ink-muted' },
 ] as const;
 
 const EMPTY_KPI: UseCaseKpi = { value: '', label: '', projected: false };
@@ -126,8 +126,8 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
       <div className="lg:col-span-8 space-y-6">
 
         {/* Identité */}
-        <section className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Identité</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Identité</h3>
 
           <Field label="Titre" required>
             <input
@@ -196,10 +196,10 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
                   key={o.value}
                   type="button"
                   onClick={() => update('accent_color', o.value as UseCasePayload['accent_color'])}
-                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm border font-sans text-xs transition-colors ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-sans text-xs transition-colors ${
                     payload.accent_color === o.value
-                      ? 'border-or-fonce bg-or-pale/20 text-sepia'
-                      : 'border-perle text-pierre hover:border-pierre'
+                      ? 'border-accent-deep bg-sun/20 text-ink'
+                      : 'border-hairline text-ink-muted hover:border-ink-muted'
                   }`}
                 >
                   <span className={`w-3 h-3 rounded-full ${o.swatch}`} />
@@ -218,8 +218,8 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
         </section>
 
         {/* Contenu */}
-        <section className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Contenu</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Contenu</h3>
 
           <Field label="Problème">
             <textarea
@@ -242,8 +242,8 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
         </section>
 
         {/* KPIs */}
-        <section className="bg-lin border border-perle rounded-md p-5">
-          <h3 className="label-mark mb-4">KPIs (jusqu'à 4)</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5">
+          <h3 className="eyebrow mb-4">KPIs (jusqu'à 4)</h3>
           <div className="space-y-3">
             {payload.kpis.map((kpi, i) => (
               <div key={i} className="grid grid-cols-[1fr_2fr_auto] gap-2 items-center">
@@ -261,12 +261,12 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
                   placeholder="Libellé du KPI"
                   className="input"
                 />
-                <label className="flex items-center gap-1.5 font-sans text-xs text-pierre whitespace-nowrap">
+                <label className="flex items-center gap-1.5 font-sans text-xs text-ink-muted whitespace-nowrap">
                   <input
                     type="checkbox"
                     checked={!!kpi.projected}
                     onChange={(e) => updateKpi(i, 'projected', e.target.checked)}
-                    className="accent-or-fonce"
+                    className="accent-accent-deep"
                   />
                   Proj.
                 </label>
@@ -280,8 +280,8 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
       <aside className="lg:col-span-4 space-y-5">
 
         {/* Statut */}
-        <div className="bg-lin border border-perle rounded-md p-5">
-          <h3 className="label-mark mb-3">Statut</h3>
+        <div className="bg-white border border-hairline rounded-xl p-5">
+          <h3 className="eyebrow mb-3">Statut</h3>
           <StatusBadge status={status} />
           <div className="mt-3 space-y-2">
             {status === 'draft' && (
@@ -300,8 +300,8 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
         </div>
 
         {/* Paramètres */}
-        <div className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Paramètres</h3>
+        <div className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Paramètres</h3>
 
           <Field label="Ordre d'affichage">
             <input
@@ -317,9 +317,9 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
               type="checkbox"
               checked={payload.is_featured}
               onChange={(e) => update('is_featured', e.target.checked)}
-              className="h-4 w-4 accent-or-fonce"
+              className="h-4 w-4 accent-accent-deep"
             />
-            <span className="font-sans text-sm text-sepia">Cas mis en avant</span>
+            <span className="font-sans text-sm text-ink">Cas mis en avant</span>
           </label>
         </div>
 
@@ -334,20 +334,20 @@ export function UseCaseForm({ useCase }: UseCaseFormProps) {
         </button>
 
         {feedback && (
-          <div className={`rounded-md border p-3 font-sans text-xs ${feedbackOk ? 'border-or bg-or-pale/20 text-sepia' : 'border-sepia bg-perle/30 text-sepia'}`}>
+          <div className={`rounded-xl border p-3 font-sans text-xs ${feedbackOk ? 'border-accent bg-sun/20 text-ink' : 'border-ink bg-cream/30 text-ink'}`}>
             {feedback}
           </div>
         )}
 
         {/* Zone danger */}
-        <details className="bg-perle/20 border border-perle rounded-md p-5 group">
-          <summary className="label-mark cursor-pointer list-none">Zone danger</summary>
-          <p className="mt-3 font-sans text-xs text-pierre">La suppression est définitive.</p>
+        <details className="bg-cream/20 border border-hairline rounded-xl p-5 group">
+          <summary className="eyebrow cursor-pointer list-none">Zone danger</summary>
+          <p className="mt-3 font-sans text-xs text-ink-muted">La suppression est définitive.</p>
           <button
             type="button"
             onClick={handleDelete}
             disabled={isPending}
-            className="mt-3 w-full px-4 py-2 rounded-sm bg-sepia text-lin font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors disabled:opacity-50"
+            className="mt-3 w-full px-4 py-2 rounded-lg bg-ink text-cream font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors disabled:opacity-50"
           >
             Supprimer définitivement
           </button>
@@ -362,23 +362,23 @@ function Field({ label, required = false, hint, children }: {
 }) {
   return (
     <div>
-      <label className="block font-sans text-[11px] font-medium uppercase tracking-wide-2 text-pierre mb-1.5">
-        {label} {required && <span className="text-or-fonce">*</span>}
+      <label className="block font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-ink-muted mb-1.5">
+        {label} {required && <span className="text-accent-deep">*</span>}
       </label>
       {children}
-      {hint && <p className="mt-1 font-sans text-[11px] text-pierre/80">{hint}</p>}
+      {hint && <p className="mt-1 font-sans text-[11px] text-ink-muted/80">{hint}</p>}
     </div>
   );
 }
 
 function StatusBadge({ status }: { status: ContentStatus }) {
   const cfg = {
-    draft: { label: 'Brouillon', classes: 'bg-perle text-sepia' },
-    published: { label: 'Publié', classes: 'bg-or text-sepia' },
-    archived: { label: 'Archivé', classes: 'bg-sepia text-lin' },
+    draft: { label: 'Brouillon', classes: 'bg-cream text-ink' },
+    published: { label: 'Publié', classes: 'bg-accent text-ink' },
+    archived: { label: 'Archivé', classes: 'bg-ink text-cream' },
   }[status];
   return (
-    <span className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-sm px-2 py-1 ${cfg.classes}`}>
+    <span className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-lg px-2 py-1 ${cfg.classes}`}>
       {cfg.label}
     </span>
   );
@@ -393,8 +393,8 @@ function ActionBtn({ children, onClick, primary = false, disabled = false }: {
       onClick={onClick}
       disabled={disabled}
       className={primary
-        ? 'w-full px-4 py-2.5 rounded-sm bg-or text-sepia font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce hover:text-lin transition-colors disabled:opacity-50'
-        : 'w-full px-4 py-2.5 rounded-sm border border-perle font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia hover:border-pierre hover:bg-perle/30 transition-colors disabled:opacity-50'
+        ? 'w-full px-4 py-2.5 rounded-lg bg-accent text-ink font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep hover:text-cream transition-colors disabled:opacity-50'
+        : 'w-full px-4 py-2.5 rounded-lg border border-hairline font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink hover:border-ink-muted hover:bg-cream/30 transition-colors disabled:opacity-50'
       }
     >
       {children}

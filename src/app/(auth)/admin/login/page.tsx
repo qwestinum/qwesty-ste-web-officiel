@@ -11,25 +11,25 @@ export const dynamic = 'force-static';
 
 export default function AdminLoginPage() {
   return (
-    <main className="min-h-screen bg-lin flex flex-col">
+    <main className="min-h-screen bg-white flex flex-col">
       <div className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="w-full max-w-md">
 
           <div className="text-center mb-12">
             <LogoSymbol className="w-14 h-14 mx-auto" />
-            <h1 className="mt-6 font-serif text-3xl font-medium text-sepia tracking-tight-1">
+            <h1 className="mt-6 font-bold text-3xl text-ink tracking-tight-1">
               Espace administrateur
             </h1>
-            <p className="mt-3 font-sans text-sm text-pierre">
+            <p className="mt-3 font-sans text-sm text-ink-muted">
               Connectez-vous avec vos identifiants administrateur.
             </p>
           </div>
 
-          <div className="bg-perle/30 border border-perle rounded-md p-7 md:p-8">
+          <div className="bg-cream/30 border border-hairline rounded-xl p-7 md:p-8">
             <LoginForm />
           </div>
 
-          <p className="mt-8 text-center font-sans text-xs text-pierre">
+          <p className="mt-8 text-center font-sans text-xs text-ink-muted">
             Cette page est réservée aux administrateurs Qwestinum.
             <br />
             <a href="/" className="link-editorial">Retour au site public</a>

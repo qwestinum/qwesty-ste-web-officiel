@@ -7,7 +7,7 @@ interface PartnersBandProps {
 /**
  * Bandeau de partenaires technologiques.
  * - Lit la table partners depuis Supabase
- * - Affiche soit le SVG inline, soit le nom seul si pas de logo
+ * - Affiche le nom seul (pas de logo stocké à ce jour)
  * - Filtre uniquement les partenaires actifs (déjà filtré côté query)
  */
 export function PartnersBand({ partners }: PartnersBandProps) {
@@ -15,15 +15,15 @@ export function PartnersBand({ partners }: PartnersBandProps) {
 
   return (
     <section
-      className="border-y border-perle bg-perle/20 py-10 md:py-12"
+      className="border-y border-hairline bg-white py-10 md:py-12"
       aria-label="Partenaires technologiques"
     >
       <div className="container-page">
-        <div className="text-center mb-8 md:mb-10">
-          <span className="label-mark">Technologies & partenaires</span>
+        <div className="mb-8 text-center md:mb-10">
+          <span className="eyebrow">Technologies &amp; partenaires</span>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-14 gap-y-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
           {partners.map((partner) => (
             <PartnerLogo key={partner.id} partner={partner} />
           ))}
@@ -35,7 +35,7 @@ export function PartnersBand({ partners }: PartnersBandProps) {
 
 function PartnerLogo({ partner }: { partner: Partner }) {
   const content = (
-    <span className="font-serif text-lg md:text-xl font-medium text-pierre opacity-60 hover:opacity-100 transition-opacity">
+    <span className="font-sans text-lg font-bold text-ink-muted opacity-60 transition-opacity hover:opacity-100 md:text-xl">
       {partner.name}
     </span>
   );

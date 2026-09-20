@@ -8,9 +8,9 @@ import { cn } from '@/lib/utils';
 
 /**
  * Header sticky avec navigation principale.
- * - Devient légèrement opaque + bordure au scroll
- * - Mobile : burger menu
- * - CTA "Diagnostic gratuit" en or → /contact#diagnostic
+ * Chrome repris de la charte ORQA : fond crème translucide + flou,
+ * filet de 1px, ombre douce qui apparaît au scroll.
+ * (Sticky plutôt que fixed : même rendu, sans décaler chaque page.)
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,29 +26,27 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full transition-all duration-300',
-        scrolled
-          ? 'border-b border-perle/60 bg-lin/80 backdrop-blur-md'
-          : 'bg-transparent'
+        'sticky top-0 z-50 w-full border-b border-hairline bg-cream/90 backdrop-blur-md transition-shadow duration-300',
+        scrolled ? 'shadow-soft' : 'shadow-none'
       )}
     >
-      <div className="container-page flex h-16 md:h-20 items-center justify-between">
+      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
         <Link href="/" aria-label="Accueil Qwestinum">
           <LogoHorizontal />
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-sans text-sm font-medium text-pierre transition-colors hover:text-sepia"
+              className="font-sans text-[15px] font-semibold text-ink-muted transition-colors hover:text-ink"
             >
               {link.label}
             </Link>
           ))}
-          <Link href="/contact#diagnostic" className="btn-primary !py-3 !px-5">
+          <Link href="/contact#diagnostic" className="btn-primary btn-compact">
             Diagnostic gratuit
           </Link>
         </nav>
@@ -56,7 +54,7 @@ export function Header() {
         {/* Burger mobile */}
         <button
           type="button"
-          className="md:hidden p-2 -mr-2 text-sepia"
+          className="-mr-2 inline-flex size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-ink/[0.04] md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
           aria-expanded={mobileOpen}
@@ -76,14 +74,14 @@ export function Header() {
 
       {/* Menu mobile déroulant */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-perle/60 bg-lin">
-          <nav className="container-page py-6 flex flex-col gap-2">
+        <div className="border-t border-hairline bg-cream md:hidden">
+          <nav className="container-page flex flex-col gap-2 py-6">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 font-sans text-base text-sepia border-b border-perle/40 last:border-0"
+                className="border-b border-hairline py-3 font-sans text-base font-semibold text-ink last:border-0"
               >
                 {link.label}
               </Link>

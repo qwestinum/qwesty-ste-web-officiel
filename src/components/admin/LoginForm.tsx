@@ -16,7 +16,7 @@ export function LoginForm() {
       <div>
         <label
           htmlFor="email"
-          className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+          className="block font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted mb-2"
         >
           Email administrateur
         </label>
@@ -28,14 +28,14 @@ export function LoginForm() {
           autoComplete="email"
           autoFocus
           placeholder="vous@qwestinum.fr"
-          className="w-full bg-lin border border-perle rounded-md px-4 py-3 font-sans text-base text-sepia placeholder:text-pierre/50 focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors"
+          className="w-full bg-white border border-hairline rounded-xl px-4 py-3 font-sans text-base text-ink placeholder:text-ink-muted/50 focus:outline-none focus:border-accent-deep focus:ring-2 focus:ring-accent/20 transition-colors"
         />
       </div>
 
       <div>
         <label
           htmlFor="password"
-          className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+          className="block font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted mb-2"
         >
           Mot de passe
         </label>
@@ -46,7 +46,7 @@ export function LoginForm() {
           required
           autoComplete="current-password"
           placeholder="••••••••"
-          className="w-full bg-lin border border-perle rounded-md px-4 py-3 font-sans text-base text-sepia placeholder:text-pierre/50 focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors"
+          className="w-full bg-white border border-hairline rounded-xl px-4 py-3 font-sans text-base text-ink placeholder:text-ink-muted/50 focus:outline-none focus:border-accent-deep focus:ring-2 focus:ring-accent/20 transition-colors"
         />
       </div>
 
@@ -56,7 +56,7 @@ export function LoginForm() {
         <div
           role="alert"
           aria-live="polite"
-          className="mt-4 rounded-md border-2 border-or-fonce bg-or-pale/10 p-4 font-sans text-sm text-sepia"
+          className="mt-4 rounded-xl border-2 border-accent-deep bg-sun/10 p-4 font-sans text-sm text-ink"
         >
           {state.message}
         </div>

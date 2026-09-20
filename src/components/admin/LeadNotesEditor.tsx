@@ -50,13 +50,13 @@ export function LeadNotesEditor({ leadId, initialNotes }: LeadNotesEditorProps) 
         rows={5}
         maxLength={5000}
         placeholder="Annotations internes : contexte du lead, prochaines actions, qualification…"
-        className="w-full bg-lin border border-perle rounded-md px-4 py-3 font-sans text-sm text-sepia placeholder:text-pierre/50 focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors resize-y"
+        className="w-full bg-white border border-hairline rounded-xl px-4 py-3 font-sans text-sm text-ink placeholder:text-ink-muted/50 focus:outline-none focus:border-accent-deep focus:ring-2 focus:ring-accent/20 transition-colors resize-y"
       />
 
       <div className="flex items-center justify-between gap-3 mt-3">
-        <div className="font-sans text-[11px] text-pierre">
+        <div className="font-sans text-[11px] text-ink-muted">
           {isDirty ? (
-            <span className="text-or-fonce">Modifications non sauvegardées</span>
+            <span className="text-accent-deep">Modifications non sauvegardées</span>
           ) : feedback ? (
             <span>{feedback}</span>
           ) : (
@@ -67,7 +67,7 @@ export function LeadNotesEditor({ leadId, initialNotes }: LeadNotesEditorProps) 
           type="button"
           onClick={handleSave}
           disabled={!isDirty || isPending}
-          className="px-4 py-2 rounded-sm bg-sepia text-lin font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="px-4 py-2 rounded-lg bg-ink text-cream font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {isPending ? 'Enregistrement…' : 'Enregistrer'}
         </button>

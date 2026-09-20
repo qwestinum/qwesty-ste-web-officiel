@@ -41,9 +41,9 @@ export function AdminShell({ userEmail, children }: AdminShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-lin">
+    <div className="min-h-screen bg-cream">
       {/* Sidebar desktop */}
-      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-perle bg-perle/20">
+      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-hairline bg-white">
         <SidebarContent pathname={pathname} userEmail={userEmail} />
       </aside>
 
@@ -51,10 +51,10 @@ export function AdminShell({ userEmail, children }: AdminShellProps) {
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div
-            className="fixed inset-0 bg-sepia/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-ink/50 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="relative w-64 bg-lin border-r border-perle flex flex-col">
+          <aside className="relative w-64 bg-white border-r border-hairline flex flex-col">
             <SidebarContent
               pathname={pathname}
               userEmail={userEmail}
@@ -66,16 +66,16 @@ export function AdminShell({ userEmail, children }: AdminShellProps) {
 
       {/* Contenu principal */}
       <div className="lg:pl-64">
-        <header className="lg:hidden sticky top-0 z-40 flex items-center justify-between h-14 px-4 border-b border-perle bg-lin">
+        <header className="lg:hidden sticky top-0 z-40 flex items-center justify-between h-14 px-4 border-b border-hairline bg-white">
           <Link href="/admin" className="flex items-center gap-2">
             <LogoSymbol className="w-7 h-7" />
-            <span className="font-serif text-base text-sepia">Admin</span>
+            <span className="font-bold text-base text-ink">Admin</span>
           </Link>
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Ouvrir le menu"
-            className="p-2 -mr-2 text-sepia"
+            className="p-2 -mr-2 text-ink"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="3" y1="7" x2="21" y2="7" />
@@ -101,13 +101,13 @@ function SidebarContent({
 }) {
   return (
     <>
-      <div className="h-16 px-5 flex items-center gap-3 border-b border-perle">
+      <div className="h-16 px-5 flex items-center gap-3 border-b border-hairline">
         <LogoSymbol className="w-8 h-8 shrink-0" />
         <div className="min-w-0">
-          <div className="font-serif text-base font-medium text-sepia tracking-tight-1 truncate">
+          <div className="font-bold text-base text-ink tracking-tight-1 truncate">
             Qwestinum
           </div>
-          <div className="font-sans text-[10px] uppercase tracking-wide-2 text-pierre">
+          <div className="font-sans text-[10px] uppercase tracking-wide-2 text-ink-muted">
             Administration
           </div>
         </div>
@@ -116,7 +116,7 @@ function SidebarContent({
       <nav className="flex-1 overflow-y-auto py-6 px-3">
         {ADMIN_NAV.map((section) => (
           <div key={section.section} className="mb-7">
-            <h3 className="px-3 mb-2 font-sans text-[10px] font-semibold uppercase tracking-wide-2 text-pierre">
+            <h3 className="px-3 mb-2 font-sans text-[10px] font-semibold uppercase tracking-wide-2 text-ink-muted">
               {section.section}
             </h3>
             <ul className="space-y-0.5">
@@ -132,10 +132,10 @@ function SidebarContent({
                       href={item.href}
                       onClick={onLinkClick}
                       className={cn(
-                        'flex items-center gap-3 px-3 py-2 rounded-sm font-sans text-sm transition-colors',
+                        'flex items-center gap-3 px-3 py-2 rounded-lg font-sans text-sm transition-colors',
                         active
-                          ? 'bg-or-pale/30 text-sepia font-medium'
-                          : 'text-sepia hover:bg-perle/40'
+                          ? 'bg-accent/10 text-ink font-bold'
+                          : 'text-ink hover:bg-ink/[0.04]'
                       )}
                     >
                       <NavIcon name={item.icon} active={active} />
@@ -149,15 +149,15 @@ function SidebarContent({
         ))}
       </nav>
 
-      <div className="p-4 border-t border-perle">
-        <div className="font-sans text-xs text-pierre mb-1">Connecté</div>
-        <div className="font-sans text-sm text-sepia truncate mb-3" title={userEmail}>
+      <div className="p-4 border-t border-hairline">
+        <div className="font-sans text-xs text-ink-muted mb-1">Connecté</div>
+        <div className="font-sans text-sm text-ink truncate mb-3" title={userEmail}>
           {userEmail}
         </div>
         <form action="/auth/signout" method="POST">
           <button
             type="submit"
-            className="w-full text-left font-sans text-xs uppercase tracking-wide-2 text-pierre hover:text-or-fonce transition-colors flex items-center gap-2"
+            className="w-full text-left font-sans text-xs uppercase tracking-wide-2 text-ink-muted hover:text-accent-deep transition-colors flex items-center gap-2"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -175,7 +175,7 @@ function SidebarContent({
 function NavIcon({ name, active = false }: { name: string; active?: boolean }) {
   const className = cn(
     'shrink-0 transition-colors',
-    active ? 'text-or-fonce' : 'text-pierre'
+    active ? 'text-accent-deep' : 'text-ink-muted'
   );
   const props = {
     width: 16,

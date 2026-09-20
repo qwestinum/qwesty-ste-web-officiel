@@ -114,8 +114,8 @@ export function FormationForm({ formation }: FormationFormProps) {
       {/* Colonne principale */}
       <div className="lg:col-span-8 space-y-6">
 
-        <section className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Identité</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Identité</h3>
 
           <Field label="Titre" required>
             <input type="text" value={payload.title} onChange={(e) => update('title', e.target.value)} className="input" />
@@ -150,8 +150,8 @@ export function FormationForm({ formation }: FormationFormProps) {
           </Field>
         </section>
 
-        <section className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Durée & Format</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Durée & Format</h3>
 
           <div className="grid grid-cols-2 gap-4">
             <Field label="Durée (jours)">
@@ -171,12 +171,12 @@ export function FormationForm({ formation }: FormationFormProps) {
           <Field label="Formats disponibles">
             <div className="flex flex-wrap gap-3 mt-1">
               {FORMAT_OPTIONS.map((fmt) => (
-                <label key={fmt} className="flex items-center gap-2 font-sans text-sm text-sepia cursor-pointer">
+                <label key={fmt} className="flex items-center gap-2 font-sans text-sm text-ink cursor-pointer">
                   <input
                     type="checkbox"
                     checked={payload.formats.includes(fmt)}
                     onChange={() => toggleFormat(fmt)}
-                    className="accent-or-fonce"
+                    className="accent-accent-deep"
                   />
                   {fmt}
                 </label>
@@ -189,13 +189,13 @@ export function FormationForm({ formation }: FormationFormProps) {
           </Field>
 
           <label className="flex items-center gap-2.5">
-            <input type="checkbox" checked={payload.is_flagship} onChange={(e) => update('is_flagship', e.target.checked)} className="h-4 w-4 accent-or-fonce" />
-            <span className="font-sans text-sm text-sepia">Formation flagship (programme phare)</span>
+            <input type="checkbox" checked={payload.is_flagship} onChange={(e) => update('is_flagship', e.target.checked)} className="h-4 w-4 accent-accent-deep" />
+            <span className="font-sans text-sm text-ink">Formation flagship (programme phare)</span>
           </label>
         </section>
 
-        <section className="bg-lin border border-perle rounded-md p-5 space-y-4">
-          <h3 className="label-mark">Contenu</h3>
+        <section className="bg-white border border-hairline rounded-xl p-5 space-y-4">
+          <h3 className="eyebrow">Contenu</h3>
 
           <Field label="Description">
             <textarea value={payload.description ?? ''} onChange={(e) => update('description', e.target.value || null)} rows={5} className="input" />
@@ -216,8 +216,8 @@ export function FormationForm({ formation }: FormationFormProps) {
       {/* Sidebar */}
       <aside className="lg:col-span-4 space-y-5">
 
-        <div className="bg-lin border border-perle rounded-md p-5">
-          <h3 className="label-mark mb-3">Statut</h3>
+        <div className="bg-white border border-hairline rounded-xl p-5">
+          <h3 className="eyebrow mb-3">Statut</h3>
           <StatusBadge status={status} />
           <div className="mt-3 space-y-2">
             {status === 'draft' && <ActionBtn primary onClick={() => handleStatusChange('published')} disabled={isPending}>Publier</ActionBtn>}
@@ -227,8 +227,8 @@ export function FormationForm({ formation }: FormationFormProps) {
           </div>
         </div>
 
-        <div className="bg-lin border border-perle rounded-md p-5">
-          <h3 className="label-mark mb-3">Paramètres</h3>
+        <div className="bg-white border border-hairline rounded-xl p-5">
+          <h3 className="eyebrow mb-3">Paramètres</h3>
           <Field label="Ordre d'affichage">
             <input type="number" value={payload.display_order} onChange={(e) => update('display_order', Number(e.target.value))} className="input" />
           </Field>
@@ -239,15 +239,15 @@ export function FormationForm({ formation }: FormationFormProps) {
         </button>
 
         {feedback && (
-          <div className={`rounded-md border p-3 font-sans text-xs ${feedbackOk ? 'border-or bg-or-pale/20 text-sepia' : 'border-sepia bg-perle/30 text-sepia'}`}>
+          <div className={`rounded-xl border p-3 font-sans text-xs ${feedbackOk ? 'border-accent bg-sun/20 text-ink' : 'border-ink bg-cream/30 text-ink'}`}>
             {feedback}
           </div>
         )}
 
-        <details className="bg-perle/20 border border-perle rounded-md p-5 group">
-          <summary className="label-mark cursor-pointer list-none">Zone danger</summary>
-          <p className="mt-3 font-sans text-xs text-pierre">La suppression est définitive.</p>
-          <button type="button" onClick={handleDelete} disabled={isPending} className="mt-3 w-full px-4 py-2 rounded-sm bg-sepia text-lin font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce transition-colors disabled:opacity-50">
+        <details className="bg-cream/20 border border-hairline rounded-xl p-5 group">
+          <summary className="eyebrow cursor-pointer list-none">Zone danger</summary>
+          <p className="mt-3 font-sans text-xs text-ink-muted">La suppression est définitive.</p>
+          <button type="button" onClick={handleDelete} disabled={isPending} className="mt-3 w-full px-4 py-2 rounded-lg bg-ink text-cream font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep transition-colors disabled:opacity-50">
             Supprimer définitivement
           </button>
         </details>
@@ -261,23 +261,23 @@ function Field({ label, required = false, hint, children }: {
 }) {
   return (
     <div>
-      <label className="block font-sans text-[11px] font-medium uppercase tracking-wide-2 text-pierre mb-1.5">
-        {label} {required && <span className="text-or-fonce">*</span>}
+      <label className="block font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-ink-muted mb-1.5">
+        {label} {required && <span className="text-accent-deep">*</span>}
       </label>
       {children}
-      {hint && <p className="mt-1 font-sans text-[11px] text-pierre/80">{hint}</p>}
+      {hint && <p className="mt-1 font-sans text-[11px] text-ink-muted/80">{hint}</p>}
     </div>
   );
 }
 
 function StatusBadge({ status }: { status: ContentStatus }) {
   const cfg = {
-    draft: { label: 'Brouillon', classes: 'bg-perle text-sepia' },
-    published: { label: 'Publié', classes: 'bg-or text-sepia' },
-    archived: { label: 'Archivé', classes: 'bg-sepia text-lin' },
+    draft: { label: 'Brouillon', classes: 'bg-cream text-ink' },
+    published: { label: 'Publié', classes: 'bg-accent text-ink' },
+    archived: { label: 'Archivé', classes: 'bg-ink text-cream' },
   }[status];
   return (
-    <span className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-sm px-2 py-1 ${cfg.classes}`}>
+    <span className={`inline-flex items-center font-sans text-[10px] font-semibold uppercase tracking-wide-2 rounded-lg px-2 py-1 ${cfg.classes}`}>
       {cfg.label}
     </span>
   );
@@ -288,8 +288,8 @@ function ActionBtn({ children, onClick, primary = false, disabled = false }: {
 }) {
   return (
     <button type="button" onClick={onClick} disabled={disabled} className={primary
-      ? 'w-full px-4 py-2.5 rounded-sm bg-or text-sepia font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-or-fonce hover:text-lin transition-colors disabled:opacity-50'
-      : 'w-full px-4 py-2.5 rounded-sm border border-perle font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia hover:border-pierre hover:bg-perle/30 transition-colors disabled:opacity-50'
+      ? 'w-full px-4 py-2.5 rounded-lg bg-accent text-ink font-sans text-xs font-semibold uppercase tracking-wide-2 hover:bg-accent-deep hover:text-cream transition-colors disabled:opacity-50'
+      : 'w-full px-4 py-2.5 rounded-lg border border-hairline font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink hover:border-ink-muted hover:bg-cream/30 transition-colors disabled:opacity-50'
     }>
       {children}
     </button>

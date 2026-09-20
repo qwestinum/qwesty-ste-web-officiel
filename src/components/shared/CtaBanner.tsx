@@ -4,13 +4,16 @@ interface CtaBannerProps {
   text: string;
   ctaLabel: string;
   ctaHref?: string;
-  variant?: 'light' | 'sepia';
+  variant?: 'light' | 'emphasis';
 }
 
 /**
  * Bannière CTA réutilisable en bas des pages.
- * - Variant 'light' : fond ivoire avec or pâle (pour pages standard)
- * - Variant 'sepia' : fond sombre avec or vif (pour mise en avant forte)
+ * - `light`    : bandeau blanc sobre, filets en haut et en bas
+ * - `emphasis` : grande carte ivoire cerclée de jaune sur halo
+ *
+ * (L'ancienne variante sombre `sepia` a disparu avec l'adoption de la
+ * charte ORQA, qui ne comporte aucune inversion.)
  */
 export function CtaBanner({
   text,
@@ -18,40 +21,37 @@ export function CtaBanner({
   ctaHref = '/#contact',
   variant = 'light',
 }: CtaBannerProps) {
-  if (variant === 'sepia') {
+  if (variant === 'emphasis') {
     return (
-      <section className="bg-sepia text-lin py-20 md:py-24 relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(45deg, transparent 0px, transparent 32px, #D4A82C 32px, #D4A82C 33px)',
-          }}
-        />
-        <div className="container-page relative text-center">
-          <p className="max-w-2xl mx-auto font-serif text-2xl md:text-3xl font-normal leading-tight tracking-tight-1 text-lin">
-            {text}
-          </p>
-          <Link
-            href={ctaHref}
-            className="inline-flex items-center gap-2 rounded-sm bg-or px-9 py-5 mt-8 font-sans text-xs font-semibold uppercase tracking-wide-2 text-sepia transition-all hover:bg-or-pale hover:-translate-y-0.5"
-          >
-            {ctaLabel}
-            <span aria-hidden="true">→</span>
-          </Link>
+      <section className="relative overflow-hidden bg-cream py-20 md:py-24">
+        <div className="container-page relative">
+          <div className="relative mx-auto max-w-4xl">
+            <div
+              aria-hidden="true"
+              className="halo-radial pointer-events-none absolute -inset-x-16 -inset-y-14"
+            />
+            <div className="card-warm relative rounded-3xl p-8 text-center sm:p-10 lg:p-12">
+              <p className="mx-auto max-w-2xl font-sans text-2xl font-bold leading-snug tracking-tight text-ink md:text-3xl">
+                {text}
+              </p>
+              <Link href={ctaHref} className="btn-primary mt-8 w-full sm:w-auto">
+                {ctaLabel}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="bg-perle/40 border-y border-perle py-16 md:py-20">
+    <section className="border-y border-hairline bg-white py-16 md:py-20">
       <div className="container-page text-center">
-        <p className="max-w-2xl mx-auto font-serif text-2xl md:text-3xl font-normal leading-tight tracking-tight-1 text-sepia">
+        <p className="mx-auto max-w-2xl font-sans text-2xl font-bold leading-snug tracking-tight text-ink md:text-3xl">
           {text}
         </p>
-        <Link href={ctaHref} className="btn-primary mt-8">
+        <Link href={ctaHref} className="btn-primary mt-8 w-full sm:w-auto">
           {ctaLabel}
           <span aria-hidden="true">→</span>
         </Link>

@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { CalEmbed } from '@/components/contact/CalEmbed';
 import { SITE_CONFIG } from '@/lib/constants';
+import { Emphasis } from '@/components/shared/Emphasis';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -27,12 +28,12 @@ export default function ContactPage() {
         />
 
         {/* Diagnostic gratuit avec Cal.com */}
-        <section id="diagnostic" className="py-16 md:py-20 border-b border-perle">
+        <section id="diagnostic" className="section-padding border-b border-hairline bg-white">
           <div className="container-page max-w-4xl">
             <div className="mb-10 text-center">
-              <span className="label-mark">Diagnostic gratuit</span>
-              <h2 className="mt-4 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
-                30 minutes pour identifier <em className="italic text-or-fonce">vos leviers IA.</em>
+              <span className="eyebrow">Diagnostic gratuit</span>
+              <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+                30 minutes pour identifier <Emphasis>vos leviers IA.</Emphasis>
               </h2>
             </div>
 
@@ -41,41 +42,41 @@ export default function ContactPage() {
         </section>
 
         {/* Formulaire de contact général */}
-        <section id="formulaire" className="py-16 md:py-20 bg-perle/30 border-b border-perle">
+        <section id="formulaire" className="section-padding border-b border-hairline bg-cream">
           <div className="container-page">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
 
               <div className="lg:col-span-4">
-                <span className="label-mark">Autres demandes</span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl font-medium leading-tight tracking-tight-1 text-sepia">
-                  Une demande plus longue ? <em className="italic text-or-fonce">Écrivez-nous.</em>
+                <span className="eyebrow">Autres demandes</span>
+                <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+                  Une demande plus longue ? <Emphasis>Écrivez-nous.</Emphasis>
                 </h2>
-                <p className="mt-5 font-sans text-base leading-relaxed text-pierre">
+                <p className="mt-5 font-sans text-base leading-relaxed text-ink-muted">
                   Catalogue de formations, RFP, partenariat, prise de parole, demande presse… Le formulaire est le bon canal pour les sujets qui demandent du contexte.
                 </p>
 
-                <div className="mt-10 space-y-4 pt-8 border-t border-perle">
+                <div className="mt-10 space-y-4 border-t border-hairline pt-8">
                   <div>
-                    <div className="label-mark mb-1">Email direct</div>
+                    <div className="eyebrow mb-1">Email direct</div>
                     <a
                       href={`mailto:${SITE_CONFIG.contact.email}`}
-                      className="font-sans text-sepia hover:text-or-fonce transition-colors"
+                      className="font-sans font-bold text-ink underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:decoration-accent-deep"
                     >
                       {SITE_CONFIG.contact.email}
                     </a>
                   </div>
                   <div>
-                    <div className="label-mark mb-1">Téléphone</div>
+                    <div className="eyebrow mb-1">Téléphone</div>
                     <a
                       href={`tel:${SITE_CONFIG.contact.phone.replace(/\s/g, '')}`}
-                      className="font-sans text-sepia hover:text-or-fonce transition-colors"
+                      className="font-sans font-bold text-ink underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:decoration-accent-deep"
                     >
                       {SITE_CONFIG.contact.phone}
                     </a>
                   </div>
                   <div>
-                    <div className="label-mark mb-1">Présence</div>
-                    <p className="font-sans text-sm text-pierre">
+                    <div className="eyebrow mb-1">Présence</div>
+                    <p className="font-sans text-sm text-ink-muted">
                       {SITE_CONFIG.locations.join(' · ')}
                     </p>
                   </div>
@@ -83,7 +84,7 @@ export default function ContactPage() {
               </div>
 
               <div className="lg:col-span-8">
-                <div className="bg-lin border border-perle rounded-md p-7 md:p-10">
+                <div className="card-cool p-7 md:p-10">
                   <ContactForm />
                 </div>
               </div>

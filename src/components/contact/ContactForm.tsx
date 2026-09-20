@@ -50,11 +50,11 @@ export function ContactForm() {
         <div
           role="alert"
           aria-live="assertive"
-          className="rounded-md border-2 border-or bg-or-pale/20 p-4 font-sans text-sm text-sepia"
+          className="rounded-xl border border-danger/40 bg-danger/5 p-4 font-sans text-sm text-ink"
         >
-          <p className="font-medium">{state.message}</p>
+          <p className="font-bold">{state.message}</p>
           {state.errors && Object.keys(state.errors).length > 0 && (
-            <ul className="mt-2 ml-4 list-disc space-y-1 text-sepia">
+            <ul className="ml-4 mt-2 list-disc space-y-1 text-ink">
               {Object.entries(state.errors).map(([field, msg]) => (
                 <li key={field}>{msg}</li>
               ))}
@@ -89,7 +89,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="subject"
-          className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+          className="eyebrow mb-2 block"
         >
           Sujet
         </label>
@@ -97,7 +97,7 @@ export function ContactForm() {
           id="subject"
           name="subject"
           defaultValue="general"
-          className="w-full bg-lin border border-perle rounded-md px-4 py-3 font-sans text-base text-sepia focus:outline-none focus:border-or-fonce focus:ring-2 focus:ring-or/20 transition-colors"
+          className="input"
         >
           {SUBJECTS.map((s) => (
             <option key={s.value} value={s.value}>
@@ -110,9 +110,9 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+          className="eyebrow mb-2 block"
         >
-          Votre message <span className="text-or-fonce">*</span>
+          Votre message <span className="text-danger">*</span>
         </label>
         <textarea
           id="message"
@@ -122,14 +122,12 @@ export function ContactForm() {
           minLength={10}
           maxLength={4000}
           placeholder="Présentez-nous votre contexte, vos enjeux, votre objectif (au moins 10 caractères)…"
-          className={`w-full bg-lin border rounded-md px-4 py-3 font-sans text-base text-sepia placeholder:text-pierre/50 focus:outline-none focus:ring-2 focus:ring-or/20 transition-colors resize-y ${
-            state.errors?.message ? 'border-or-fonce' : 'border-perle focus:border-or-fonce'
-          }`}
+          className={`input ${state.errors?.message ? 'border-danger' : ''}`}
         />
         {state.errors?.message && (
-          <p className="mt-2 font-sans text-xs text-or-fonce">{state.errors.message}</p>
+          <p className="mt-2 font-sans text-xs text-danger">{state.errors.message}</p>
         )}
-        <p className="mt-1 font-sans text-[11px] text-pierre">
+        <p className="mt-1 font-sans text-[11px] text-ink-muted">
           Minimum 10 caractères
         </p>
       </div>
@@ -141,14 +139,14 @@ export function ContactForm() {
             id="consent"
             name="consent"
             required
-            className="mt-1 h-4 w-4 accent-or-fonce shrink-0"
+            className="mt-1 size-4 shrink-0 accent-accent-deep"
           />
-          <label htmlFor="consent" className="font-sans text-xs leading-relaxed text-pierre">
-            J'accepte que mes données soient utilisées par Qwestinum pour me recontacter au sujet de ma demande, conformément à la <a href="/confidentialite" className="link-editorial">politique de confidentialité</a>. <span className="text-or-fonce">*</span>
+          <label htmlFor="consent" className="font-sans text-xs leading-relaxed text-ink-muted">
+            J'accepte que mes données soient utilisées par Qwestinum pour me recontacter au sujet de ma demande, conformément à la <a href="/confidentialite" className="link-editorial">politique de confidentialité</a>. <span className="text-danger">*</span>
           </label>
         </div>
         {state.errors?.consent && (
-          <p className="mt-2 ml-7 font-sans text-xs text-or-fonce">{state.errors.consent}</p>
+          <p className="ml-7 mt-2 font-sans text-xs text-danger">{state.errors.consent}</p>
         )}
       </div>
 
@@ -159,7 +157,7 @@ export function ContactForm() {
         <div
           role="status"
           aria-live="polite"
-          className="mt-4 rounded-md border-2 border-or bg-or-pale/30 p-4 font-sans text-sm text-sepia font-medium"
+          className="mt-4 rounded-xl border border-success/40 bg-success/5 p-4 font-sans text-sm font-bold text-ink"
         >
           {state.message}
         </div>
@@ -189,9 +187,9 @@ function Field({
     <div>
       <label
         htmlFor={name}
-        className="block font-sans text-xs font-medium uppercase tracking-wide-2 text-pierre mb-2"
+        className="eyebrow mb-2 block"
       >
-        {label} {required && <span className="text-or-fonce">*</span>}
+        {label} {required && <span className="text-danger">*</span>}
       </label>
       <input
         type={type}
@@ -200,11 +198,9 @@ function Field({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
-        className={`w-full bg-lin border rounded-md px-4 py-3 font-sans text-base text-sepia placeholder:text-pierre/50 focus:outline-none focus:ring-2 focus:ring-or/20 transition-colors ${
-          error ? 'border-or-fonce' : 'border-perle focus:border-or-fonce'
-        }`}
+        className={`input ${error ? 'border-danger' : ''}`}
       />
-      {error && <p className="mt-2 font-sans text-xs text-or-fonce">{error}</p>}
+      {error && <p className="mt-2 font-sans text-xs text-danger">{error}</p>}
     </div>
   );
 }
@@ -216,12 +212,12 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-primary !py-4 !px-8 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="btn-primary"
     >
       {pending ? (
         <>
           <svg
-            className="animate-spin h-4 w-4"
+            className="size-4 animate-spin"
             viewBox="0 0 24 24"
             fill="none"
           >

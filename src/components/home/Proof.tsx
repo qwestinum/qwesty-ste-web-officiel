@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { UseCaseKpi } from '@/lib/supabase/types';
+import { Emphasis } from '@/components/shared/Emphasis';
 
 interface ProofProps {
   kpis: UseCaseKpi[];
@@ -13,33 +14,38 @@ interface ProofProps {
 export function Proof({ kpis }: ProofProps) {
   // Limite à 4 KPI pour la grille
   const displayed = kpis.slice(0, 4);
+  const shown = displayed.length > 0 ? displayed : PLACEHOLDER_KPIS;
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="section-padding bg-white">
       <div className="container-page">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
 
           {/* Colonne texte */}
           <div>
-            <span className="label-mark">Résultats mesurés</span>
-            <h2 className="mt-4 font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tighter-2 text-sepia">
-              Des impacts <em className="italic text-or-fonce">concrets,</em> documentés sur nos cas clients.
+            <span className="eyebrow">Résultats mesurés</span>
+            <h2 className="mt-4 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Des impacts <Emphasis>concrets,</Emphasis> documentés sur nos cas
+              clients.
             </h2>
-            <p className="mt-6 font-sans text-lg leading-relaxed text-pierre">
-              Chaque mission Qwestinum produit un livrable concret et mesurable. De l'hôtellerie 5 étoiles au cabinet de recrutement, nos cas démontrent que l'IA transforme les opérations quand elle est déployée avec méthode.
+            <p className="mt-6 font-sans text-lg leading-relaxed text-ink-muted">
+              Chaque mission Qwestinum produit un livrable concret et mesurable.
+              De l&apos;hôtellerie 5 étoiles au cabinet de recrutement, nos cas
+              démontrent que l&apos;IA transforme les opérations quand elle est
+              déployée avec méthode.
             </p>
 
             <Link href="/cas-usage" className="btn-primary mt-8">
-              Voir tous les cas d'usage
+              Voir tous les cas d&apos;usage
               <span aria-hidden="true">→</span>
             </Link>
           </div>
 
           {/* Colonne KPI */}
           <div className="grid grid-cols-2 gap-4">
-            {displayed.length > 0
-              ? displayed.map((kpi, i) => <KpiCard key={i} kpi={kpi} accent={ACCENTS[i % ACCENTS.length]} />)
-              : PLACEHOLDER_KPIS.map((kpi, i) => <KpiCard key={i} kpi={kpi} accent={ACCENTS[i % ACCENTS.length]} />)}
+            {shown.map((kpi, i) => (
+              <KpiCard key={i} kpi={kpi} />
+            ))}
           </div>
         </div>
       </div>
@@ -47,36 +53,17 @@ export function Proof({ kpis }: ProofProps) {
   );
 }
 
-const ACCENTS = ['or-fonce', 'or', 'sepia', 'pierre'] as const;
-
-function KpiCard({ kpi, accent }: { kpi: UseCaseKpi; accent: string }) {
-  const accentColors: Record<string, string> = {
-    'or-fonce': 'text-or-fonce',
-    or: 'text-or-fonce',
-    sepia: 'text-sepia',
-    pierre: 'text-pierre',
-  };
-  const borderColors: Record<string, string> = {
-    'or-fonce': 'before:bg-or-fonce',
-    or: 'before:bg-or',
-    sepia: 'before:bg-sepia',
-    pierre: 'before:bg-pierre',
-  };
-
+function KpiCard({ kpi }: { kpi: UseCaseKpi }) {
   return (
-    <div
-      className={`relative bg-lin border border-perle p-6 rounded-md overflow-hidden before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3px] ${borderColors[accent]}`}
-    >
-      <div
-        className={`font-serif text-3xl md:text-4xl font-medium leading-tight-extra tracking-tighter-2 ${accentColors[accent]}`}
-      >
+    <div className="card-warm p-6">
+      <div className="font-sans text-3xl font-bold leading-none tracking-tight text-accent-deep md:text-4xl">
         {kpi.value}
       </div>
-      <div className="mt-2 font-sans text-xs leading-relaxed text-pierre">
+      <div className="mt-3 font-sans text-xs leading-relaxed text-ink-muted">
         {kpi.label}
       </div>
       {kpi.projected && (
-        <div className="mt-2 font-sans text-[10px] italic text-pierre">
+        <div className="mt-2 font-sans text-[10px] italic text-ink-muted">
           projection
         </div>
       )}

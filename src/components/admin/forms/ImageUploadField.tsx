@@ -44,17 +44,17 @@ export function ImageUploadField({ bucket, value, onChange, label = 'Image' }: I
 
   return (
     <div>
-      <label className="block font-sans text-[11px] font-medium uppercase tracking-wide-2 text-pierre mb-1.5">
+      <label className="block font-sans text-[11px] font-semibold uppercase tracking-wide-2 text-ink-muted mb-1.5">
         {label}
       </label>
 
       {value && (
         <div className="mb-2 flex items-center gap-3">
-          <img src={value} alt="" className="h-12 w-12 object-cover rounded-sm border border-perle" />
+          <img src={value} alt="" className="h-12 w-12 object-cover rounded-lg border border-hairline" />
           <button
             type="button"
             onClick={() => onChange('')}
-            className="font-sans text-[11px] text-pierre hover:text-sepia transition-colors"
+            className="font-sans text-[11px] text-ink-muted hover:text-ink transition-colors"
           >
             Supprimer
           </button>
@@ -67,14 +67,14 @@ export function ImageUploadField({ bucket, value, onChange, label = 'Image' }: I
         accept="image/*"
         onChange={handleFileChange}
         disabled={uploading}
-        className="block w-full font-sans text-xs text-pierre file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:font-sans file:text-xs file:font-semibold file:uppercase file:tracking-wide-2 file:bg-perle file:text-sepia hover:file:bg-perle/70 disabled:opacity-50"
+        className="block w-full font-sans text-xs text-ink-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:font-sans file:text-xs file:font-semibold file:uppercase file:tracking-wide-2 file:bg-cream file:text-ink hover:file:bg-cream/70 disabled:opacity-50"
       />
 
       {uploading && (
-        <p className="mt-1 font-sans text-[11px] text-pierre">Upload en cours…</p>
+        <p className="mt-1 font-sans text-[11px] text-ink-muted">Upload en cours…</p>
       )}
       {error && (
-        <p className="mt-1 font-sans text-[11px] text-sepia">{error}</p>
+        <p className="mt-1 font-sans text-[11px] text-ink">{error}</p>
       )}
     </div>
   );

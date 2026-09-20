@@ -20,11 +20,11 @@ export default async function FormationEditPage({ params }: { params: { id: stri
       <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
         <Link
           href="/admin/formations"
-          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors"
+          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted hover:text-ink transition-colors"
         >
           <span aria-hidden="true">←</span> Toutes les formations
         </Link>
-        <div className="font-sans text-xs text-pierre font-mono">ID : {formation.id.slice(0, 8)}…</div>
+        <div className="font-sans text-xs text-ink-muted font-mono">ID : {formation.id.slice(0, 8)}…</div>
       </div>
 
       <FormationForm formation={formation} />

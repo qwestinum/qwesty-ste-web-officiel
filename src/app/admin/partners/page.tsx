@@ -11,11 +11,11 @@ export default async function PartnersPage() {
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-8 lg:py-10 max-w-4xl mx-auto">
       <header className="mb-8">
-        <span className="label-mark">Configuration</span>
-        <h1 className="mt-2 font-serif text-3xl md:text-4xl font-medium text-sepia tracking-tight-1">
+        <span className="eyebrow">Configuration</span>
+        <h1 className="mt-2 font-bold text-3xl md:text-4xl text-ink tracking-tight-1">
           Partenaires
         </h1>
-        <p className="mt-2 font-sans text-sm text-pierre">
+        <p className="mt-2 font-sans text-sm text-ink-muted">
           Logos et liens affichés dans la bande partenaires de la homepage.
         </p>
       </header>

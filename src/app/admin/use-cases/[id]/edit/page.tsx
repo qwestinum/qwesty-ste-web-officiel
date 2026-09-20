@@ -20,11 +20,11 @@ export default async function UseCaseEditPage({ params }: { params: { id: string
       <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
         <Link
           href="/admin/use-cases"
-          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-pierre hover:text-sepia transition-colors"
+          className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wide-2 text-ink-muted hover:text-ink transition-colors"
         >
           <span aria-hidden="true">←</span> {"Tous les cas d'usage"}
         </Link>
-        <div className="font-sans text-xs text-pierre font-mono">ID : {useCase.id.slice(0, 8)}…</div>
+        <div className="font-sans text-xs text-ink-muted font-mono">ID : {useCase.id.slice(0, 8)}…</div>
       </div>
 
       <UseCaseForm useCase={useCase} />

@@ -32,11 +32,11 @@ export default async function AdminLeadsPage({
     <div className="px-4 sm:px-6 lg:px-10 py-8 lg:py-10 max-w-6xl mx-auto">
 
       <header className="mb-8">
-        <span className="label-mark">Contenu</span>
-        <h1 className="mt-2 font-serif text-3xl md:text-4xl font-medium text-sepia tracking-tight-1">
+        <span className="eyebrow">Contenu</span>
+        <h1 className="mt-2 font-bold text-3xl md:text-4xl text-ink tracking-tight-1">
           Leads
         </h1>
-        <p className="mt-2 font-sans text-sm text-pierre">
+        <p className="mt-2 font-sans text-sm text-ink-muted">
           {leads.length} {leads.length > 1 ? 'leads' : 'lead'}
           {status !== 'all' ? ` · filtré par "${status}"` : ''}
           {search ? ` · recherche "${search}"` : ''}
@@ -46,24 +46,24 @@ export default async function AdminLeadsPage({
       <LeadFilters currentStatus={status} currentSearch={search} />
 
       {leads.length === 0 ? (
-        <div className="bg-perle/20 border border-perle rounded-md p-12 text-center">
-          <p className="font-sans text-sm text-pierre">
+        <div className="bg-cream/20 border border-hairline rounded-xl p-12 text-center">
+          <p className="font-sans text-sm text-ink-muted">
             Aucun lead ne correspond aux filtres actuels.
           </p>
           {(status !== 'all' || search) && (
             <Link
               href="/admin/leads"
-              className="mt-3 inline-block font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce hover:text-sepia transition-colors"
+              className="mt-3 inline-block font-sans text-xs font-semibold uppercase tracking-wide-2 text-accent-deep hover:text-ink transition-colors"
             >
               Réinitialiser les filtres
             </Link>
           )}
         </div>
       ) : (
-        <div className="bg-lin border border-perle rounded-md overflow-hidden">
+        <div className="bg-white border border-hairline rounded-xl overflow-hidden">
           {/* Vue desktop : table */}
           <table className="hidden md:table w-full text-sm">
-            <thead className="bg-perle/40 border-b border-perle">
+            <thead className="bg-cream/40 border-b border-hairline">
               <tr>
                 <Th>Date</Th>
                 <Th>Nom</Th>
@@ -73,16 +73,16 @@ export default async function AdminLeadsPage({
                 <Th align="right">Action</Th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-perle">
+            <tbody className="divide-y divide-hairline">
               {leads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-perle/20 transition-colors">
-                  <Td className="text-pierre tabular-nums whitespace-nowrap">
+                <tr key={lead.id} className="hover:bg-cream/20 transition-colors">
+                  <Td className="text-ink-muted tabular-nums whitespace-nowrap">
                     {formatDateTime(lead.created_at)}
                   </Td>
-                  <Td className="font-medium text-sepia">
+                  <Td className="font-semibold text-ink">
                     {lead.full_name}
                     {lead.company && (
-                      <span className="block font-normal text-xs text-pierre">
+                      <span className="block font-normal text-xs text-ink-muted">
                         {lead.company}
                       </span>
                     )}
@@ -90,12 +90,12 @@ export default async function AdminLeadsPage({
                   <Td>
                     <a
                       href={`mailto:${lead.email}`}
-                      className="text-or-fonce hover:text-sepia transition-colors"
+                      className="text-accent-deep hover:text-ink transition-colors"
                     >
                       {lead.email}
                     </a>
                   </Td>
-                  <Td className="text-sepia">
+                  <Td className="text-ink">
                     {SUBJECT_LABELS[lead.subject] ?? lead.subject}
                   </Td>
                   <Td>
@@ -104,7 +104,7 @@ export default async function AdminLeadsPage({
                   <Td align="right">
                     <Link
                       href={`/admin/leads/${lead.id}`}
-                      className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-or-fonce hover:text-sepia transition-colors"
+                      className="font-sans text-xs font-semibold uppercase tracking-wide-2 text-accent-deep hover:text-ink transition-colors"
                     >
                       Ouvrir →
                     </Link>
@@ -115,25 +115,25 @@ export default async function AdminLeadsPage({
           </table>
 
           {/* Vue mobile : liste de cards */}
-          <ul className="md:hidden divide-y divide-perle">
+          <ul className="md:hidden divide-y divide-hairline">
             {leads.map((lead) => (
               <li key={lead.id}>
                 <Link
                   href={`/admin/leads/${lead.id}`}
-                  className="block p-4 hover:bg-perle/30 transition-colors"
+                  className="block p-4 hover:bg-cream/30 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div className="min-w-0">
-                      <div className="font-sans text-sm font-medium text-sepia truncate">
+                      <div className="font-sans text-sm font-semibold text-ink truncate">
                         {lead.full_name}
                       </div>
-                      <div className="font-sans text-xs text-pierre truncate">
+                      <div className="font-sans text-xs text-ink-muted truncate">
                         {lead.email}
                       </div>
                     </div>
                     <LeadStatusPill status={lead.status} />
                   </div>
-                  <div className="flex items-center justify-between text-xs text-pierre">
+                  <div className="flex items-center justify-between text-xs text-ink-muted">
                     <span>{SUBJECT_LABELS[lead.subject] ?? lead.subject}</span>
                     <span className="tabular-nums">
                       {formatDateTime(lead.created_at)}
@@ -158,7 +158,7 @@ function Th({
 }) {
   return (
     <th
-      className={`px-4 py-3 font-sans text-[10px] font-semibold uppercase tracking-wide-2 text-pierre text-${align}`}
+      className={`px-4 py-3 font-sans text-[10px] font-semibold uppercase tracking-wide-2 text-ink-muted text-${align}`}
     >
       {children}
     </th>

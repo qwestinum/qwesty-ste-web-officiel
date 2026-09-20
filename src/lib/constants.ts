@@ -23,8 +23,8 @@ export const SITE_CONFIG = {
  * Les champs laissés vides ne sont PAS affichés sur les pages : il suffit
  * de les renseigner ici pour qu'ils apparaissent, sans toucher au JSX.
  *
- * Reste à compléter : `publicationDirector`, obligatoire pour un site
- * édité par une société française (art. 6 III LCEN), et `vatNumber`.
+ * Toutes les mentions obligatoires de l'article 6 III de la LCEN sont
+ * renseignées. Seul `vatNumber` reste optionnel.
  */
 export const LEGAL_CONFIG = {
   companyName: 'Qwestinum',
@@ -36,7 +36,7 @@ export const LEGAL_CONFIG = {
   rcs: 'Versailles 992 506 188',
   vatNumber: '',
   address: '45 rue Daniel Bricon, 78680 Épône',
-  publicationDirector: '',
+  publicationDirector: 'Imad Belfaqir',
   host: {
     name: 'Vercel Inc.',
     url: 'https://vercel.com',
